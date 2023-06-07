@@ -32,7 +32,7 @@ class Car(db.Model):
     user = db.relationship("User")
 
 # TODO: Add your models below, remember to add a new migration and upgrade database
-class Garage_Sale(db.Model):
+class GarageSale(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     date = db.Column(db.Date, nullable=False)
     start_time = db.Column(db.Time, nullable = False)
@@ -52,4 +52,4 @@ class Item(db.Model):
     category = db.Column(db.String(255))
     image = db.Column(db.String(255))
     gs_id = db.Column(db.Integer, db.ForeignKey('garage_sale.id'))
-    garage_sale = db.relationship("Garage_Sale")
+    garage_sale = db.relationship("GarageSale")

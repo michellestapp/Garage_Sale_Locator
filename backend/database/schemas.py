@@ -15,8 +15,10 @@ class RegisterSchema(ma.Schema):
     first_name = fields.String(required=True)
     last_name = fields.String(required=True)
     email = fields.String(required=True)
+    contact_number = fields.String
+    
     class Meta:
-        fields = ("id", "username",  "password", "first_name", "last_name", "email")
+        fields = ("id", "username",  "password", "first_name", "last_name", "email", "contact_number")
 
     @post_load
     def create_user(self, data, **kwargs):
@@ -31,8 +33,9 @@ class UserSchema(ma.Schema):
     first_name = fields.String(required=True)
     last_name = fields.String(required=True)
     email = fields.String(required=True)
+    contact_number = fields.String
     class Meta:
-        fields = ("id", "username", "first_name", "last_name", "email",)
+        fields = ("id", "username", "first_name", "last_name", "email", "contact_number")
 
 register_schema = RegisterSchema()
 user_schema = UserSchema()
@@ -59,3 +62,44 @@ cars_schema = CarSchema(many=True)
 
 
 # TODO: Add your schemas below
+class GarageSaleSchema(ma.Schema):
+    id = fields.Integer(primary_key = True)
+    date = fields.Date(required = True)
+    start_time = fields.Time(required = True)
+    end_time = fields.Time(required = True)
+    street_address = fields.String(required = True)
+    city = fields.String(required = True)
+    state = fields.String(required = True)
+    zip = fields.Integer(required = True)
+    user_id = fields.Integer()
+    user = ma.Nested(UserSchema, many = False)
+
+    class Meta:
+        fields = ("id", "date", "start_time", "end_time", "street_address", "city", "state", "zip", "user")
+
+    @post_load
+    def create_garage_sale(self, data, **kwargs):
+        return GarageSale(**data)
+    
+    garage_sale_schema = GarageSaleSchema()
+    garage_sales_schema = GarageSaleSchema (many=True)
+
+class ItemSchema(ma.Schema):
+    id = fields.Integer(primary_key = True)
+    name_of_item = fields.String(required = True)
+    description = fields.String()
+    price = fields.Integer()
+    category = fields.String()
+    image = fields.String()
+    gs_id = fields.Integer()
+    garage_sale = ma.Nested(GarageSaleSchema, many=True)
+
+    class Meta:
+        fields = ("id","name_of_item", "description", "price", "category", "image", "gs_id")
+
+    @post_load
+    def create_item(self, data, **kwargs):
+        return Item(**data)
+    
+    item_schema = ItemSchema()
+    items_schema = ItemSchema (many=True)
