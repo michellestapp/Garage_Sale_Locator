@@ -51,5 +51,5 @@ class Item(db.Model):
     price = db.Column(db.Integer)
     category = db.Column(db.String(255))
     image = db.Column(db.String(255))
-    gs_id = db.Column(db.Integer, db.ForeignKey('garage_sale.id'))
+    garage_sale_id = db.Column(db.Integer, db.ForeignKey('garage_sale.id'))
     garage_sale = db.relationship("GarageSale")

@@ -1,6 +1,6 @@
 from flask_marshmallow import Marshmallow
-from marshmallow import post_load, fields
-from database.models import User, Car
+from marshmallow import post_load, fields, Schema
+from database.models import User, GarageSale, Item, Car
 
 ma = Marshmallow()
 
@@ -15,7 +15,7 @@ class RegisterSchema(ma.Schema):
     first_name = fields.String(required=True)
     last_name = fields.String(required=True)
     email = fields.String(required=True)
-    contact_number = fields.String
+    contact_number = fields.String()
     
     class Meta:
         fields = ("id", "username",  "password", "first_name", "last_name", "email", "contact_number")
@@ -33,7 +33,7 @@ class UserSchema(ma.Schema):
     first_name = fields.String(required=True)
     last_name = fields.String(required=True)
     email = fields.String(required=True)
-    contact_number = fields.String
+    contact_number = fields.String()
     class Meta:
         fields = ("id", "username", "first_name", "last_name", "email", "contact_number")
 
@@ -81,8 +81,8 @@ class GarageSaleSchema(ma.Schema):
     def create_garage_sale(self, data, **kwargs):
         return GarageSale(**data)
     
-    garage_sale_schema = GarageSaleSchema()
-    garage_sales_schema = GarageSaleSchema (many=True)
+garage_sale_schema = GarageSaleSchema()
+garage_sales_schema = GarageSaleSchema(many=True)
 
 class ItemSchema(ma.Schema):
     id = fields.Integer(primary_key = True)
@@ -91,15 +91,16 @@ class ItemSchema(ma.Schema):
     price = fields.Integer()
     category = fields.String()
     image = fields.String()
-    gs_id = fields.Integer()
+    garage_sale_id = fields.Integer()
     garage_sale = ma.Nested(GarageSaleSchema, many=True)
 
+
     class Meta:
-        fields = ("id","name_of_item", "description", "price", "category", "image", "gs_id")
+        fields = ("id","name_of_item", "description", "price", "category", "image", "garage_sale")
 
     @post_load
     def create_item(self, data, **kwargs):
         return Item(**data)
     
-    item_schema = ItemSchema()
-    items_schema = ItemSchema (many=True)
+item_schema = ItemSchema()
+items_schema = ItemSchema(many=True)

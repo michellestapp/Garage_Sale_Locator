@@ -16,7 +16,7 @@ class AllGarageSaleResource(Resource):
             garage_sales = GarageSale.query.filter_by(date=date)
         return garage_sales_schema.dump(garage_sales)
     
-class UserGarageSaleListResource(Resource):
+class GarageSaleListResource(Resource):
     @jwt_required()
     def get(self):
         user_id = get_jwt_identity()
@@ -25,46 +25,49 @@ class UserGarageSaleListResource(Resource):
     
     @jwt_required()
     def post(self):
-        user_id = get_jwt_identity()
-        form_data = request.get_json()
-        new_garage_sale = garage_sale_schema.load(form_data)
-        new_garage_sale.user_id = user_id
-        db.session.add(new_garage_sale)
-        db.session.commit()
-        return garage_sale_schema.dump(new_garage_sale), 201
+        try:
+            user_id = get_jwt_identity()
+            form_data = request.get_json()
+            new_garage_sale = garage_sale_schema.load(form_data)
+            new_garage_sale.user_id = user_id
+            db.session.add(new_garage_sale)
+            db.session.commit()
+            return garage_sale_schema.dump(new_garage_sale), 201
+        except ValidationError as err:
+            return err.messages, 400
     
-class UserGarageSaleResource(Resource):
+class GarageSaleResource(Resource):
     @jwt_required()
-    def put(self,user_id):
+    def put(self,garage_sale_id):
         user_id = get_jwt_identity()
-        edit_garage_sale = Item.query.get_or_404(user_id)
+        edit_garage_sale = GarageSale.query.get_or_404(garage_sale_id)
         if "date" in request.json:
-            edit_garage_sale.user_id = request.json["date"]
+            edit_garage_sale.date = request.json["date"]
         if "start_time" in request.json:
-            edit_garage_sale.user_id = request.json["start_time"]
+            edit_garage_sale.start_time = request.json["start_time"]
         if "end_time"in request.json:
-            edit_garage_sale.user_id = request.json["end_time"]
+            edit_garage_sale.end_time = request.json["end_time"]
         if "street_address" in request.json:
-            edit_garage_sale.user_id = request.json["street_address"]
+            edit_garage_sale.street_address = request.json["street_address"]
         if "city" in request.json:
-            edit_garage_sale.user_id = request.json["city"]
+            edit_garage_sale.city = request.json["city"]
         if "state" in request.json:
-            edit_garage_sale.user_id = request.json["state"]
+            edit_garage_sale.state = request.json["state"]
         if "zip" in request.json:
-            edit_garage_sale.user_id = request.json["zip"]
+            edit_garage_sale.zip = request.json["zip"]
         db.session.commit()
         return item_schema.dump(edit_garage_sale), 200
 
     @jwt_required()
-    def delete(self, user_id):
+    def delete(self, garage_sale_id):
         user_id = get_jwt_identity()
-        delete_garage_sale = GarageSale.query.get_or_404(user_id)
+        delete_garage_sale = GarageSale.query.get_or_404(garage_sale_id)
         db.session.delete(delete_garage_sale)
         db.session.commit()
         return '',204
 
 
-class UserItemsResource(Resource):
+class ItemListResource(Resource):
     @jwt_required()
     def get(self):
         user_id = get_jwt_identity()
@@ -82,21 +85,21 @@ class UserItemsResource(Resource):
         serialized_item = item_schema.dump(new_item)
         return serialized_item, 201
     
-class UserItemResource(Resource):
+class ItemResource(Resource):
     @jwt_required()
     def put(self, garage_sale_id):
         user_id = get_jwt_identity()
         edit_item = Item.query.get_or_404(garage_sale_id)
         if "name_of_item" in request.json:
-            edit_item.garage_sale_id = request.json["name_of_item"]
+            edit_item.name_of_item = request.json["name_of_item"]
         if "description" in request.json:
-            edit_item.garage_sale_id = request.json["description"]
+            edit_item.description = request.json["description"]
         if "price"in request.json:
-            edit_item.garage_sale_id = request.json["price"]
+            edit_item.price = request.json["price"]
         if "category" in request.json:
-            edit_item.garage_sale_id = request.json["category"]
+            edit_item.category = request.json["category"]
         if "image" in request.json:
-            edit_item.garage_sale_id = request.json["image"]
+            edit_item.image = request.json["image"]
         db.session.commit()
         return item_schema.dump(edit_item), 200
 
