@@ -72,28 +72,31 @@ class AllItemListResource(Resource):
         return items_schema.dump(user_items, many=True), 200
 
 class ItemListResource(Resource):
-#    @jwt_required()
+    @jwt_required()
     def get(self, garage_sale_id):
-#        garage_sale_id = get_jwt_identity()
         user_items = Item.query.filter_by(garage_sale_id = garage_sale_id)
         return items_schema.dump(user_items, many=True), 200
+
     
-    # @jwt_required()
+    @jwt_required()
     def post(self,garage_sale_id):
-        # user_id = get_jwt_identity()
-        form_data = request.get_json
+        user_id = get_jwt_identity()
+        # garage_sale = GarageSale.query.get_or_404(garage_sale_id)
+        # if user_id == garage_sale.user_id:
+        form_data = request.get_json()
         new_item = item_schema.load(form_data)
         new_item.garage_sale_id = garage_sale_id
         db.session.add(new_item)
         db.session.commit()
         serialized_item = item_schema.dump(new_item)
         return serialized_item, 201
+        # return '', 401
     
 class ItemResource(Resource):
     @jwt_required()
-    def put(self, garage_sale_id):
+    def put(self, item_id):
         user_id = get_jwt_identity()
-        edit_item = Item.query.get_or_404(garage_sale_id)
+        edit_item = Item.query.get_or_404(item_id)
         if "name_of_item" in request.json:
             edit_item.name_of_item = request.json["name_of_item"]
         if "description" in request.json:
@@ -108,9 +111,9 @@ class ItemResource(Resource):
         return item_schema.dump(edit_item), 200
 
     @jwt_required()
-    def delete(self, garage_sale_id):
+    def delete(self, item_id):
         user_id = get_jwt_identity()
-        delete_item = Item.query.get_or_404(garage_sale_id)
+        delete_item = Item.query.get_or_404(item_id)
         db.session.delete(delete_item)
         db.session.commit()
         return '',204

@@ -61,6 +61,6 @@ def create_routes():
     api.add_resource(GarageSaleResource, '/api/user_garage_sales/<int:garage_sale_id>')
     api.add_resource(AllItemListResource,'/api/user_items')
     api.add_resource(ItemListResource,'/api/user_items/<int:garage_sale_id>')
-    # api.add_resource(ItemResource,'/api/user_items/<int:garage_sale_id>')
+    api.add_resource(ItemResource,'/api/items/<int:item_id>')
     
     return api
