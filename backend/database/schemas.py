@@ -87,12 +87,12 @@ garage_sales_schema = GarageSaleSchema(many=True)
 class ItemSchema(ma.Schema):
     id = fields.Integer(primary_key = True)
     name_of_item = fields.String(required = True)
-    description = fields.String()
-    price = fields.Integer()
-    category = fields.String()
-    image = fields.String()
+    description = fields.String(required = False, allow_none=True)
+    price = fields.Integer(required = False, allow_none=True)
+    category = fields.String(required = False, allow_none=True)
+    image = fields.String(required = False, allow_none=True)
     garage_sale_id = fields.Integer()
-    garage_sale = ma.Nested(GarageSaleSchema, many=True)
+    garage_sale = ma.Nested(GarageSaleSchema)
 
 
     class Meta:

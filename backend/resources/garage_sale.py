@@ -66,20 +66,24 @@ class GarageSaleResource(Resource):
         db.session.commit()
         return '',204
 
+class AllItemListResource(Resource):
+    def get(self):
+        user_items = Item.query.all()
+        return items_schema.dump(user_items, many=True), 200
 
 class ItemListResource(Resource):
-    @jwt_required()
-    def get(self):
-        user_id = get_jwt_identity()
-        user_items = Item.query.filter_by(user_id = user_id)
-        return items_schema.dump(user_items), 200
+#    @jwt_required()
+    def get(self, garage_sale_id):
+#        garage_sale_id = get_jwt_identity()
+        user_items = Item.query.filter_by(garage_sale_id = garage_sale_id)
+        return items_schema.dump(user_items, many=True), 200
     
-    @jwt_required()
-    def post(self):
-        user_id = get_jwt_identity()
+    # @jwt_required()
+    def post(self,garage_sale_id):
+        # user_id = get_jwt_identity()
         form_data = request.get_json
         new_item = item_schema.load(form_data)
-        new_item.user_id = user_id
+        new_item.garage_sale_id = garage_sale_id
         db.session.add(new_item)
         db.session.commit()
         serialized_item = item_schema.dump(new_item)

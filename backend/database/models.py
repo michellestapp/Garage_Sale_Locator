@@ -47,9 +47,9 @@ class GarageSale(db.Model):
 class Item(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name_of_item = db.Column(db.String(255), nullable=False)
-    description = db.Column(db.String(255))
-    price = db.Column(db.Integer)
-    category = db.Column(db.String(255))
-    image = db.Column(db.String(255))
+    description = db.Column(db.String(255), nullable=True)
+    price = db.Column(db.Integer, nullable=True)
+    category = db.Column(db.String(255), nullable=True)
+    image = db.Column(db.String(255), nullable=True)
     garage_sale_id = db.Column(db.Integer, db.ForeignKey('garage_sale.id'))
     garage_sale = db.relationship("GarageSale")
