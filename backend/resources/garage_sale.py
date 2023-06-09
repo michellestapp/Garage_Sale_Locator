@@ -124,7 +124,6 @@ class ItemResource(Resource):
         edit_item = Item.query.get_or_404(item_id)
         garage_sale_locator = GarageSale.query.get_or_404(edit_item.garage_sale_id)
         user = garage_sale_locator.user_id
-        print(user==user_id)
         if int(user_id) == user:
             if "name_of_item" in request.form:
                 edit_item.name_of_item = request.form["name_of_item"]
@@ -152,6 +151,10 @@ class ItemResource(Resource):
     def delete(self, item_id):
         user_id = get_jwt_identity()
         delete_item = Item.query.get_or_404(item_id)
-        db.session.delete(delete_item)
-        db.session.commit()
-        return '',204
+        garage_sale_locator = GarageSale.query.get_or_404(delete_item.garage_sale_id)
+        user = garage_sale_locator.user_id
+        if int(user_id) == user:
+            db.session.delete(delete_item)
+            db.session.commit()
+            return '',204
+        return "You are not authorized to delete this item", 403
