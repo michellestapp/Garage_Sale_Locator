@@ -18,9 +18,6 @@ def allowed_file(filename):
 class AllGarageSaleResource(Resource):
     def get(self):
         garage_sales = GarageSale.query.all()
-        date = request.args.get('date')
-        if date:
-            garage_sales = GarageSale.query.filter_by(date=date)
         return garage_sales_schema.dump(garage_sales)
     
 class GarageSaleListResource(Resource):
@@ -47,31 +44,36 @@ class GarageSaleResource(Resource):
     @jwt_required()
     def put(self,garage_sale_id):
         user_id = get_jwt_identity()
+        
         edit_garage_sale = GarageSale.query.get_or_404(garage_sale_id)
-        if "date" in request.json:
-            edit_garage_sale.date = request.json["date"]
-        if "start_time" in request.json:
-            edit_garage_sale.start_time = request.json["start_time"]
-        if "end_time"in request.json:
-            edit_garage_sale.end_time = request.json["end_time"]
-        if "street_address" in request.json:
-            edit_garage_sale.street_address = request.json["street_address"]
-        if "city" in request.json:
-            edit_garage_sale.city = request.json["city"]
-        if "state" in request.json:
-            edit_garage_sale.state = request.json["state"]
-        if "zip" in request.json:
-            edit_garage_sale.zip = request.json["zip"]
-        db.session.commit()
-        return item_schema.dump(edit_garage_sale), 200
+        if int(user_id) == edit_garage_sale.user_id:
+            if "date" in request.json:
+                edit_garage_sale.date = request.json["date"]
+            if "start_time" in request.json:
+                edit_garage_sale.start_time = request.json["start_time"]
+            if "end_time"in request.json:
+                edit_garage_sale.end_time = request.json["end_time"]
+            if "street_address" in request.json:
+                edit_garage_sale.street_address = request.json["street_address"]
+            if "city" in request.json:
+                edit_garage_sale.city = request.json["city"]
+            if "state" in request.json:
+                edit_garage_sale.state = request.json["state"]
+            if "zip" in request.json:
+                edit_garage_sale.zip = request.json["zip"]
+            db.session.commit()
+            return item_schema.dump(edit_garage_sale), 200
+        return "Not authorized to change this sale", 403
 
     @jwt_required()
     def delete(self, garage_sale_id):
         user_id = get_jwt_identity()
         delete_garage_sale = GarageSale.query.get_or_404(garage_sale_id)
-        db.session.delete(delete_garage_sale)
-        db.session.commit()
-        return '',204
+        if int(user_id) == delete_garage_sale.user_id:
+            db.session.delete(delete_garage_sale)
+            db.session.commit()
+            return '',204
+        return "Not autorized to delete this garage sale", 403
 
 class AllItemListResource(Resource):
     def get(self):
@@ -88,48 +90,63 @@ class ItemListResource(Resource):
     @jwt_required()
     def post(self,garage_sale_id):
         user_id = get_jwt_identity()
-        # garage_sale = GarageSale.query.get_or_404(garage_sale_id)
-        # if user_id == garage_sale.user_id:
-        if 'image' not in request.files:
-            return 'no file', 404
-        file = request.files['image']
-        
-        if file.filename == '':
-            return 'filename empty', 404
-        if file and allowed_file(file.filename):
-            filename = secure_filename(file.filename)
-            file.save(os.path.join(current_app.config['UPLOAD_FOLDER'],filename))
-            new_item = Item()
-            new_item.name_of_item = request.form['name_of_item']
-            new_item.image = filename
+        garage_sale = GarageSale.query.get_or_404(garage_sale_id)
 
-            # form_data = request.get_json()
-            # new_item = item_schema.load(form_data)
-            new_item.garage_sale_id = garage_sale_id
-            db.session.add(new_item)
-            db.session.commit()
-            return item_schema.dump(new_item), 201
-        return '', 401
+        if int(user_id) == garage_sale.user_id:
+            if 'image' not in request.files:
+                return 'no file', 404
+            file = request.files['image']
+            
+            if file.filename == '':
+                return 'filename empty', 404
+            if file and allowed_file(file.filename):
+                filename = secure_filename(file.filename)
+                file.save(os.path.join(current_app.config['UPLOAD_FOLDER'],filename))
+                new_item = Item()
+                new_item.name_of_item = request.form['name_of_item']
+                new_item.description = request.form['description']
+                new_item.price = request.form['price']
+                new_item.category = request.form['category']
+                new_item.image = filename
+                new_item.garage_sale_id = garage_sale_id
+                db.session.add(new_item)
+                db.session.commit()
+                return item_schema.dump(new_item), 201
+            return '', 401
+        return 'You are not the owner', 403
 
 
 
 class ItemResource(Resource):
     @jwt_required()
     def put(self, item_id):
-        user_id = get_jwt_identity()
+        user_id = get_jwt_identity()  
         edit_item = Item.query.get_or_404(item_id)
-        if "name_of_item" in request.json:
-            edit_item.name_of_item = request.json["name_of_item"]
-        if "description" in request.json:
-            edit_item.description = request.json["description"]
-        if "price"in request.json:
-            edit_item.price = request.json["price"]
-        if "category" in request.json:
-            edit_item.category = request.json["category"]
-        if "image" in request.json:
-            edit_item.image = request.json["image"]
-        db.session.commit()
-        return item_schema.dump(edit_item), 200
+        garage_sale_locator = GarageSale.query.get_or_404(edit_item.garage_sale_id)
+        user = garage_sale_locator.user_id
+        print(user==user_id)
+        if int(user_id) == user:
+            if "name_of_item" in request.form:
+                edit_item.name_of_item = request.form["name_of_item"]
+            if "description" in request.form:
+                edit_item.description = request.form["description"]
+            if "price"in request.form:
+                edit_item.price = request.form["price"]
+            if "category" in request.form:
+                edit_item.category = request.form["category"]
+            if "image" in request.files:
+                file = request.files['image']
+                if 'image' not in request.files:
+                    return 'no file', 404
+                if file.filename == '':
+                    return 'filename empty',404
+                if file and allowed_file(file.filename):
+                    filename = secure_filename(file.filename)
+                    file.save(os.path.join(current_app.config['UPLOAD_FOLDER'],filename))
+                    edit_item.image = filename
+            db.session.commit()
+            return item_schema.dump(edit_item), 200
+        return "You are not authorized to change this item", 403
 
     @jwt_required()
     def delete(self, item_id):
