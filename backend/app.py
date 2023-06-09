@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, request, send_from_directory,url_for, redirect
 from flask_bcrypt import Bcrypt
 from flask_cors import CORS
 from flask_jwt_extended import JWTManager
@@ -11,6 +11,7 @@ from resources.cars import AllCarResource, UserCarResource
 from resources.garage_sale import GarageSaleListResource, AllGarageSaleResource, GarageSaleResource, ItemResource, ItemListResource, AllItemListResource
 from dotenv import load_dotenv
 from os import environ
+import os
 
 # Adds variables from .env file to environment
 load_dotenv()
@@ -21,16 +22,24 @@ jwt= JWTManager()
 cors = CORS()
 migrate = Migrate()
 
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+UPLOAD_FOLDER = os.path.join(BASE_DIR, 'static/images')
+
 def create_app():
     """
     App factory that creates app instance
     """
     # Creates app instance
-    app = Flask(__name__)
+    app = Flask(__name__, static_url_path='/static')
+   
 
     # Loads config properties from .env file
     app.config['SQLALCHEMY_DATABASE_URI'] = environ.get('SQLALCHEMY_DATABASE_URI')
     app.config['JWT_SECRET_KEY'] = environ.get('JWT_SECRET_KEY')
+    app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+    
+
+    
 
     # Registers all routes with API
     api = create_routes()

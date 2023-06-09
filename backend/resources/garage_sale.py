@@ -1,4 +1,4 @@
-from flask import request
+from flask import request, current_app
 from flask_jwt_extended import jwt_required, get_jwt_identity, verify_jwt_in_request
 from flask_restful import Resource
 from database.models import db, GarageSale, Item
@@ -7,6 +7,13 @@ from flask_cors import CORS
 from flask import Flask
 from marshmallow import ValidationError
 from sqlalchemy.exc import IntegrityError
+from werkzeug.utils import secure_filename
+import os
+
+
+def allowed_file(filename):
+    ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 class AllGarageSaleResource(Resource):
     def get(self):
@@ -83,15 +90,29 @@ class ItemListResource(Resource):
         user_id = get_jwt_identity()
         # garage_sale = GarageSale.query.get_or_404(garage_sale_id)
         # if user_id == garage_sale.user_id:
-        form_data = request.get_json()
-        new_item = item_schema.load(form_data)
-        new_item.garage_sale_id = garage_sale_id
-        db.session.add(new_item)
-        db.session.commit()
-        serialized_item = item_schema.dump(new_item)
-        return serialized_item, 201
-        # return '', 401
-    
+        if 'image' not in request.files:
+            return 'no file', 404
+        file = request.files['image']
+        
+        if file.filename == '':
+            return 'filename empty', 404
+        if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(current_app.config['UPLOAD_FOLDER'],filename))
+            new_item = Item()
+            new_item.name_of_item = request.form['name_of_item']
+            new_item.image = filename
+
+            # form_data = request.get_json()
+            # new_item = item_schema.load(form_data)
+            new_item.garage_sale_id = garage_sale_id
+            db.session.add(new_item)
+            db.session.commit()
+            return item_schema.dump(new_item), 201
+        return '', 401
+
+
+
 class ItemResource(Resource):
     @jwt_required()
     def put(self, item_id):
