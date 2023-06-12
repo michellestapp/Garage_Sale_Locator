@@ -8,7 +8,8 @@ from database.models import db
 from database.schemas import ma
 from resources.auth import LoginResource, RegisterResource
 from resources.cars import AllCarResource, UserCarResource
-from resources.garage_sale import GarageSaleListResource, AllGarageSaleResource, GarageSaleResource, ItemResource, ItemListResource, AllItemListResource
+from resources.garage_sale import GarageSaleListResource, AllGarageSaleResource, GarageSaleResource
+from resources.item import ItemResource, ItemListResource, AllItemListResource 
 from dotenv import load_dotenv
 from os import environ
 import os
