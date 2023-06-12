@@ -22,9 +22,9 @@ function App() {
         <Route
           path="/"
           element={
-            <PrivateRoute>
+            // <PrivateRoute>
               <HomePage />
-            </PrivateRoute>
+            // </PrivateRoute>
           }
         />
         <Route path="/register" element={<RegisterPage />} />

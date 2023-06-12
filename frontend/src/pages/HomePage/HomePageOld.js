@@ -51,7 +51,6 @@ const HomePage = () => {
         garageSales.map((garage_sale) => (
           <p key={garage_sale.id}>
             {garage_sale.formattedDate} {garage_sale.start_time}-{garage_sale.end_time}
-            {/* {car.year} {car.model} {car.make} */}
           </p>
         ))}
     </div>
