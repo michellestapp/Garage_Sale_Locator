@@ -34,6 +34,7 @@ class Car(db.Model):
 # TODO: Add your models below, remember to add a new migration and upgrade database
 class GarageSale(db.Model):
     id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(255), nullable = False)
     date = db.Column(db.Date, nullable=False)
     start_time = db.Column(db.Time, nullable = False)
     end_time = db.Column(db.Time, nullable = False)
@@ -41,6 +42,7 @@ class GarageSale(db.Model):
     city = db.Column(db.String(255), nullable = False)
     state = db.Column(db.String(255), nullable = False)
     zip = db.Column(db.Integer, nullable = False)
+    categories = db.Column(db.String(255), nullable = False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     user = db.relationship("User")
 
@@ -52,4 +54,4 @@ class Item(db.Model):
     category = db.Column(db.String(255), nullable=True)
     image = db.Column(db.String(255), nullable=True)
     garage_sale_id = db.Column(db.Integer, db.ForeignKey('garage_sale.id'))
-    garage_sale = db.relationship("GarageSale")
+    garage_sale = db.relationship("GarageSale",backref=db.backref('items'))

@@ -34,11 +34,11 @@ class ItemListResource(Resource):
 
         if int(user_id) == garage_sale.user_id:
             if 'image' not in request.files:
-                return 'no file', 404
+                return 'no file', 400
             file = request.files['image']
             
             if file.filename == '':
-                return 'filename empty', 404
+                return 'filename empty', 400
             if file and allowed_file(file.filename):
                 filename = secure_filename(file.filename)
                 file.save(os.path.join(current_app.config['UPLOAD_FOLDER'],filename))

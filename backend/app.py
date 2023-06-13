@@ -10,6 +10,7 @@ from resources.auth import LoginResource, RegisterResource
 from resources.cars import AllCarResource, UserCarResource
 from resources.garage_sale import GarageSaleListResource, AllGarageSaleResource, GarageSaleResource
 from resources.item import ItemResource, ItemListResource, AllItemListResource 
+from resources.image import ImageResource
 from dotenv import load_dotenv
 from os import environ
 import os
@@ -66,11 +67,12 @@ def create_routes():
     api.add_resource(LoginResource, '/api/auth/login')
     api.add_resource(AllCarResource, '/api/cars')
     api.add_resource(UserCarResource, '/api/user_cars')
-    api.add_resource(AllGarageSaleResource,'/api/garage_sales')
-    api.add_resource(GarageSaleListResource, '/api/user_garage_sales')
-    api.add_resource(GarageSaleResource, '/api/user_garage_sales/<int:garage_sale_id>')
+    api.add_resource(AllGarageSaleResource,'/api/garage_sales/all')
+    api.add_resource(GarageSaleListResource, '/api/garage_sales')
+    api.add_resource(GarageSaleResource, '/api/garage_sales/<int:garage_sale_id>')
     api.add_resource(AllItemListResource,'/api/user_items')
     api.add_resource(ItemListResource,'/api/user_items/<int:garage_sale_id>')
     api.add_resource(ItemResource,'/api/items/<int:item_id>')
+    api.add_resource(ImageResource,'/images/<filename>')
     
     return api
