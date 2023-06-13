@@ -1,6 +1,7 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import useAuth from "../../hooks/useAuth";
+import { Link } from 'react-router-dom'
 
 import axios from "axios";
 const HomePage = ({}) => {
@@ -14,10 +15,17 @@ const HomePage = ({}) => {
         );
         const updatedGarageSales = response.data.map((garage_sale) => {
           const date = new Date(garage_sale.date);
+
           const startTimeParts = garage_sale.start_time.split(":");
           const startTime = new Date();
           startTime.setHours(parseInt(startTimeParts[0]));
           startTime.setMinutes(parseInt(startTimeParts[1]));
+
+          const endTimeParts = garage_sale.end_time.split(":");
+          const endTime = new Date();
+          endTime.setHours(parseInt(endTimeParts[0]));
+          endTime.setMinutes(parseInt(endTimeParts[1]));
+
           const formattedDate = date.toLocaleDateString("en-US", {
             year: "numeric",
             month: "long",
@@ -27,10 +35,15 @@ const HomePage = ({}) => {
             hour: 'numeric', 
             minute: 'numeric' 
           });
+          const formattedEndTime = endTime.toLocaleTimeString('en-US', { 
+            hour: 'numeric', 
+            minute: 'numeric' 
+          });
           return {
             ...garage_sale,
             formattedDate: formattedDate,
-            formattedStartTime: formattedStartTime
+            formattedStartTime: formattedStartTime,
+            formattedEndTime: formattedEndTime
           };
         });
 
@@ -41,13 +54,21 @@ const HomePage = ({}) => {
   },[]);
   return (
     <div className="container">
-      <h1>Home Page!</h1>
+      <h1>Active Garage Sales</h1>
       {garageSales &&
         garageSales.map((garage_sale) => (
-          <p key={garage_sale.id}>
-            {garage_sale.formattedDate} {garage_sale.formattedStartTime}-
-            {garage_sale.end_time}
-          </p>
+                <Link to={`/garage_sales/${garage_sale.id}`}  key={garage_sale.id} >
+            <div >
+                
+                    <div> {garage_sale.name} </div>
+                    <div>{garage_sale.formattedDate}</div> 
+                    <div>{garage_sale.formattedStartTime}-
+                    {garage_sale.formattedEndTime}</div>
+                    <div> {garage_sale.zip} </div>
+                    <div>{garage_sale.categories}</div>
+                
+            </div>
+            </Link>
         ))}
     </div>
   );
