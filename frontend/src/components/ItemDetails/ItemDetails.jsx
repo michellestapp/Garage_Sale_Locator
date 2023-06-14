@@ -5,8 +5,12 @@ const ItemDetails = ({ items }) => {
     <div>
       {items.map((item) => (
         <div key={item.id}>
-          <h3>Item Name: {item.name_of_item}</h3>
           <img src={`http://127.0.0.1:5000/images/${item.image}`} alt={item.name_of_item} />
+          <p>Item Name: {item.name_of_item}</p>
+          <p>Item Description: {item.description}</p>
+          <p>Price: ${item.price}</p>
+          <p>Category: {item.category}</p>
+
         </div>
       ))}
     </div>

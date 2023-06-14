@@ -1,6 +1,8 @@
 import React from "react";
 import axios from "axios";
 import ItemDetails from "../ItemDetails/ItemDetails";
+import GarageSaleMap from "../GarageSaleMap/GarageSaleMap"
+import GoogleMapReact from "google-map-react";
 
 const GarageSaleDetails = ({ garageSaleDetails }) => {
   console.log(garageSaleDetails);
@@ -25,9 +27,18 @@ const GarageSaleDetails = ({ garageSaleDetails }) => {
     return `${formattedHours}:${formattedMinutes} ${ampm}`;
   };
 
+  const fullAddress = () => {
+    return `${garageSaleDetails.street_address}, ${garageSaleDetails.city}, ${garageSaleDetails.state} ${garageSaleDetails.zip}`;
+  };
+  
+  
+  
+  
   return (
     <div>
       <h1>Details</h1>
+      <GarageSaleMap fullAddress={fullAddress()} />
+
       <div>
         <p>Name: {garageSaleDetails.name}</p>
         <p>Date of Sale: {formatDate(garageSaleDetails.date)}</p>
@@ -36,7 +47,9 @@ const GarageSaleDetails = ({ garageSaleDetails }) => {
         </p>
         <p>Address:</p> 
             <div>{garageSaleDetails.street_address}
-        <p>{garageSaleDetails.city},{garageSaleDetails.state} {garageSaleDetails.zip}</p></div>
+        <p>{garageSaleDetails.city},{garageSaleDetails.state} {garageSaleDetails.zip}</p>
+        <p>{fullAddress()}</p>
+        </div>
         <br />
         <ItemDetails items = {garageSaleDetails.items}/>
       </div>

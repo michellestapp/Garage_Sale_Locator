@@ -60,7 +60,7 @@ const HomePage = ({}) => {
       {garageSales &&
         garageSales.map((garage_sale) => (
             <Link to={`/garage_sales/${garage_sale.id}`}  key={garage_sale.id} >
-            <div >
+                <div >
                 
                     <div> {garage_sale.name} </div>
                     <div>{garage_sale.formattedDate}</div> 
@@ -69,7 +69,7 @@ const HomePage = ({}) => {
                     <div> {garage_sale.zip} </div>
                     <div>{garage_sale.categories}</div>
                 
-            </div>
+                </div>
             </Link>
         ))}
     </div>

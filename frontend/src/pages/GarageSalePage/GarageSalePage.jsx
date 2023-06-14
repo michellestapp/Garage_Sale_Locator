@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import GarageSaleDetails from '../../components/GarageSaleDetails/GarageSaleDetails';
+import GarageSaleMap from '../../components/GarageSaleMap/GarageSaleMap';
 
 function GarageSalePage() {
   const { garage_sale_id } = useParams();
