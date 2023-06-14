@@ -4,6 +4,7 @@ import useAuth from "../../hooks/useAuth";
 import { Link } from 'react-router-dom'
 
 import axios from "axios";
+
 const HomePage = ({}) => {
   const [garageSales, setGarageSales] = useState([]);
 
@@ -15,6 +16,11 @@ const HomePage = ({}) => {
         );
         const updatedGarageSales = response.data.map((garage_sale) => {
           const date = new Date(garage_sale.date);
+          const formattedDate = date.toLocaleDateString("en-US", {
+            month: 'numeric',
+            day: 'numeric',
+            year: 'numeric',
+          });
 
           const startTimeParts = garage_sale.start_time.split(":");
           const startTime = new Date();
@@ -26,11 +32,7 @@ const HomePage = ({}) => {
           endTime.setHours(parseInt(endTimeParts[0]));
           endTime.setMinutes(parseInt(endTimeParts[1]));
 
-          const formattedDate = date.toLocaleDateString("en-US", {
-            year: "numeric",
-            month: "long",
-            day: "numeric",
-          });
+          
           const formattedStartTime = startTime.toLocaleTimeString('en-US', { 
             hour: 'numeric', 
             minute: 'numeric' 
@@ -57,7 +59,7 @@ const HomePage = ({}) => {
       <h1>Active Garage Sales</h1>
       {garageSales &&
         garageSales.map((garage_sale) => (
-                <Link to={`/garage_sales/${garage_sale.id}`}  key={garage_sale.id} >
+            <Link to={`/garage_sales/${garage_sale.id}`}  key={garage_sale.id} >
             <div >
                 
                     <div> {garage_sale.name} </div>
@@ -76,12 +78,4 @@ const HomePage = ({}) => {
 
 export default HomePage;
 
-//   return (
-//     <div>
-//       <h1>Welcome to the Garage Sale Locator</h1>
-//       <input type="time" />
-//     </div>
-//   );
-// };
 
-// export default HomePage;

@@ -1,26 +1,47 @@
 import React from "react";
 import axios from "axios";
+import ItemDetails from "../ItemDetails/ItemDetails";
 
+const GarageSaleDetails = ({ garageSaleDetails }) => {
+  console.log(garageSaleDetails);
 
-const GarageSaleDetails = ({garageSaleDetails}) => {
-    console.log(garageSaleDetails)
-    return ( 
-        <div>
-            <h1>Details</h1>
-            <div>
-                <p>Name: {garageSaleDetails.name}</p>
-                <p>Date of Sale: {garageSaleDetails.date}</p>
-                <br />
-                {garageSaleDetails.items.map((item) => (
-                    <div key={item.id}>
-                    <h3>Item Name: {item.name_of_item}</h3>
-                    <img src={`http://127.0.0.1:5000/images/${item.image}`} alt={item.name_of_item}/>
-                    <h1>{item.image}</h1>
-                    </div>
-      ))}
-            </div>
-        </div>
-     );
-}
- 
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const formattedDate = date.toLocaleDateString("en-US", {
+      month: "numeric",
+      day: "numeric",
+      year: "numeric",
+    });
+    return formattedDate;
+  };
+
+  const formatTime = (timeString) => {
+    const timeParts = timeString.split(":");
+    const hours = parseInt(timeParts[0]);
+    const minutes = parseInt(timeParts[1]);
+    const ampm = hours >= 12 ? "PM" : "AM";
+    const formattedHours = hours % 12 === 0 ? 12 : hours % 12;
+    const formattedMinutes = minutes.toString().padStart(2, "0");
+    return `${formattedHours}:${formattedMinutes} ${ampm}`;
+  };
+
+  return (
+    <div>
+      <h1>Details</h1>
+      <div>
+        <p>Name: {garageSaleDetails.name}</p>
+        <p>Date of Sale: {formatDate(garageSaleDetails.date)}</p>
+        <p>
+          Time of Sale: {formatTime(garageSaleDetails.start_time)}-{formatTime(garageSaleDetails.end_time)}
+        </p>
+        <p>Address:</p> 
+            <div>{garageSaleDetails.street_address}
+        <p>{garageSaleDetails.city},{garageSaleDetails.state} {garageSaleDetails.zip}</p></div>
+        <br />
+        <ItemDetails items = {garageSaleDetails.items}/>
+      </div>
+    </div>
+  );
+};
+
 export default GarageSaleDetails;
