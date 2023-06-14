@@ -1,10 +1,15 @@
 import React, { useState, useEffect } from 'react';
+// import { GoogleMap, Marker, useLoadScript } from "react-google-maps";
 // import { GoogleMap, Marker } from 'google-maps-react';
 import GoogleMapReact from 'google-map-react'
- import axios from 'axios';
+import axios from 'axios';
 
 
-const GarageSaleMap = ({ fullAddress }) => {
+
+
+const Marker = ({ text }) => <div>{text}</div>;
+
+const GarageSaleMap = ({ fullAddress, markerText }) => {
   const [coordinates, setCoordinates] = useState({ lat: 0, lng: 0 });
 
   console.log(coordinates)
@@ -13,6 +18,7 @@ const GarageSaleMap = ({ fullAddress }) => {
   const fetchCoordinates = async () => {
     try {
       console.log(fullAddress) 
+
       const response = await axios.get(
         `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(fullAddress)}&key=AIzaSyBT6E7N9TKiM3KZcDNW5NPvrxJSIsmDbpU`
       );
@@ -34,19 +40,14 @@ const GarageSaleMap = ({ fullAddress }) => {
       <GoogleMapReact bootstrapURLKeys={{key: 'AIzaSyBT6E7N9TKiM3KZcDNW5NPvrxJSIsmDbpU'}} 
       center={coordinates} 
 
-      defaultZoom={11}>
+      defaultZoom={15}>
+        <Marker lat={coordinates.lat} lng={coordinates.lng} text={markerText}/>
+       
 
       </GoogleMapReact>
-      {/* <GoogleMapReact
-        google={window.google}
-        zoom={14}
-        initialCenter={coordinates}
-        center={coordinates}
-      >
-          {/* <Marker lat={coordinates.lat} lng={coordinates.lng}/> */}
-      {/* </GoogleMapReact> */} 
     </div>
   );
 };
+
 
 export default GarageSaleMap;

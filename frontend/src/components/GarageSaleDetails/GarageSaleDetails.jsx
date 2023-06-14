@@ -30,6 +30,7 @@ const GarageSaleDetails = ({ garageSaleDetails }) => {
   const fullAddress = () => {
     return `${garageSaleDetails.street_address}, ${garageSaleDetails.city}, ${garageSaleDetails.state} ${garageSaleDetails.zip}`;
   };
+ 
   
   
   
@@ -37,7 +38,8 @@ const GarageSaleDetails = ({ garageSaleDetails }) => {
   return (
     <div>
       <h1>Details</h1>
-      <GarageSaleMap fullAddress={fullAddress()} />
+      <GarageSaleMap fullAddress={fullAddress()} markerText = {garageSaleDetails.name}/>
+
 
       <div>
         <p>Name: {garageSaleDetails.name}</p>
