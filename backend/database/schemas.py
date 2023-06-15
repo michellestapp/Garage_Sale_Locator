@@ -72,12 +72,11 @@ class GarageSaleSchema(ma.Schema):
     city = fields.String(required = True)
     state = fields.String(required = True)
     zip = fields.Integer(required = True)
-    categories = fields.String(required = True)
     user_id = fields.Integer()
     user = ma.Nested(UserSchema, many = False)
     items = ma.Nested("ItemSchema", many = True, exclude=('garage_sale',))
     class Meta:
-        fields = ("id", "name","date", "start_time", "end_time", "street_address", "city", "state", "zip","categories", "user", "items")
+        fields = ("id", "name","date", "start_time", "end_time", "street_address", "city", "state", "zip","user", "items")
 
     @post_load
     def create_garage_sale(self, data, **kwargs):

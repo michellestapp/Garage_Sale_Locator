@@ -15,6 +15,7 @@ import Footer from "./components/Footer/Footer";
 // Util Imports
 import PrivateRoute from "./utils/PrivateRoute";
 import MySales from "./pages/MySalesPage/MySalesPage";
+import NewSaleForm from "./components/NewSaleForm/NewSaleForm";
 
 function App() {
   return (
@@ -30,6 +31,11 @@ function App() {
         <Route path='/mySalesPage' element={
           <PrivateRoute> 
             <MySales />
+          </PrivateRoute>
+        }/>
+          <Route path='/garage_sales' element={
+          <PrivateRoute> 
+            <NewSaleForm />
           </PrivateRoute>
         }/>
         <Route path="/garage_sales/:garage_sale_id" element={<GarageSalePage />}/>

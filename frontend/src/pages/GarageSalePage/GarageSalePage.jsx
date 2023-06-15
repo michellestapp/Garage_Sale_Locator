@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { useParams,useLocation } from 'react-router-dom';
 import GarageSaleDetails from '../../components/GarageSaleDetails/GarageSaleDetails';
 
 
 function GarageSalePage() {
   const { garage_sale_id } = useParams();
   const [garageSaleDetails, setGarageSaleDetails] = useState(null);
+  const location = useLocation();
 
   useEffect(() => {
     fetchGarageSale();

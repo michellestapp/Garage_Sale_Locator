@@ -69,8 +69,6 @@ class GarageSaleResource(Resource):
                 edit_garage_sale.state = request.json["state"]
             if "zip" in request.json:
                 edit_garage_sale.zip = request.json["zip"]
-            if "categories"in request.json:
-                edit_garage_sale.categories = request.json["categories"] 
             db.session.commit()
             return garage_sale_schema.dump(edit_garage_sale), 200
         return "Not authorized to change this sale", 401

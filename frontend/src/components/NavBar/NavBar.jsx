@@ -19,6 +19,10 @@ const Navbar = () => {
             <button onClick = {() => navigate("/mySalesPage")}>My Sales</button>)
           : ( " ")}
         </li>
+        <li>{user? (
+            <button onClick = {() => navigate("/garage_sales")}>Post New Sale</button>)
+          : ( " ")}
+        </li>
         <li>
           {user ? (
             <button onClick={logoutUser}>Logout</button>

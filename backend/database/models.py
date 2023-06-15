@@ -42,7 +42,6 @@ class GarageSale(db.Model):
     city = db.Column(db.String(255), nullable = False)
     state = db.Column(db.String(255), nullable = False)
     zip = db.Column(db.Integer, nullable = False)
-    categories = db.Column(db.String(255), nullable = False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     user = db.relationship("User")
 

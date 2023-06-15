@@ -1,8 +1,8 @@
 import React from "react";
 import axios from "axios";
 import ItemDetails from "../ItemDetails/ItemDetails";
-import GarageSaleMap from "../GarageSaleMap/GarageSaleMap"
-import GoogleMapReact from "google-map-react";
+import GarageSaleMap from "../GarageSaleMap/GarageSaleMap";
+
 
 const GarageSaleDetails = ({ garageSaleDetails }) => {
   console.log(garageSaleDetails);
@@ -30,30 +30,33 @@ const GarageSaleDetails = ({ garageSaleDetails }) => {
   const fullAddress = () => {
     return `${garageSaleDetails.street_address}, ${garageSaleDetails.city}, ${garageSaleDetails.state} ${garageSaleDetails.zip}`;
   };
- 
-  
-  
-  
-  
+
   return (
     <div>
       <h1>Details</h1>
-      <GarageSaleMap fullAddress={fullAddress()} markerText = {garageSaleDetails.name}/>
-
+      <GarageSaleMap
+        fullAddress={fullAddress()}
+        markerText={garageSaleDetails.name}
+      />
 
       <div>
         <p>Name: {garageSaleDetails.name}</p>
         <p>Date of Sale: {formatDate(garageSaleDetails.date)}</p>
         <p>
-          Time of Sale: {formatTime(garageSaleDetails.start_time)}-{formatTime(garageSaleDetails.end_time)}
+          Time of Sale: {formatTime(garageSaleDetails.start_time)}-
+          {formatTime(garageSaleDetails.end_time)}
         </p>
-        <p>Address:</p> 
-            <div>{garageSaleDetails.street_address}
-        <p>{garageSaleDetails.city},{garageSaleDetails.state} {garageSaleDetails.zip}</p>
-        <p>{fullAddress()}</p>
+        <p>Address:</p>
+        <div>
+          {garageSaleDetails.street_address}
+          <p>
+            {garageSaleDetails.city},{garageSaleDetails.state}{" "}
+            {garageSaleDetails.zip}
+          </p>
+          <p>{fullAddress()}</p>
         </div>
         <br />
-        <ItemDetails items = {garageSaleDetails.items}/>
+        <ItemDetails items={garageSaleDetails.items} />
       </div>
     </div>
   );

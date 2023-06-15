@@ -16,7 +16,6 @@ const MySalesPage = () => {
           },
         });
         setMySales(response.data);
-        console.log(mySales);
       } catch (error) {
         console.log(error.response.data);
       }
