@@ -4,6 +4,7 @@ import useAuth from "../../hooks/useAuth";
 import { Link } from 'react-router-dom'
 
 import axios from "axios";
+import SearchBar from "../../components/SearchBar/SearchBar";
 
 const HomePage = ({}) => {
   const [garageSales, setGarageSales] = useState([]);
@@ -57,6 +58,9 @@ const HomePage = ({}) => {
   return (
     <div className="container">
       <h1>Active Garage Sales</h1>
+      <div>
+        <SearchBar/>
+      </div>
       {garageSales &&
         garageSales.map((garage_sale) => (
             <Link to={`/garage_sales/${garage_sale.id}`}  key={garage_sale.id} >

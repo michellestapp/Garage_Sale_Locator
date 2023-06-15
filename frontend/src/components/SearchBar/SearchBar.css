@@ -1,0 +1,11 @@
+.search-template{
+    font-size: large;
+    font-weight: bold;
+    padding: 5px;
+}
+.filter{
+    font-size: medium;
+}
+.search-bar{
+    display: flex;
+}
