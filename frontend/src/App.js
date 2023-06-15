@@ -20,15 +20,13 @@ function App() {
     <div>
       <Navbar />
       <Routes>
-        <Route
-          path="/"
-          element={
+        <Route path="/" element={
             // <PrivateRoute>
-              <HomePage />
+            <HomePage />
             // </PrivateRoute>
           }
         />
-        <Route path="/garage_sales/:garage_sale_id" element={<GarageSalePage/>}/>
+        <Route path="/garage_sales/:garage_sale_id" element={<GarageSalePage />}/>
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/login" element={<LoginPage />} />
       </Routes>
