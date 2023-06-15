@@ -15,6 +15,10 @@ const Navbar = () => {
             <b>Garage Sale Locator</b>
           </Link>
         </li>
+        <li>{user? (
+            <button onClick = {() => navigate("/mySalesPage")}>My Sales</button>)
+          : ( " ")}
+        </li>
         <li>
           {user ? (
             <button onClick={logoutUser}>Logout</button>
