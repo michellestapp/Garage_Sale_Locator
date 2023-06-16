@@ -16,6 +16,7 @@ import Footer from "./components/Footer/Footer";
 import PrivateRoute from "./utils/PrivateRoute";
 import MySales from "./pages/MySalesPage/MySalesPage";
 import NewSaleForm from "./components/NewSaleForm/NewSaleForm";
+import EditSaleForm from "./components/EditSaleForm/EditSaleForm";
 
 function App() {
   return (
@@ -35,7 +36,12 @@ function App() {
         }/>
           <Route path='/garage_sales' element={
           <PrivateRoute> 
-            <NewSaleForm />
+            <NewSalePage />
+          </PrivateRoute>
+        }/>
+        <Route path='/garage_sales/:garage_sale_id' element={
+          <PrivateRoute> 
+            <EditSaleForm />
           </PrivateRoute>
         }/>
         <Route path="/garage_sales/:garage_sale_id" element={<GarageSalePage />}/>

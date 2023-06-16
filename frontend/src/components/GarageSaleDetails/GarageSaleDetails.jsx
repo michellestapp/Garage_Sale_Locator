@@ -1,11 +1,12 @@
 import React from "react";
 import axios from "axios";
-import ItemDetails from "../ItemDetails/ItemDetails";
+import ItemList from "../ItemList/ItemList";
 import GarageSaleMap from "../GarageSaleMap/GarageSaleMap";
-
+import AddItemForm from "../AddItemForm/AddItemForm";
 
 const GarageSaleDetails = ({ garageSaleDetails }) => {
   console.log(garageSaleDetails);
+
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
@@ -56,7 +57,8 @@ const GarageSaleDetails = ({ garageSaleDetails }) => {
           <p>{fullAddress()}</p>
         </div>
         <br />
-        <ItemDetails items={garageSaleDetails.items} />
+        <AddItemForm garageSale={garageSaleDetails}/>
+        <ItemList items={garageSaleDetails.items} />
       </div>
     </div>
   );
