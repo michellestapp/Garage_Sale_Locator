@@ -1,16 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useLocation, useParams, useNavigate } from 'react-router-dom';
+import useAuth from '../../hooks/useAuth';
 
-const EditSaleForm = ({ garageSaleId, token, fetchMySales }) => {
+const EditSalePage = ({}) => {
+  const [user, token] = useAuth();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const garageSale = location.state?.garage_sale
   const [formData, setFormData] = useState({
-    name: '',
-    date: '',
-    start_time: '',
-    end_time: '',
-    street_address: '',
-    city: '',
-    state: '',
-    zip: ''
+    name: garageSale.name,
+    date: garageSale.date,
+    start_time: garageSale.start_time,
+    end_time: garageSale.end_time,
+    street_address: garageSale.street_address,
+    city: garageSale.city,
+    state: garageSale.state,
+    zip: garageSale.zip
   });
 
   const handleInputChange = (event) => {
@@ -20,12 +26,11 @@ const EditSaleForm = ({ garageSaleId, token, fetchMySales }) => {
     }));
   };
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-
+async function editSale() {
     try {
+
       let response = await axios.put(
-        `http://127.0.0.1:5000/api/garage_sales/${garageSaleId}`,
+        `http://127.0.0.1:5000/api/garage_sales/${garageSale.id}`,
         formData,
         {
           headers: {
@@ -33,15 +38,19 @@ const EditSaleForm = ({ garageSaleId, token, fetchMySales }) => {
           }
         }
       );
-      fetchMySales(response.data);
+      console.log(response.data);
     } catch (error) {
       console.log(error.response.data);
     }
   };
 
-  useEffect(() => {
-    fetchMySales();
-  }, [token]);
+  function handleSubmit(event) {
+    event.preventDefault();
+    editSale();
+    navigate('/mySalesPage');
+    
+  }
+ 
 
   return (
     <div>
@@ -84,10 +93,10 @@ const EditSaleForm = ({ garageSaleId, token, fetchMySales }) => {
             <input type="text" name="zip" value={formData.zip} onChange={handleInputChange} />
           </label>
         </div>
-        <button type="submit">Edit Sale</button>
+        <button type="submit">Submit Changes</button>
       </form>
     </div>
   );
 };
 
-export default EditSaleForm;
+export default EditSalePage;

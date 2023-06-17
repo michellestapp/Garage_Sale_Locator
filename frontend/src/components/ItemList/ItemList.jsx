@@ -1,6 +1,9 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
+
 
 const ItemList = ({ items }) => {
+  const navigate = useNavigate()
   return (
     <div>
       {items.map((item) => (

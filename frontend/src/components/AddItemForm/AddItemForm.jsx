@@ -1,6 +1,14 @@
 import React from 'react';
+import useAuth from '../../hooks/useAuth';
+
 const AddItemForm = ({garageSale}) => {
-    return ( <form >
+    
+    const [user,token] = useAuth();
+    console.log(garageSale.name)
+    console.log(user.id)
+
+    return garageSale.user_id===user.id && ( <form >
+        <h1>test</h1>
 
 
     </form> );

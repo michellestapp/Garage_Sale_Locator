@@ -40,13 +40,13 @@ const MySalesPage = () => {
     }
   };
 
-  const editSale = (garageSaleId) => {
-    navigate(`/edit_sale/${garageSaleId}`);
-  };
-
   useEffect(() => {
     fetchMySales();
   }, [user, token]);
+
+  const handleEditSale = (garageSale) => {
+   navigate(`/garage_sales/${garageSale.id}`, { state: { garage_sale: garageSale} });
+ };
 
   return (
     <div>
@@ -60,21 +60,13 @@ const MySalesPage = () => {
                   <div onClick={() => navigate(`/garage_sales/${garage_sale.id}`)}>
                     <p>{garage_sale.name}</p>
                     <p>{formatDate(garage_sale.date)}</p>
-                    <p>
-                      {formatTime(garage_sale.start_time)}-{formatTime(garage_sale.end_time)}
-                    </p>
+                    <p>{formatTime(garage_sale.start_time)}-{formatTime(garage_sale.end_time)}</p>
                     <p>{garage_sale.street_address}</p>
-                    <p>
-                      {garage_sale.city}, {garage_sale.state} {garage_sale.zip}
-                    </p>
+                    <p>{garage_sale.city}, {garage_sale.state} {garage_sale.zip} </p>
                   </div>
                   <div>
-                    <button type="submit" onClick={() => deleteSale(garage_sale.id)}>
-                      Delete Sale
-                    </button>
-                    <button type="submit" onClick={() => editSale(garage_sale.id)}>
-                      Edit Sale
-                    </button>
+                    <button type="submit" onClick={() => deleteSale(garage_sale.id)}>Delete Sale</button>
+                    <button type="submit" onClick={() => handleEditSale(garage_sale)}>Edit Sale</button>
                   </div>
                 </div>
               );

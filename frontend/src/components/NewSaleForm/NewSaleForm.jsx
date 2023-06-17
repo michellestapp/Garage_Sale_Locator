@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 const NewSaleForm = () => {
   const navigate = useNavigate()
   const [user, token] = useAuth();
-  const [formData, handleInputChange, reset] = useCustomForm({
+  const [formData, handleInputChange] = useCustomForm({
     name: "",
     date: "",
     start_time: "",
@@ -31,7 +31,7 @@ const NewSaleForm = () => {
         }
       );
       console.log(response.data);
-    //   reset();
+
     } catch (error) {
       if (error.response && error.response.data) {
         console.log("Error response data:", error.response.data);
