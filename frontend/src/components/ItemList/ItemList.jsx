@@ -1,9 +1,13 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import useAuth from "../../hooks/useAuth";
+import { Link } from "react-router-dom";
 
 
 const ItemList = ({ items }) => {
   const navigate = useNavigate()
+  const [user, token] = useAuth();
+  console.log('ItemList',user)
   return (
     <div>
       {items.map((item) => (
@@ -20,10 +24,13 @@ const ItemList = ({ items }) => {
           <p>Item Description: {item.description}</p>
           <p>Price: ${item.price}</p>
           <p>Category: {item.category}</p>
-          {/* <li>{user ? (
-            <button onClick={() => navigate("/user_items/${item.id}")}>Edit Item</button>)
+          <li>
+            {user ? (
+            <button onClick={() => navigate(`/items/${item.id}`)}>Edit Item</button>
+            )
           : ( " ")}
-        </li> */}
+        </li>
+
         </div>
       ))}
     </div>

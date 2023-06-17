@@ -44,13 +44,23 @@ class GarageSaleResource(Resource):
     def get(self,garage_sale_id):
         garage_sale = GarageSale.query.get_or_404(garage_sale_id)
         return garage_sale_schema.dump(garage_sale)
+ 
 
+    @jwt_required()
+    def delete(self, garage_sale_id):
+        user_id = get_jwt_identity()
+        delete_garage_sale = GarageSale.query.get_or_404(garage_sale_id)
+        if int(user_id) == delete_garage_sale.user_id:
+            db.session.delete(delete_garage_sale)
+            db.session.commit()
+            return '',204
+        return "Not autorized to delete this garage sale", 401
 
-
+class GarageSaleEditResource(Resource):
     @jwt_required()
     def put(self,garage_sale_id):
         user_id = get_jwt_identity()
-        
+           
         edit_garage_sale = GarageSale.query.get_or_404(garage_sale_id)
         if int(user_id) == edit_garage_sale.user_id:
             if "name" in request.json:
@@ -72,14 +82,3 @@ class GarageSaleResource(Resource):
             db.session.commit()
             return garage_sale_schema.dump(edit_garage_sale), 200
         return "Not authorized to change this sale", 401
-
-    @jwt_required()
-    def delete(self, garage_sale_id):
-        user_id = get_jwt_identity()
-        delete_garage_sale = GarageSale.query.get_or_404(garage_sale_id)
-        if int(user_id) == delete_garage_sale.user_id:
-            db.session.delete(delete_garage_sale)
-            db.session.commit()
-            return '',204
-        return "Not autorized to delete this garage sale", 401
-

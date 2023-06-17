@@ -8,7 +8,7 @@ from database.models import db
 from database.schemas import ma
 from resources.auth import LoginResource, RegisterResource
 from resources.cars import AllCarResource, UserCarResource
-from resources.garage_sale import GarageSaleListResource, AllGarageSaleResource, GarageSaleResource
+from resources.garage_sale import GarageSaleListResource, AllGarageSaleResource, GarageSaleResource, GarageSaleEditResource
 from resources.item import ItemResource, ItemListResource, AllItemListResource 
 from resources.image import ImageResource
 from dotenv import load_dotenv
@@ -74,5 +74,5 @@ def create_routes():
     api.add_resource(ItemListResource,'/api/user_items/<int:garage_sale_id>')
     api.add_resource(ItemResource,'/api/items/<int:item_id>')
     api.add_resource(ImageResource,'/images/<filename>')
-    
+    api.add_resource(GarageSaleEditResource, '/api/edit_sale/<int:garage_sale_id>')    
     return api

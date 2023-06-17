@@ -9,6 +9,7 @@ import RegisterPage from "./pages/RegisterPage/RegisterPage";
 import GarageSalePage from "./pages/GarageSalePage/GarageSalePage";
 import NewSalePage from "./pages/NewSalePage/NewSalePage";
 import EditSalePage from "./pages/EditSalePage/EditSalePage";
+import EditItemPage from "./pages/EditItemPage/EditItemPage";
 
 // Component Imports
 import Navbar from "./components/NavBar/NavBar";
@@ -34,11 +35,16 @@ function App() {
             <MySales />
           </PrivateRoute>
         }/>
-        <Route path='/garage_sales/:garage_sale_id' element={
+        <Route path='/items/:itemId' element={
+          <PrivateRoute> 
+            <EditItemPage/>
+          </PrivateRoute> 
+        }/>
+        <Route path='/edit_sale/:garage_sale_id' element={
           <PrivateRoute> 
             <EditSalePage />
           </PrivateRoute>
-        }/>
+          }/>
           <Route path='/garage_sales' element={
           <PrivateRoute> 
             <NewSalePage />

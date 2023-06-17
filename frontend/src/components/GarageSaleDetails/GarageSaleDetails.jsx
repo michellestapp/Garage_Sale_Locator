@@ -1,8 +1,4 @@
 import React from "react";
-import axios from "axios";
-import ItemList from "../ItemList/ItemList";
-import GarageSaleMap from "../GarageSaleMap/GarageSaleMap";
-import AddItemForm from "../AddItemForm/AddItemForm";
 import { formatDate, formatTime } from "../MyFunctions/MyFunctions";
 
 const GarageSaleDetails = ({ garageSaleDetails }) => {
@@ -28,7 +24,6 @@ const GarageSaleDetails = ({ garageSaleDetails }) => {
           </p>
         </div>
         <br />
-        <AddItemForm garageSale={garageSaleDetails}/>
       </div>
     </div>
   );

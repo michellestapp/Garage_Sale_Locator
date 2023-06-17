@@ -45,7 +45,7 @@ const MySalesPage = () => {
   }, [user, token]);
 
   const handleEditSale = (garageSale) => {
-   navigate(`/garage_sales/${garageSale.id}`, { state: { garage_sale: garageSale} });
+   navigate(`/edit_sale/${garageSale.id}`, { state: { garage_sale: garageSale} });
  };
 
   return (

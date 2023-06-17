@@ -4,6 +4,7 @@ import { useParams,useLocation } from 'react-router-dom';
 import GarageSaleDetails from '../../components/GarageSaleDetails/GarageSaleDetails';
 import GarageSaleMap from '../../components/GarageSaleMap/GarageSaleMap';
 import ItemList from '../../components/ItemList/ItemList';
+import AddItemForm from '../../components/AddItemForm/AddItemForm';
 
 
 function GarageSalePage() {
@@ -17,24 +18,27 @@ function GarageSalePage() {
   useEffect(() => {
     fetchGarageSale();
   }, [garage_sale_id]);
-  console.log(garage_sale_id)
+ 
 
   const fetchGarageSale = async () => {
     try {
       const response = await axios.get(`http://127.0.0.1:5000/api/garage_sales/${garage_sale_id}`);
       const garageSaleData = response.data;
       setGarageSaleDetails(garageSaleData);
-      console.log(garage_sale_id)
+
     } catch (error) {
       console.error('Error getting garage sale details', error);
     }
   };
+
+
 
   return (
     <div>
       <h1>Garage Sale Details</h1>
       {garageSaleDetails && <GarageSaleMap fullAddress={fullAddress()} markerText={garageSaleDetails.name}/>}
       {garageSaleDetails && <GarageSaleDetails garageSaleDetails={garageSaleDetails} />}
+      {garageSaleDetails && <AddItemForm garageSale={garageSaleDetails} onItemAdded={fetchGarageSale}/>}
       {garageSaleDetails && <ItemList items={garageSaleDetails.items} />}
     </div>
   );

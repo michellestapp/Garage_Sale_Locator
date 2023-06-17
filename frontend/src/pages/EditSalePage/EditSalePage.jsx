@@ -30,7 +30,7 @@ async function editSale() {
     try {
 
       let response = await axios.put(
-        `http://127.0.0.1:5000/api/garage_sales/${garageSale.id}`,
+        `http://127.0.0.1:5000/api/edit_sale/${garageSale.id}`,
         formData,
         {
           headers: {
