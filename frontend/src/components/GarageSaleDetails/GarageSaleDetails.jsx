@@ -1,5 +1,5 @@
 import React from "react";
-import { formatDate, formatTime } from "../MyFunctions/MyFunctions";
+import { formatDate, formatTime} from "../../utils/utils"
 
 const GarageSaleDetails = ({ garageSaleDetails }) => {
 

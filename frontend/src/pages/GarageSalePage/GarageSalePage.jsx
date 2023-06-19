@@ -38,8 +38,8 @@ function GarageSalePage() {
       <h1>Garage Sale Details</h1>
       {garageSaleDetails && <GarageSaleMap fullAddress={fullAddress()} markerText={garageSaleDetails.name}/>}
       {garageSaleDetails && <GarageSaleDetails garageSaleDetails={garageSaleDetails} />}
-      {garageSaleDetails && <AddItemForm garageSale={garageSaleDetails} onItemAdded={fetchGarageSale}/>}
-      {garageSaleDetails && <ItemList items={garageSaleDetails.items} garageSaleId = {garage_sale_id}/>}
+      {garageSaleDetails && <AddItemForm garageSale={garageSaleDetails} fetchGarageSale={fetchGarageSale}/>}
+      {garageSaleDetails && <ItemList garageSaleDetails={garageSaleDetails} garageSaleId = {garage_sale_id} fetchGarageSale={fetchGarageSale}/>}
     </div>
   );
 }

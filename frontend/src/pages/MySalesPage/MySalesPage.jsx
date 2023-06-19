@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import useAuth from '../../hooks/useAuth';
 import { useNavigate } from 'react-router-dom';
-import { formatDate, formatTime } from '../../components/MyFunctions/MyFunctions';
+import { formatDate, formatTime} from "../../utils/utils"
 
 const MySalesPage = () => {
   const [user, token] = useAuth();

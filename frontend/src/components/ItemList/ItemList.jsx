@@ -2,9 +2,10 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 
-const ItemList = ({ items, garageSaleId }) => {
+const ItemList = ({ garageSaleDetails, garageSaleId, fetchGarageSale }) => {
   const navigate = useNavigate()
   const [user, token] = useAuth();
 
@@ -12,9 +13,26 @@ const ItemList = ({ items, garageSaleId }) => {
     navigate(`/items/${item.id}`, { state: { item, garageSaleId: garageSaleId } });
   };
 
+
+  const deleteItem = async (item) => {
+    try {
+      const response = await axios.delete(`http://127.0.0.1:5000/api/items/${item.id}`,{
+          headers: {
+            Authorization: 'Bearer ' + token,
+          },
+        }
+      );
+      if (response.status === 204) {
+        await fetchGarageSale();
+      }
+    } catch (error) {
+      console.log('Error:', error);
+    } 
+  }
+
   return (
     <div>
-      {items.map((item) => (
+      {garageSaleDetails.items.map((item) => (
         <div key={item.id}>
           {item.image ? (
             <img
@@ -28,12 +46,18 @@ const ItemList = ({ items, garageSaleId }) => {
           <p>Item Description: {item.description}</p>
           <p>Price: ${item.price}</p>
           <p>Category: {item.category}</p>
-          <li>
-            {user ? (
+          <div>
+            {(user.id == garageSaleDetails.user.id) ? (
             <button onClick={() => handleEditItem(item)}>Edit Item</button>
             )
           : ( " ")}
-        </li>
+        </div>
+        <div>
+            { (user.id == garageSaleDetails.user.id)? (
+            <button onClick={() => deleteItem(item)}>Delete Item</button>
+            )
+          : ( " ")}
+        </div>
 
         </div>
       ))}

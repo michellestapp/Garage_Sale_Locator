@@ -91,7 +91,7 @@ class ItemSchema(ma.Schema):
     description = fields.String(required = False, allow_none=True)
     price = fields.Integer(required = False, allow_none=True)
     category = fields.String(required = False, allow_none=True)
-    image = fields.String(required = False, allow_none=True)
+    image = fields.String(allow_none=True)
     garage_sale_id = fields.Integer()
     garage_sale = ma.Nested(GarageSaleSchema)
 

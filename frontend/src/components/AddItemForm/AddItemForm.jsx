@@ -4,7 +4,7 @@ import useCustomForm from '../../hooks/useCustomForm';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-const AddItemForm = ({ garageSale , onItemAdded}) => {
+const AddItemForm = ({ garageSale, fetchGarageSale }) => {
   const [user, token] = useAuth();
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
@@ -15,6 +15,7 @@ const AddItemForm = ({ garageSale , onItemAdded}) => {
     image: null,
   });
 
+
   async function addItem() {
     try {
       const form = new FormData();
@@ -22,18 +23,17 @@ const AddItemForm = ({ garageSale , onItemAdded}) => {
       form.append('description', formData.description);
       form.append('price', formData.price);
       form.append('category', formData.category);
-      if (formData.image) {
-        form.append('image', formData.image);
-      }
+      form.append('image', formData.image || '');
 
-      let response = await axios.post('http://127.0.0.1:5000/api/user_items/3', form, {
+      let response = await axios.post(`http://127.0.0.1:5000/api/user_items/${garageSale.id}`, form, {
         headers: {
           Authorization: 'Bearer ' + token,
           'Content-Type': 'multipart/form-data',
         },
       });
- 
-   
+      if (response.status === 201) {
+        await fetchGarageSale();
+      }  
     } catch (error) {
       if (error.response && error.response.data) {
         console.log('Error response data:', error.response.data);
@@ -46,8 +46,6 @@ const AddItemForm = ({ garageSale , onItemAdded}) => {
   function handleSubmit(event) {
     event.preventDefault();
     addItem();
-    navigate(`/garage_sales/${garageSale.id}`);
-
 
   }
 
@@ -66,7 +64,7 @@ const AddItemForm = ({ garageSale , onItemAdded}) => {
   }
 
   return garageSale.user.id === user.id && (
-    <form type = "multipart"  onSubmit={handleSubmit}>
+    <form encType="multipart/form-data"  onSubmit={handleSubmit}>
       <label>
         Item Name: <input type="text" name="name_of_item" value={formData.name_of_item} onChange={handleInputChange} />
       </label>
@@ -79,7 +77,14 @@ const AddItemForm = ({ garageSale , onItemAdded}) => {
         Price: <input type="number" name="price" value={formData.price} onChange={handleInputChange} />
       </label>
       <label>
-        Category: <input type="text" name="category" value={formData.category} onChange={handleInputChange} />
+        Category:
+        <select name="category" value={formData.category} onChange={handleInputChange}>
+          <option value="">Select a category</option>
+          <option value="Books">Books</option>
+          <option value="Electronics">Electronics</option>
+          <option value="Clothing">Clothing</option>
+          {/* Add more options as needed */}
+        </select>
       </label>
       <div>
         <label>
@@ -88,7 +93,6 @@ const AddItemForm = ({ garageSale , onItemAdded}) => {
       </div>
 
       <button type="submit">Add Item</button>
-      <h1>test</h1>
     </form>
   );
 };

@@ -8,7 +8,6 @@ const EditItemPage = () => {
     const {item, garageSaleId} = location.state;
     const [user, token] = useAuth();
     const navigate = useNavigate();
-    console.log('EditItemPage garageSaelId:', garageSaleId)
 
     const [formData, setFormData] = useState({
         name_of_item: item ? item.name_of_item : '',
