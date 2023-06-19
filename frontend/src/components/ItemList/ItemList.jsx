@@ -4,10 +4,14 @@ import useAuth from "../../hooks/useAuth";
 import { Link } from "react-router-dom";
 
 
-const ItemList = ({ items }) => {
+const ItemList = ({ items, garageSaleId }) => {
   const navigate = useNavigate()
   const [user, token] = useAuth();
-  console.log('ItemList',user)
+
+  const handleEditItem = (item) => {
+    navigate(`/items/${item.id}`, { state: { item, garageSaleId: garageSaleId } });
+  };
+
   return (
     <div>
       {items.map((item) => (
@@ -26,7 +30,7 @@ const ItemList = ({ items }) => {
           <p>Category: {item.category}</p>
           <li>
             {user ? (
-            <button onClick={() => navigate(`/items/${item.id}`)}>Edit Item</button>
+            <button onClick={() => handleEditItem(item)}>Edit Item</button>
             )
           : ( " ")}
         </li>

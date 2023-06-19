@@ -12,12 +12,9 @@ const Marker = ({ text }) => <div>{text}</div>;
 const GarageSaleMap = ({ fullAddress, markerText }) => {
   const [coordinates, setCoordinates] = useState({ lat: 0, lng: 0 });
 
-  console.log(coordinates)
-
-
   const fetchCoordinates = async () => {
     try {
-      console.log(fullAddress) 
+
 
       const response = await axios.get(
         `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(fullAddress)}&key=AIzaSyBT6E7N9TKiM3KZcDNW5NPvrxJSIsmDbpU`

@@ -2,7 +2,6 @@ import React from "react";
 import { formatDate, formatTime } from "../MyFunctions/MyFunctions";
 
 const GarageSaleDetails = ({ garageSaleDetails }) => {
-  console.log(garageSaleDetails);
 
   return (
     <div>

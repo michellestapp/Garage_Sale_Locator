@@ -36,9 +36,9 @@ function App() {
           </PrivateRoute>
         }/>
         <Route path='/items/:itemId' element={
-          <PrivateRoute> 
+          // <PrivateRoute> 
             <EditItemPage/>
-          </PrivateRoute> 
+          /* </PrivateRoute>  */
         }/>
         <Route path='/edit_sale/:garage_sale_id' element={
           <PrivateRoute> 

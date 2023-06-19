@@ -8,6 +8,7 @@ const EditSalePage = ({}) => {
   const navigate = useNavigate();
   const location = useLocation();
   const garageSale = location.state?.garage_sale
+  
   const [formData, setFormData] = useState({
     name: garageSale.name,
     date: garageSale.date,

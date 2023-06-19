@@ -22,7 +22,9 @@ const AddItemForm = ({ garageSale , onItemAdded}) => {
       form.append('description', formData.description);
       form.append('price', formData.price);
       form.append('category', formData.category);
-      form.append('image', formData.image);
+      if (formData.image) {
+        form.append('image', formData.image);
+      }
 
       let response = await axios.post('http://127.0.0.1:5000/api/user_items/3', form, {
         headers: {
@@ -31,8 +33,6 @@ const AddItemForm = ({ garageSale , onItemAdded}) => {
         },
       });
  
-        if (typeof onItemAdded === 'function') {
-        onItemAdded();}
    
     } catch (error) {
       if (error.response && error.response.data) {
@@ -47,6 +47,7 @@ const AddItemForm = ({ garageSale , onItemAdded}) => {
     event.preventDefault();
     addItem();
     navigate(`/garage_sales/${garageSale.id}`);
+
 
   }
 
@@ -65,7 +66,7 @@ const AddItemForm = ({ garageSale , onItemAdded}) => {
   }
 
   return garageSale.user.id === user.id && (
-    <form onSubmit={handleSubmit}>
+    <form type = "multipart"  onSubmit={handleSubmit}>
       <label>
         Item Name: <input type="text" name="name_of_item" value={formData.name_of_item} onChange={handleInputChange} />
       </label>
@@ -82,7 +83,7 @@ const AddItemForm = ({ garageSale , onItemAdded}) => {
       </label>
       <div>
         <label>
-          Image: <input type="file" name="image" onChange={handleFileInputChange} />
+            Image: <input type="file" name="image" onChange={handleFileInputChange} />
         </label>
       </div>
 
