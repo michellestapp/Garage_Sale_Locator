@@ -1,5 +1,7 @@
 import React from 'react';
 import './SearchBar.css'
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 const SearchBar = ({searchInput, setSearchInput}) => {
 
@@ -16,8 +18,8 @@ const SearchBar = ({searchInput, setSearchInput}) => {
         <div className='search-bar'>
          
             <span className='search-template'>Search</span>
-            <input data-cy="search-input" type='text' onChange = {handleChange} value={searchInput}/>
-            <button className='filter'   onClick={() => setSearchInput('')}>Clear Filter</button>
+            <input className="search-input" type='text' onChange = {handleChange} value={searchInput}/>
+            <button className='btn'   onClick={() => setSearchInput('')}>Reset</button>
         
         </div>
     );

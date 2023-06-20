@@ -1,11 +1,16 @@
 import React, { useEffect, useState } from "react";
+import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from "axios";
 import { Link } from "react-router-dom";
 import SearchBar from "../../components/SearchBar/SearchBar";
+import { useNavigate } from "react-router-dom";
+import './HomePage.css'
+
 
 const HomePage = () => {
   const [garageSales, setGarageSales] = useState([]);
   const [searchInput, setSearchInput] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchGarageSales = async () => {
@@ -67,26 +72,29 @@ const HomePage = () => {
 
 
   return (
-    <div className="container">
-      <h1>Active Garage Sales</h1>
-      <div>
-        <SearchBar searchInput={searchInput} setSearchInput={setSearchInput} />
+    <div className = "background-format" >
+      <div className='top-bar'>
+        <h1>Active Garage Sales</h1>
+        <div>
+          <SearchBar searchInput={searchInput} setSearchInput={setSearchInput} />
+        </div>
       </div>
+      <div className = "garage-sales-list container border">
       {filteredGarageSales &&
         filteredGarageSales.map((garage_sale) => (
-          <Link to={`/garage_sales/${garage_sale.id}`} key={garage_sale.id}>
-            <span>
-              <p>{garage_sale.name}</p>
-              <p>{garage_sale.formattedDate}</p>
-              <p>
-                {garage_sale.formattedStartTime}-{garage_sale.formattedEndTime}
-              </p>
-              <p>{garage_sale.zip}</p>
-              <p>{garage_sale.categories}</p>
-              <br />
-            </span>
-          </Link>
+          <div className = "card-link border" onClick = {() => navigate(`/garage_sales/${garage_sale.id}`)}>
+            <div >
+
+              <div className = "sale-format">{garage_sale.name}</div>
+              <div className="sale-data-format"><h5>Date: </h5> <p>{garage_sale.formattedDate}</p></div>
+              <div className="sale-data-format"><h5>Time:</h5>  
+                <p>{garage_sale.formattedStartTime}-{garage_sale.formattedEndTime}</p>
+              </div>
+              <div className="sale-data-format"><h5>Zip:</h5> <p>{garage_sale.zip}</p></div>
+            </div>
+          </div>
         ))}
+        </div>
     </div>
   );
 };

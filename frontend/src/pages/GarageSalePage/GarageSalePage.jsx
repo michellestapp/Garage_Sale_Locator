@@ -5,6 +5,7 @@ import GarageSaleDetails from '../../components/GarageSaleDetails/GarageSaleDeta
 import GarageSaleMap from '../../components/GarageSaleMap/GarageSaleMap';
 import ItemList from '../../components/ItemList/ItemList';
 import AddItemForm from '../../components/AddItemForm/AddItemForm';
+import './GarageSalePage.css'
 
 
 function GarageSalePage() {
@@ -34,11 +35,14 @@ function GarageSalePage() {
 
 
   return (
-    <div>
+    <div className='background-format display'>
       <h1>Garage Sale Details</h1>
       {garageSaleDetails && <GarageSaleMap fullAddress={fullAddress()} markerText={garageSaleDetails.name}/>}
+      <div className='gs-sale-additem'>
       {garageSaleDetails && <GarageSaleDetails garageSaleDetails={garageSaleDetails} />}
       {garageSaleDetails && <AddItemForm garageSale={garageSaleDetails} fetchGarageSale={fetchGarageSale}/>}
+      </div>
+
       {garageSaleDetails && <ItemList garageSaleDetails={garageSaleDetails} garageSaleId = {garage_sale_id} fetchGarageSale={fetchGarageSale}/>}
     </div>
   );

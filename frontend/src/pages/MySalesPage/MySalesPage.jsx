@@ -57,7 +57,7 @@ const MySalesPage = () => {
             if (user.id === garage_sale.user.id) {
               return (
                 <div key={index}>
-                  <div onClick={() => navigate(`/garage_sales/${garage_sale.id}`)}>
+                  <div className = "current-sales" onClick={() => navigate(`/garage_sales/${garage_sale.id}`)}>
                     <p>{garage_sale.name}</p>
                     <p>{formatDate(garage_sale.date)}</p>
                     <p>{formatTime(garage_sale.start_time)}-{formatTime(garage_sale.end_time)}</p>

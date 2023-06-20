@@ -14,24 +14,28 @@ const AddItemForm = ({ garageSale, fetchGarageSale }) => {
     category: '',
     image: null,
   });
+  console.log(garageSale);
+  console.log(user.id);
 
 
   async function addItem() {
     try {
-      const form = new FormData();
-      form.append('name_of_item', formData.name_of_item);
-      form.append('description', formData.description);
-      form.append('price', formData.price);
-      form.append('category', formData.category);
-      form.append('image', formData.image || '');
-
-      let response = await axios.post(`http://127.0.0.1:5000/api/user_items/${garageSale.id}`, form, {
+        let response = await axios.post(`http://127.0.0.1:5000/api/user_items/${garageSale.id}`,
+      {
+        name_of_item: formData.name_of_item,
+        description: formData.description,
+        price: formData.price,
+        category: formData.category,
+      
+      }, {
         headers: {
           Authorization: 'Bearer ' + token,
-          'Content-Type': 'multipart/form-data',
+          'Content-Type': 'application/json',
+  
         },
       });
       if (response.status === 201) {
+        console.log('Line 49 AddItemForm', garageSale.id)
         await fetchGarageSale();
       }  
     } catch (error) {
@@ -46,7 +50,6 @@ const AddItemForm = ({ garageSale, fetchGarageSale }) => {
   function handleSubmit(event) {
     event.preventDefault();
     addItem();
-
   }
 
   function handleInputChange(event) {
@@ -56,43 +59,36 @@ const AddItemForm = ({ garageSale, fetchGarageSale }) => {
     }));
   }
 
-  function handleFileInputChange(event) {
-    setFormData((prevFormData) => ({
-      ...prevFormData,
-      image: event.target.files[0],
-    }));
-  }
-
   return garageSale.user.id === user.id && (
-    <form encType="multipart/form-data"  onSubmit={handleSubmit}>
-      <label>
-        Item Name: <input type="text" name="name_of_item" value={formData.name_of_item} onChange={handleInputChange} />
-      </label>
+    <form   className = 'add-item-form' onSubmit={handleSubmit}>
       <div>
+      <label>
+        Item Name: <input className='add-item-name-input' type="text" name="name_of_item" value={formData.name_of_item} onChange={handleInputChange} />
+      </label>
+      </div>
+      <div className='form-group'>
         <label>
-          Description: <input type="text" name="description" value={formData.description} onChange={handleInputChange} />
+          Description: <input className='add-item-desc-input' type="text" name="description" value={formData.description} onChange={handleInputChange} />
         </label>
       </div>
       <label>
-        Price: <input type="number" name="price" value={formData.price} onChange={handleInputChange} />
+        Price: <input className='add-item-price' type="number" name="price" value={formData.price} onChange={handleInputChange} />
       </label>
-      <label>
+      <label className='pad-category'>
         Category:
-        <select name="category" value={formData.category} onChange={handleInputChange}>
+        <select  name="category" value={formData.category} onChange={handleInputChange}>
           <option value="">Select a category</option>
           <option value="Books">Books</option>
           <option value="Electronics">Electronics</option>
           <option value="Clothing">Clothing</option>
-          {/* Add more options as needed */}
+
         </select>
       </label>
       <div>
-        <label>
-            Image: <input type="file" name="image" onChange={handleFileInputChange} />
-        </label>
+        <button className = 'btn btn-light' type="submit">Add Item</button>
       </div>
-
-      <button type="submit">Add Item</button>
+      
+  
     </form>
   );
 };

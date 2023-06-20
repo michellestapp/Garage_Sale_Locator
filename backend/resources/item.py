@@ -33,26 +33,21 @@ class ItemListResource(Resource):
         garage_sale = GarageSale.query.get_or_404(garage_sale_id)
 
         if int(user_id) == garage_sale.user_id:
-            if 'image' not in request.files:
-                return 'no file', 400
-            file = request.files['image']
+
+            form_data = request.get_json()
+            new_item = item_schema.load(form_data)
+
+
+            # new_item.name_of_item = request.form['name_of_item']
+            # new_item.description = request.form['description']
+            # new_item.price = request.form['price']
+            # new_item.category = request.form['category']
+            new_item.garage_sale_id = garage_sale_id
             
-            if file.filename == '':
-                return 'filename empty', 400
-            if file and allowed_file(file.filename):
-                filename = secure_filename(file.filename)
-                file.save(os.path.join(current_app.config['UPLOAD_FOLDER'],filename))
-                new_item = Item()
-                new_item.name_of_item = request.form['name_of_item']
-                new_item.description = request.form['description']
-                new_item.price = request.form['price']
-                new_item.category = request.form['category']
-                new_item.image = filename
-                new_item.garage_sale_id = garage_sale_id
-                db.session.add(new_item)
-                db.session.commit()
-                return item_schema.dump(new_item), 201
-            return '', 401
+          
+            db.session.add(new_item)
+            db.session.commit()
+            return item_schema.dump(new_item), 201
         return 'You are not the owner', 403
 
 
@@ -97,3 +92,17 @@ class ItemResource(Resource):
             db.session.commit()
             return '',204
         return "You are not authorized to delete this item", 403
+    
+class ItemImageResource(Resource):
+    @jwt_required()
+    def post(self, item_id):
+        item = Item.query.get_or_404(item_id)
+        file = request.files['image']
+        if file and allowed_file(file.filename):
+            if file.filename == '':
+                return 'filename empty', 400
+            filename = secure_filename(file.filename)
+            item.image = filename
+            file.save(os.path.join(current_app.config['UPLOAD_FOLDER'],filename))
+            db.session.commit()
+        return item_schema.dump(item), 200

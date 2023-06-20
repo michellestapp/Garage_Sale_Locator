@@ -1,0 +1,77 @@
+.background-format{
+    background-color: cornflowerblue;
+    border: 2px solid black;
+    padding: 10px;
+}
+
+.sale-format {
+    font-size: 24px;
+    font-weight: 500;
+
+} 
+.sale-details-container{
+    width: 500px;
+    height: auto;
+}
+
+.sale-data-format{
+    font-size: 20px;
+    text-align: left;
+    padding-left: 20px;
+}
+
+.display{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.gs-sale-additem{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+.add-item-form{
+    background-color: rgb(136, 88, 190);
+    padding: 10px;
+    color: white
+    }
+
+.add-item-name-input{
+    padding: 5px;
+    width: 250px;
+    height: 25px
+}
+.add-item-desc-input{
+    padding: 5px;
+    width: 300px;
+    height: 40px;
+    margin: 10px
+}
+
+.add-item-price{
+    padding: 5px;
+    width: 100px;
+    height: 25px;
+    margin: 10px
+}
+.pad-category{
+    padding: 20px;
+    display: flex;
+    
+}
+
+.image-props{
+    object-fit:contain;
+    width:300px;
+    height: 300px;
+
+}
+.item-format{
+    margin-top: 0;
+    text-align: left;
+    padding-left:15px;
+}
+.button-margin{
+    margin:5px
+}

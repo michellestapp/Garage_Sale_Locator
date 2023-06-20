@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
-// import { GoogleMap, Marker, useLoadScript } from "react-google-maps";
-// import { GoogleMap, Marker } from 'google-maps-react';
 import GoogleMapReact from 'google-map-react'
 import axios from 'axios';
 
 
 
-
-const Marker = ({ text }) => <div>{text}</div>;
+const Marker = ({ text }) => (
+  <div style={{ backgroundColor: 'red', color: 'white', padding: '5px', borderRadius: '50%', width: '40px', height: '40px' }}>
+    {text}
+  </div>
+);
 
 const GarageSaleMap = ({ fullAddress, markerText }) => {
   const [coordinates, setCoordinates] = useState({ lat: 0, lng: 0 });
@@ -33,7 +34,7 @@ const GarageSaleMap = ({ fullAddress, markerText }) => {
    
 
   return (
-    <div style={{ height: '400px', width: '100%' }}>
+    <div style={{ height: '300px', width: '100%' }}>
       <GoogleMapReact bootstrapURLKeys={{key: 'AIzaSyBT6E7N9TKiM3KZcDNW5NPvrxJSIsmDbpU'}} 
       center={coordinates} 
 

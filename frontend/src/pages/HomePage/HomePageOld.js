@@ -1,6 +1,7 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import useAuth from "../../hooks/useAuth";
+import '/bootstrap/dist/css/bootstrap'
 
 import axios from "axios";
 
