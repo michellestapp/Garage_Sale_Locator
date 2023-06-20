@@ -3,6 +3,7 @@ import useAuth from "../../hooks/useAuth";
 import axios from "axios";
 import useCustomForm from "../../hooks/useCustomForm";
 import { useNavigate } from "react-router-dom";
+import './NewSalePage.css'
 
 const NewSalePage = ({}) => {
   const navigate = useNavigate()
@@ -48,7 +49,7 @@ const NewSalePage = ({}) => {
   }
 
   return (
-    <div>
+    <div className="background-format">
       <form onSubmit={(event) => handleSubmit(event)}>
         <label>Sale Name:{" "}
           <input type="text" name="name" value={formData.name} onChange={handleInputChange}/>
@@ -80,7 +81,7 @@ const NewSalePage = ({}) => {
             <input type="text" name="zip" value={formData.zip} onChange={handleInputChange} />
           </label>
         </div>
-        <button type="submit">Add Sale</button>
+        <button className="btn btn-light btn-outline-dark btn-sm" type="submit">Add Sale</button>
       </form>
     </div>
   );

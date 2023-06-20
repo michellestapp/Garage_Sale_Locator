@@ -10,8 +10,10 @@
 
 } 
 .sale-details-container{
-    width: 500px;
+    align-items: center;
+    width: 600px;
     height: auto;
+    padding: 30px
 }
 
 .sale-data-format{
@@ -30,6 +32,7 @@
     display: flex;
     align-items: center;
     flex-direction: column;
+    flex-direction: row;
 }
 .add-item-form{
     background-color: rgb(136, 88, 190);

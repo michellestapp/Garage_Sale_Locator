@@ -65,8 +65,9 @@ const ItemList = ({ garageSaleDetails, garageSaleId, fetchGarageSale }) => {
 
   return (
     <div className="pad-category">
+      <h2>Items</h2>
       {garageSaleDetails.items.map((item) => (
-        <div key={item.id} className="item-container">
+        <div key={item.id} className="border">
           {item.image ? (
             <img className="image-props pad-category"
               src={`http://127.0.0.1:5000/images/${item.image}`}
@@ -82,10 +83,10 @@ const ItemList = ({ garageSaleDetails, garageSaleId, fetchGarageSale }) => {
         <div>
         <label>
             Image: <input type="file" name="image" onChange={handleFileInputChange} />
-         { image &&  <button onClick ={() => postImage(item)}>Upload Image</button>}
+ 
         </label>
       </div>
-
+      { image &&  <button className='btn btn-light btn-outline-dark btn-sm button-margin' onClick ={() => postImage(item)}>Upload Image</button>}
             {user.id == garageSaleDetails.user.id ? (
               <button className="btn btn-light btn-outline-dark btn-sm button-margin" onClick={() => handleEditItem(item)}>Edit Item</button>
             ) : (

@@ -1,0 +1,11 @@
+.background-format{
+    background-color: cornflowerblue;
+    border: 2px solid black;
+    padding: 10px;
+}
+label {
+    color: black;
+    font-weight: bold;
+    display: block;
+    padding: 10px;
+  }

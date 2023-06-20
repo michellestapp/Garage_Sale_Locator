@@ -4,8 +4,8 @@ import { formatDate, formatTime} from "../../utils/utils"
 const GarageSaleDetails = ({ garageSaleDetails }) => {
 
   return (
-    <div>
-      <div>
+    <div className="sale-details-container">
+      <div className="container">
         <p className="sale-format">{garageSaleDetails.name}</p>
         <p><h5>Date of Sale:</h5> {formatDate(garageSaleDetails.date)}</p>
         <p>

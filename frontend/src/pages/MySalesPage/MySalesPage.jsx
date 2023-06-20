@@ -3,6 +3,7 @@ import axios from 'axios';
 import useAuth from '../../hooks/useAuth';
 import { useNavigate } from 'react-router-dom';
 import { formatDate, formatTime} from "../../utils/utils"
+import './MySalesPage.css'
 
 const MySalesPage = () => {
   const [user, token] = useAuth();
@@ -49,24 +50,24 @@ const MySalesPage = () => {
  };
 
   return (
-    <div>
+    <div className='background-format'>
       <h1>{user.username}'s Sale Summary</h1>
-      <div>
+      <div className='mysales-layout'>
         {mySales && mySales.length > 0 ? (
           mySales.map((garage_sale, index) => {
             if (user.id === garage_sale.user.id) {
               return (
-                <div key={index}>
-                  <div className = "current-sales" onClick={() => navigate(`/garage_sales/${garage_sale.id}`)}>
-                    <p>{garage_sale.name}</p>
-                    <p>{formatDate(garage_sale.date)}</p>
-                    <p>{formatTime(garage_sale.start_time)}-{formatTime(garage_sale.end_time)}</p>
-                    <p>{garage_sale.street_address}</p>
-                    <p>{garage_sale.city}, {garage_sale.state} {garage_sale.zip} </p>
+                <div  key={index} className='border'>
+                  <div  className=' mysales-size' onClick={() => navigate(`/garage_sales/${garage_sale.id}`)}>
+                    <p className='mysales-name-format'>{garage_sale.name}</p>
+                    <p className='mysales-details-format'>{formatDate(garage_sale.date)}</p>
+                    <p className='mysales-details-format'>{formatTime(garage_sale.start_time)}-{formatTime(garage_sale.end_time)}</p>
+                    <p className='mysales-details-format'>{garage_sale.street_address}</p>
+                    <p className='mysales-details-format'>{garage_sale.city}, {garage_sale.state} {garage_sale.zip} </p>
                   </div>
                   <div>
-                    <button type="submit" onClick={() => deleteSale(garage_sale.id)}>Delete Sale</button>
-                    <button type="submit" onClick={() => handleEditSale(garage_sale)}>Edit Sale</button>
+                    <button className="btn btn-light btn-outline-dark btn-sm" type="submit" onClick={() => deleteSale(garage_sale.id)}>Delete Sale</button>
+                    <button className="btn btn-light btn-outline-dark btn-sm" type="submit" onClick={() => handleEditSale(garage_sale)}>Edit Sale</button>
                   </div>
                 </div>
               );

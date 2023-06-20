@@ -54,7 +54,7 @@ async function editSale() {
  
 
   return (
-    <div>
+    <div className='background-format'>
       <form onSubmit={handleSubmit}>
         <label>
           Sale Name:
@@ -94,8 +94,10 @@ async function editSale() {
             <input type="text" name="zip" value={formData.zip} onChange={handleInputChange} />
           </label>
         </div>
-        <button type="submit">Submit Changes</button>
+        <br />
+        <button className="btn btn-light btn-outline-dark btn-sm" type="submit">Submit Changes</button>
       </form>
+      <br /><br />
     </div>
   );
 };

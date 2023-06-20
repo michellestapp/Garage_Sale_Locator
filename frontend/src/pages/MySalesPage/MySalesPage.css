@@ -1,0 +1,29 @@
+.background-format{
+    background-color: cornflowerblue;
+    border: 2px solid black;
+    padding: 10px;
+}
+
+.mysales-layout{
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 20px;
+}
+.mysales-name-format{
+    padding: 10px;
+    font-weight: 500;
+    text-align: center;
+}
+.mysales-details-format{
+    text-align: center;
+    padding-left: 15px;
+    padding-right: 15px;
+
+}
+label {
+    color: black;
+    font-weight: bold;
+    display: block;
+    padding: 10px;
+  }
