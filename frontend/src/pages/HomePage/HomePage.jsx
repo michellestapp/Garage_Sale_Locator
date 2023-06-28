@@ -72,7 +72,7 @@ const HomePage = () => {
 
 
   return (
-    <div className = "background-format" >
+    <div className = "background-format color" >
       <div className='top-bar'>
         <h1>Active Garage Sales</h1>
         <div>
@@ -82,15 +82,15 @@ const HomePage = () => {
       <div className = "garage-sales-list container border">
       {filteredGarageSales &&
         filteredGarageSales.map((garage_sale) => (
-          <div className = "card-link border" onClick = {() => navigate(`/garage_sales/${garage_sale.id}`)}>
+          <div className = "card-link" key= {garage_sale.id} onClick = {() => navigate(`/garage_sales/${garage_sale.id}`)}>
             <div >
 
               <div className = "sale-format">{garage_sale.name}</div>
-              <div className="sale-data-format"><h5>Date: </h5> <p>{garage_sale.formattedDate}</p></div>
-              <div className="sale-data-format"><h5>Time:</h5>  
+              <div className="sale-data-format">Date: <p>{garage_sale.formattedDate}</p></div>
+              <div className="sale-data-format">Time:  
                 <p>{garage_sale.formattedStartTime}-{garage_sale.formattedEndTime}</p>
               </div>
-              <div className="sale-data-format"><h5>Zip:</h5> <p>{garage_sale.zip}</p></div>
+              <div className="sale-data-format">Zip:<p>{garage_sale.zip}</p></div>
             </div>
           </div>
         ))}

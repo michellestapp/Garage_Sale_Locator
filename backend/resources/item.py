@@ -60,23 +60,23 @@ class ItemResource(Resource):
         garage_sale_locator = GarageSale.query.get_or_404(edit_item.garage_sale_id)
         user = garage_sale_locator.user_id
         if int(user_id) == user:
-            if "name_of_item" in request.form:
-                edit_item.name_of_item = request.form["name_of_item"]
-            if "description" in request.form:
-                edit_item.description = request.form["description"]
-            if "price"in request.form:
-                edit_item.price = request.form["price"]
-            if "category" in request.form:
-                edit_item.category = request.form["category"]
-            if "image" in request.files:
-                file = request.files['image']
-                if file and allowed_file(file.filename):
-                    filename = secure_filename(file.filename)
-                    file.save(os.path.join(current_app.config['UPLOAD_FOLDER'],filename))
-                    edit_item.image = filename                     
-                else:
-                    filename = ''
-                    edit_item.image = filename
+            if "name_of_item" in request.json:
+                edit_item.name_of_item = request.json["name_of_item"]
+            if "description" in request.json:
+                edit_item.description = request.json["description"]
+            if "price"in request.json:
+                edit_item.price = request.json["price"]
+            if "category" in request.json:
+                edit_item.category = request.json["category"]
+            # if "image" in request.files:
+            #     file = request.files['image']
+            #     if file and allowed_file(file.filename):
+            #         filename = secure_filename(file.filename)
+            #         file.save(os.path.join(current_app.config['UPLOAD_FOLDER'],filename))
+            #         edit_item.image = filename                     
+            #     else:
+            #         filename = ''
+            #         edit_item.image = filename
             db.session.commit()
             return item_schema.dump(edit_item), 200
         return "You are not authorized to change this item", 403

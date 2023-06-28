@@ -9,6 +9,7 @@ const ItemList = ({ garageSaleDetails, garageSaleId, fetchGarageSale }) => {
   const [user, token] = useAuth();
   const [image, setImage] = useState("");
 
+
   const handleEditItem = (item) => {
     navigate(`/items/${item.id}`, {
       state: { item, garageSaleId: garageSaleId },
@@ -30,7 +31,7 @@ const ItemList = ({ garageSaleDetails, garageSaleId, fetchGarageSale }) => {
           },
         }
       );
-      if (response.status===200) {
+      if (response.status === 200) {
         await fetchGarageSale();
       }
     } catch (error) {
@@ -56,20 +57,20 @@ const ItemList = ({ garageSaleDetails, garageSaleId, fetchGarageSale }) => {
     }
   };
 
-
-
   function handleFileInputChange(event) {
-    setImage(event.target.files[0])
+    setImage(event.target.files[0]);
   }
-
 
   return (
     <div className="pad-category">
       <h2>Items</h2>
-      {garageSaleDetails.items.map((item) => (
-        <div key={item.id} className="border">
+      {garageSaleDetails && garageSaleDetails.items.map((item) => (
+        <div  className="border" key={item.id}>
+          {console.log(item)}
+          {console.log("ItemList garageSaleDetails",garageSaleDetails)}
           {item.image ? (
-            <img className="image-props pad-category"
+            <img
+              className="image-props pad-category"
               src={`http://127.0.0.1:5000/images/${item.image}`}
               alt={item.name_of_item}
             />
@@ -80,25 +81,42 @@ const ItemList = ({ garageSaleDetails, garageSaleId, fetchGarageSale }) => {
           <p className="item-format">Item Description: {item.description}</p>
           <p className="item-format">Price: ${item.price}</p>
           <p className="item-format">Category: {item.category}</p>
-        <div>
-        <label>
-            Image: <input type="file" name="image" onChange={handleFileInputChange} />
- 
-        </label>
-      </div>
-      { image &&  <button className='btn btn-light btn-outline-dark btn-sm button-margin' onClick ={() => postImage(item)}>Upload Image</button>}
-            {user.id == garageSaleDetails.user.id ? (
-              <button className="btn btn-light btn-outline-dark btn-sm button-margin" onClick={() => handleEditItem(item)}>Edit Item</button>
-            ) : (
-              " "
-            )}
-  
-            {user.id == garageSaleDetails.user.id ? (
-              <button className="btn btn-light btn-outline-dark btn-sm" onClick={() => deleteItem(item)}>Delete Item</button>
-            ) : (
-              " "
-            )}
-
+          {/* {image && user.id ===garageSaleDetails.user.id && ( */}
+          <div>
+            <label>
+              Image:{" "}
+              <input
+                type="file"
+                name="image"
+                onChange={handleFileInputChange}
+              />
+            </label>
+          </div>
+          {/* )} */}
+          {user.id === garageSaleDetails.user.id && (
+            <button
+              className="btn btn-light btn-outline-dark btn-sm button-margin"
+              onClick={() => postImage(item)}
+            >
+              Upload Image
+            </button>
+          )}
+          {user && user.id === garageSaleDetails.user.id && (
+            <button
+              className="btn btn-light btn-outline-dark btn-sm button-margin"
+              onClick={() => handleEditItem(item)}
+            >
+              Edit Item
+            </button>
+          )}
+          {user && user.id === garageSaleDetails.user.id && (
+            <button
+              className="btn btn-light btn-outline-dark btn-sm"
+              onClick={() => deleteItem(item)}
+            >
+              Delete Item
+            </button>
+          )}
         </div>
       ))}
     </div>

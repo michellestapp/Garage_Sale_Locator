@@ -14,9 +14,6 @@ const AddItemForm = ({ garageSale, fetchGarageSale }) => {
     category: '',
     image: null,
   });
-  console.log(garageSale);
-  console.log(user.id);
-
 
   async function addItem() {
     try {
@@ -57,6 +54,10 @@ const AddItemForm = ({ garageSale, fetchGarageSale }) => {
       ...prevFormData,
       [event.target.name]: event.target.value,
     }));
+  }
+  if (!user) {
+   
+    return null;
   }
 
   return garageSale.user.id === user.id && (

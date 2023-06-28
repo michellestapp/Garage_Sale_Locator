@@ -1,18 +1,20 @@
 import React from "react";
 import { formatDate, formatTime} from "../../utils/utils"
+import './GarageSaleDetails.css'
+
 
 const GarageSaleDetails = ({ garageSaleDetails }) => {
 
   return (
     <div className="sale-details-container">
       <div className="container">
-        <p className="sale-format">{garageSaleDetails.name}</p>
-        <p><h5>Date of Sale:</h5> {formatDate(garageSaleDetails.date)}</p>
+        <p className="sale-format color">{garageSaleDetails.name}</p>
+        <p>Date of Sale: {formatDate(garageSaleDetails.date)}</p>
         <p>
-          <h5>Time of Sale:</h5> {formatTime(garageSaleDetails.start_time)}-
+          Time of Sale: {formatTime(garageSaleDetails.start_time)}-
           {formatTime(garageSaleDetails.end_time)}
         </p>
-        <p><h5>Address:</h5></p>
+        <p>Address:</p>
         <div>
           <p>{garageSaleDetails.street_address}</p>
           <p>

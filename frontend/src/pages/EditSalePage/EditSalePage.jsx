@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useLocation, useParams, useNavigate } from 'react-router-dom';
 import useAuth from '../../hooks/useAuth';
 
+
 const EditSalePage = ({}) => {
   const [user, token] = useAuth();
   const navigate = useNavigate();
