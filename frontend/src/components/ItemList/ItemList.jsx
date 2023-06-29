@@ -1,14 +1,12 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
-import { Link } from "react-router-dom";
 import axios from "axios";
 
 const ItemList = ({ garageSaleDetails, garageSaleId, fetchGarageSale }) => {
   const navigate = useNavigate();
   const [user, token] = useAuth();
   const [image, setImage] = useState("");
-
 
   const handleEditItem = (item) => {
     navigate(`/items/${item.id}`, {
@@ -64,61 +62,62 @@ const ItemList = ({ garageSaleDetails, garageSaleId, fetchGarageSale }) => {
   return (
     <div className="pad-category">
       <h2>Items</h2>
-      {garageSaleDetails && garageSaleDetails.items.map((item) => (
-        <div  className="border" key={item.id}>
-          {console.log(item)}
-          {console.log("ItemList garageSaleDetails",garageSaleDetails)}
-          {item.image ? (
-            <img
-              className="image-props pad-category"
-              src={`http://127.0.0.1:5000/images/${item.image}`}
-              alt={item.name_of_item}
-            />
-          ) : (
-            <span>No image available</span>
-          )}
-          <p className="item-format">Item Name: {item.name_of_item}</p>
-          <p className="item-format">Item Description: {item.description}</p>
-          <p className="item-format">Price: ${item.price}</p>
-          <p className="item-format">Category: {item.category}</p>
-          {/* {image && user.id ===garageSaleDetails.user.id && ( */}
-          <div>
-            <label>
-              Image:{" "}
-              <input
-                type="file"
-                name="image"
-                onChange={handleFileInputChange}
+      {garageSaleDetails &&
+        garageSaleDetails.items.map((item) => (
+          <div className="border" key={item.id}>
+            {console.log(item)}
+            {/* {console.log("ItemList garageSaleDetails",garageSaleDetails)} */}
+            {item.image ? (
+              <img
+                className="image-props pad-category"
+                src={`http://127.0.0.1:5000/images/${item.image}`}
+                alt={item.name_of_item}
               />
-            </label>
+            ) : (
+              <span>No image available</span>
+            )}
+            <p className="item-format">Item Name: {item.name_of_item}</p>
+            <p className="item-format">Item Description: {item.description}</p>
+            <p className="item-format">Price: ${item.price}</p>
+            <p className="item-format">Category: {item.category}</p>
+            {image && user?.id === garageSaleDetails.user.id && (
+              <div>
+                <label>
+                  Image:{" "}
+                  <input
+                    type="file"
+                    name="image"
+                    onChange={handleFileInputChange}
+                  />
+                </label>
+              </div>
+            )}
+            {user?.id === garageSaleDetails.user.id && (
+              <button
+                className="btn btn-light btn-outline-dark btn-sm button-margin"
+                onClick={() => postImage(item)}
+              >
+                Upload Image
+              </button>
+            )}
+            {user && user.id === garageSaleDetails.user.id && (
+              <button
+                className="btn btn-light btn-outline-dark btn-sm button-margin"
+                onClick={() => handleEditItem(item)}
+              >
+                Edit Item
+              </button>
+            )}
+            {user && user.id === garageSaleDetails.user.id && (
+              <button
+                className="btn btn-light btn-outline-dark btn-sm"
+                onClick={() => deleteItem(item)}
+              >
+                Delete Item
+              </button>
+            )}
           </div>
-          {/* )} */}
-          {user.id === garageSaleDetails.user.id && (
-            <button
-              className="btn btn-light btn-outline-dark btn-sm button-margin"
-              onClick={() => postImage(item)}
-            >
-              Upload Image
-            </button>
-          )}
-          {user && user.id === garageSaleDetails.user.id && (
-            <button
-              className="btn btn-light btn-outline-dark btn-sm button-margin"
-              onClick={() => handleEditItem(item)}
-            >
-              Edit Item
-            </button>
-          )}
-          {user && user.id === garageSaleDetails.user.id && (
-            <button
-              className="btn btn-light btn-outline-dark btn-sm"
-              onClick={() => deleteItem(item)}
-            >
-              Delete Item
-            </button>
-          )}
-        </div>
-      ))}
+        ))}
     </div>
   );
 };
