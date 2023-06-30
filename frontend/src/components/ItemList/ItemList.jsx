@@ -100,7 +100,7 @@ const ItemList = ({ garageSaleDetails, garageSaleId, fetchGarageSale }) => {
                 Upload Image
               </button>
             )}
-            {user && user.id === garageSaleDetails.user.id && (
+            {user?.id === garageSaleDetails.user.id && (
               <button
                 className="btn btn-light btn-outline-dark btn-sm button-margin"
                 onClick={() => handleEditItem(item)}
@@ -108,7 +108,7 @@ const ItemList = ({ garageSaleDetails, garageSaleId, fetchGarageSale }) => {
                 Edit Item
               </button>
             )}
-            {user && user.id === garageSaleDetails.user.id && (
+            {user?.id === garageSaleDetails.user.id && (
               <button
                 className="btn btn-light btn-outline-dark btn-sm"
                 onClick={() => deleteItem(item)}

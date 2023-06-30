@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import SearchBar from "../../components/SearchBar/SearchBar";
 import { useNavigate } from "react-router-dom";
 import './HomePage.css'
+import { formatDate, formatTime} from "../../utils/utils"
 
 
 const HomePage = () => {
@@ -16,42 +17,8 @@ const HomePage = () => {
     const fetchGarageSales = async () => {
       try {
         let response = await axios.get("http://127.0.0.1:5000/api/garage_sales/all");
-        const updatedGarageSales = response.data.map((garage_sale) => {
-          const date = new Date(garage_sale.date);
-          const formattedDate = date.toLocaleDateString("en-US", {
-            month: "numeric",
-            day: "numeric",
-            year: "numeric",
-          });
-
-          const startTimeParts = garage_sale.start_time.split(":");
-          const startTime = new Date();
-          startTime.setHours(parseInt(startTimeParts[0]));
-          startTime.setMinutes(parseInt(startTimeParts[1]));
-
-          const endTimeParts = garage_sale.end_time.split(":");
-          const endTime = new Date();
-          endTime.setHours(parseInt(endTimeParts[0]));
-          endTime.setMinutes(parseInt(endTimeParts[1]));
-
-          const formattedStartTime = startTime.toLocaleTimeString("en-US", {
-            hour: "numeric",
-            minute: "numeric",
-          });
-          const formattedEndTime = endTime.toLocaleTimeString("en-US", {
-            hour: "numeric",
-            minute: "numeric",
-          });
-
-          return {
-            ...garage_sale,
-            formattedDate: formattedDate,
-            formattedStartTime: formattedStartTime,
-            formattedEndTime: formattedEndTime,
-          };
-        });
-
-        setGarageSales(updatedGarageSales);
+        const GarageSaleData = response.data;
+        setGarageSales(GarageSaleData);
       } catch (error) {
         console.error("Error fetching garage sales:", error);
       }
@@ -86,9 +53,9 @@ const HomePage = () => {
             <div >
 
               <div className = "sale-format">{garage_sale.name}</div>
-              <div className="sale-data-format">Date: <p>{garage_sale.formattedDate}</p></div>
+              <div className="sale-data-format">Date: <p>{formatDate(garage_sale.date)}</p></div>
               <div className="sale-data-format">Time:  
-                <p>{garage_sale.formattedStartTime}-{garage_sale.formattedEndTime}</p>
+                <p>{formatTime(garage_sale.start_time)}-{formatTime(garage_sale.end_time)}</p>
               </div>
               <div className="sale-data-format">Zip:<p>{garage_sale.zip}</p></div>
             </div>
