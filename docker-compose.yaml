@@ -1,0 +1,30 @@
+version: '3.4'
+services:
+
+  garage-sale-locator-database:
+    # build: ./database
+    image: michellestapp/garage-sale-locator-database:1.0
+    ports:
+      - 3307:3306
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+    restart: always
+
+  garage-sale-locator-backend:
+    # build: ./backend
+    image: michellestapp/garage-sale-locator-backend:1.0
+    ports: 
+    - 5000:5000
+    restart: always
+    depends_on:
+      - "garage-sale-locator-database"
+    command: >
+      sh -c "flask db upgrade && gunicorn -b 0.0.0.0:5000 app:app"
+
+  garage-sale-locator-frontend:
+    # build: ./frontend
+    image: michellestapp/garage-sale-locator-frontend:1.0
+    depends_on:
+      - "garage-sale-locator-backend"
+    ports:
+     - 8080:80
