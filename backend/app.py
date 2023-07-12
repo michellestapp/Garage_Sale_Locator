@@ -78,3 +78,5 @@ def create_routes():
     api.add_resource(GarageSaleEditResource, '/api/edit_sale/<int:garage_sale_id>')
     api.add_resource(TestResource, '/api/test')    
     return api
+
+app = create_app()

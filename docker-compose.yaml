@@ -27,4 +27,4 @@ services:
     depends_on:
       - "garage-sale-locator-backend"
     ports:
-     - 8080:80
+     - 80:80

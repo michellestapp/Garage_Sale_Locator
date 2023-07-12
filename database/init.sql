@@ -1,1 +1,1 @@
-CREATE DATABASE IF NOT EXISTS garage_sale_locator_database;
+CREATE DATABASE IF NOT EXISTS garage_sales;
