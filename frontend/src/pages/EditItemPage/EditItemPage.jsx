@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import useAuth from '../../hooks/useAuth';
 import axios from 'axios';
 import { useLocation, useNavigate } from 'react-router-dom';
+import api from '../../utils/api';
 
 const EditItemPage = () => {
     const location = useLocation();
@@ -27,8 +28,8 @@ const EditItemPage = () => {
 
   async function editItem() {
     try {
-      let response = await axios.put(
-        `http://127.0.0.1:5000/api/items/${item.id}`,
+      let response = await api.put(
+        `/items/${item.id}`,
         formData,
         {
           headers: {

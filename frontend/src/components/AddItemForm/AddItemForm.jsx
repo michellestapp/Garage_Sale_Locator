@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import useAuth from '../../hooks/useAuth';
 import useCustomForm from '../../hooks/useCustomForm';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import api from '../../utils/api';
 
 const AddItemForm = ({ garageSale, fetchGarageSale }) => {
   const [user, token] = useAuth();
@@ -17,7 +17,7 @@ const AddItemForm = ({ garageSale, fetchGarageSale }) => {
 
   async function addItem() {
     try {
-        let response = await axios.post(`http://127.0.0.1:5000/api/user_items/${garageSale.id}`,
+        let response = await api.post(`/user_items/${garageSale.id}`,
       {
         name_of_item: formData.name_of_item,
         description: formData.description,

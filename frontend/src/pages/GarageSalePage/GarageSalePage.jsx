@@ -6,6 +6,7 @@ import GarageSaleMap from '../../components/GarageSaleMap/GarageSaleMap';
 import ItemList from '../../components/ItemList/ItemList';
 import AddItemForm from '../../components/AddItemForm/AddItemForm';
 import './GarageSalePage.css'
+import api from '../../utils/api';
 
 
 function GarageSalePage() {
@@ -23,7 +24,7 @@ function GarageSalePage() {
 
   const fetchGarageSale = async () => {
     try {
-      const response = await axios.get(`http://127.0.0.1:5000/api/garage_sales/${garage_sale_id}`);
+      const response = await api.get(`/garage_sales/${garage_sale_id}`);
       const garageSaleData = response.data;
       setGarageSaleDetails(garageSaleData);
 

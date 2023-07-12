@@ -4,6 +4,7 @@ import useAuth from '../../hooks/useAuth';
 import { useNavigate } from 'react-router-dom';
 import { formatDate, formatTime} from "../../utils/utils"
 import './MySalesPage.css'
+import api from '../../utils/api';
 
 const MySalesPage = () => {
   const [user, token] = useAuth();
@@ -12,7 +13,7 @@ const MySalesPage = () => {
 
   const fetchMySales = async () => {
     try {
-      const response = await axios.get('http://127.0.0.1:5000/api/garage_sales', {
+      const response = await api.get('/garage_sales', {
         headers: {
           Authorization: 'Bearer ' + token,
         },
@@ -25,8 +26,8 @@ const MySalesPage = () => {
 
   const deleteSale = async (garageSaleId) => {
     try {
-      const response = await axios.delete(
-        `http://127.0.0.1:5000/api/garage_sales/${garageSaleId}`,
+      const response = await api.delete(
+        `/garage_sales/${garageSaleId}`,
         {
           headers: {
             Authorization: 'Bearer ' + token,

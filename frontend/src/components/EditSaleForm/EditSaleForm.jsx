@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import api from '../../utils/api';
+
 
 const EditSaleForm = ({ garageSaleId, token, fetchMySales }) => {
   const [formData, setFormData] = useState({
@@ -24,8 +25,8 @@ const EditSaleForm = ({ garageSaleId, token, fetchMySales }) => {
     event.preventDefault();
 
     try {
-      let response = await axios.put(
-        `http://127.0.0.1:5000/api/garage_sales/${garageSaleId}`,
+      let response = await api.put(
+        `/garage_sales/${garageSaleId}`,
         formData,
         {
           headers: {

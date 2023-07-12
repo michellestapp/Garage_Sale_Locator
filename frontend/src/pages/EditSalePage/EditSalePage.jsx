@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useLocation, useParams, useNavigate } from 'react-router-dom';
 import useAuth from '../../hooks/useAuth';
+import api from '../../utils/api';
 
 
 const EditSalePage = ({}) => {
@@ -31,8 +32,8 @@ const EditSalePage = ({}) => {
 async function editSale() {
     try {
 
-      let response = await axios.put(
-        `http://127.0.0.1:5000/api/edit_sale/${garageSale.id}`,
+      let response = await api.put(
+        `/edit_sale/${garageSale.id}`,
         formData,
         {
           headers: {

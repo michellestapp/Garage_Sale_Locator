@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import axios from "axios";
+import api from "../../utils/api"
 import SearchBar from "../../components/SearchBar/SearchBar";
 import { useNavigate } from "react-router-dom";
 import './HomePage.css'
@@ -15,7 +15,7 @@ const HomePage = () => {
   useEffect(() => {
     const fetchGarageSales = async () => {
       try {
-        let response = await axios.get("http://127.0.0.1:5000/api/garage_sales/all");
+        let response = await api.get("/garage_sales/all");
         const GarageSaleData = response.data;
         setGarageSales(GarageSaleData);
       } catch (error) {

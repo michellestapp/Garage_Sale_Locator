@@ -74,7 +74,7 @@ def create_routes():
     api.add_resource(ItemListResource,'/api/user_items/<int:garage_sale_id>')
     api.add_resource(ItemResource,'/api/items/<int:item_id>')
     api.add_resource(ItemImageResource,'/api/items/<int:item_id>/image')
-    api.add_resource(ImageResource,'/images/<filename>')
+    api.add_resource(ImageResource,'/api/images/<filename>')
     api.add_resource(GarageSaleEditResource, '/api/edit_sale/<int:garage_sale_id>')
     api.add_resource(TestResource, '/api/test')    
     return api

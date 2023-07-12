@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import axios from "axios";
+import api from "../../utils/api";
 
 const ItemList = ({ garageSaleDetails, garageSaleId, fetchGarageSale }) => {
   const navigate = useNavigate();
@@ -19,8 +20,8 @@ const ItemList = ({ garageSaleDetails, garageSaleId, fetchGarageSale }) => {
       const form = new FormData();
       form.append("image", image || "");
 
-      const response = await axios.post(
-        `http://127.0.0.1:5000/api/items/${item.id}/image`,
+      const response = await api.post(
+        `/items/${item.id}/image`,
         form,
         {
           headers: {
@@ -39,8 +40,8 @@ const ItemList = ({ garageSaleDetails, garageSaleId, fetchGarageSale }) => {
 
   const deleteItem = async (item) => {
     try {
-      const response = await axios.delete(
-        `http://127.0.0.1:5000/api/items/${item.id}`,
+      const response = await api.delete(
+        `/items/${item.id}`,
         {
           headers: {
             Authorization: "Bearer " + token,
@@ -70,7 +71,7 @@ const ItemList = ({ garageSaleDetails, garageSaleId, fetchGarageSale }) => {
             {item.image ? (
               <img
                 className="image-props pad-category"
-                src={`http://127.0.0.1:5000/images/${item.image}`}
+                src={`${process.env.REACT_APP_BASE_URL}/images/${item.image}`}
                 alt={item.name_of_item}
               />
             ) : (

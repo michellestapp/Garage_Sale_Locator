@@ -4,6 +4,7 @@ import axios from "axios";
 import useCustomForm from "../../hooks/useCustomForm";
 import { useNavigate } from "react-router-dom";
 import './NewSalePage.css'
+import api from "../../utils/api";
 
 const NewSalePage = ({}) => {
   const navigate = useNavigate()
@@ -21,8 +22,8 @@ const NewSalePage = ({}) => {
 
   async function postSale() {
     try {
-      let response = await axios.post(
-        "http://127.0.0.1:5000/api/garage_sales",
+      let response = await api.post(
+        "/garage_sales",
         formData,
         {
           headers: {
