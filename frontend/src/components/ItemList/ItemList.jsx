@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
-import axios from "axios";
 import api from "../../utils/api";
 
 const ItemList = ({ garageSaleDetails, garageSaleId, fetchGarageSale }) => {
@@ -66,7 +65,6 @@ const ItemList = ({ garageSaleDetails, garageSaleId, fetchGarageSale }) => {
       {garageSaleDetails &&
         garageSaleDetails.items.map((item) => (
           <div className="border" key={item.id}>
-            {console.log(item)}
             {/* {console.log("ItemList garageSaleDetails",garageSaleDetails)} */}
             {item.image ? (
               <img
@@ -81,7 +79,7 @@ const ItemList = ({ garageSaleDetails, garageSaleId, fetchGarageSale }) => {
             <p className="item-format">Item Description: {item.description}</p>
             <p className="item-format">Price: ${item.price}</p>
             <p className="item-format">Category: {item.category}</p>
-            {image && user?.id === garageSaleDetails.user.id && (
+            {user?.id === garageSaleDetails.user.id && (
               <div>
                 <label>
                   Image:{" "}

@@ -29,9 +29,9 @@ const HomePage = () => {
   const filteredGarageSales = garageSales.filter((garage_sale) => {
     return (
       garage_sale.name.toLowerCase().includes(searchInput.toLowerCase()) ||
-      garage_sale.formattedDate.includes(searchInput) ||
-      garage_sale.formattedStartTime.includes(searchInput) ||
-      garage_sale.formattedEndTime.includes(searchInput) ||
+      formatDate(garage_sale.date).includes(searchInput) ||
+      formatTime(garage_sale.start_time).includes(searchInput) ||
+      formatDate(garage_sale.end_time).includes(searchInput) ||
       garage_sale.zip.toString().includes(searchInput)
     );
   });
