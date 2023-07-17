@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import { useParams,useLocation } from 'react-router-dom';
 import GarageSaleDetails from '../../components/GarageSaleDetails/GarageSaleDetails';
 import GarageSaleMap from '../../components/GarageSaleMap/GarageSaleMap';
