@@ -35,10 +35,10 @@ function GarageSalePage() {
 
 
   return (
-    <div className='background-format display color'>
+    <div className='display color'>
       <h1>Garage Sale Details</h1>
       {garageSaleDetails && <GarageSaleMap fullAddress={fullAddress()} markerText={garageSaleDetails.name}/>}
-      <div className='gs-sale-additem color'>
+      <div className='gs-sale-additem'>
       {garageSaleDetails && <GarageSaleDetails garageSaleDetails={garageSaleDetails} />}
       {garageSaleDetails && <AddItemForm garageSale={garageSaleDetails} fetchGarageSale={fetchGarageSale}/>}
       </div>

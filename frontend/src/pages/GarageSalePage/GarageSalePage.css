@@ -1,7 +1,8 @@
-.background-format{
+
+body{
+    margin:0;
+    padding:10px;
     background-color: cornflowerblue;
-    border: 2px solid black;
-    padding: 10px;
 }
 
 .sale-format {

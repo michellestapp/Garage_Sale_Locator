@@ -38,14 +38,14 @@ const HomePage = () => {
 
 
   return (
-    <div className = "background-format color" >
+    <div className = "color" >
       <div className='top-bar'>
         <h1>Active Garage Sales</h1>
         <div>
           <SearchBar searchInput={searchInput} setSearchInput={setSearchInput} />
         </div>
       </div>
-      <div className = "garage-sales-list container border">
+      <div className = "garage-sales-list container">
       {filteredGarageSales &&
         filteredGarageSales.map((garage_sale) => (
           <div className = "card-link" key= {garage_sale.id} onClick = {() => navigate(`/garage_sales/${garage_sale.id}`)}>

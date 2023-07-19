@@ -65,7 +65,6 @@ const ItemList = ({ garageSaleDetails, garageSaleId, fetchGarageSale }) => {
       {garageSaleDetails &&
         garageSaleDetails.items.map((item) => (
           <div className="border" key={item.id}>
-            {/* {console.log("ItemList garageSaleDetails",garageSaleDetails)} */}
             {item.image ? (
               <img
                 className="image-props pad-category"

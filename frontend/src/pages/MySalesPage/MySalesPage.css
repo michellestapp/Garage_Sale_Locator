@@ -1,14 +1,17 @@
-.background-format{
-    background-color: cornflowerblue;
-    border: 2px solid black;
-    padding: 10px;
-}
-
 .mysales-layout{
     display:flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: flex-start;
     padding: 20px;
+}
+.mysales-layout .border{
+    border: 1px solid #ccc;
+    padding: 10px;
+    transition: background-color 0.3s ease;    
+}
+.mysales-layout .border:hover{
+    background-color: lightblue; 
+    
 }
 .mysales-name-format{
     padding: 10px;

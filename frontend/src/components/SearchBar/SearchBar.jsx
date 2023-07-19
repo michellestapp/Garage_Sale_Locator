@@ -19,7 +19,7 @@ const SearchBar = ({searchInput, setSearchInput}) => {
          
             <span className='search-template'>Search</span>
             <input className="search-input" type='text' onChange = {handleChange} value={searchInput}/>
-            <button className='btn'   onClick={() => setSearchInput('')}>Reset</button>
+            <button className='search-reset'   onClick={() => setSearchInput('')}>Reset</button>
         
         </div>
     );

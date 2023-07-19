@@ -18,4 +18,13 @@
     font-size: 14px;
     padding: 15px;
     margin-top: 15px;
+    margin-right: 10px;
+}
+.search-reset{
+    color: white;
+    font-weight: bold;
+    font-size: large;
+    padding: 5px 10px;
+
+
 }
