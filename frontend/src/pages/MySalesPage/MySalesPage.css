@@ -3,14 +3,17 @@
     flex-direction: row;
     justify-content: flex-start;
     padding: 20px;
+    
 }
 .mysales-layout .border{
-    border: 1px solid #ccc;
     padding: 10px;
-    transition: background-color 0.3s ease;    
+    transition: background-color 0.3s ease;
+    background-color: rgb(136, 88, 190);
+    color:white; 
+    margin: 20px;   
 }
 .mysales-layout .border:hover{
-    background-color: lightblue; 
+    background-color: purple; 
     
 }
 .mysales-name-format{
@@ -29,4 +32,9 @@ label {
     font-weight: bold;
     display: block;
     padding: 10px;
+  }
+  .color{
+    color:white;
+    padding-left: 30px;
+    padding-top: 30px;
   }

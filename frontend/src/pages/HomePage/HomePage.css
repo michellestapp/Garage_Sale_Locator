@@ -37,3 +37,22 @@
     text-align: left;
     padding-left: 20px;
 }
+.page-container{
+    background-image: url('./grass image.jpg');
+    background-size: cover; /* You can use 'cover', 'contain', '100% 100%', etc. */
+    width: auto;
+    height: 1000px;
+    background-repeat: no-repeat;
+    background-position: center center; 
+}
+.outlined-text {
+    font-size: 48px;
+    font-weight: bold;
+    color:  rgb(136, 88, 190);
+    /* text-shadow:  */
+      /* -1px -1px 0 #000, Top-left shadow (offset: -1px horizontally, -1px vertically) */
+      /* 1px -1px 0 #000,  Top-right shadow (offset: 1px horizontally, -1px vertically) */
+      /* -1px 1px 0 #000,  Bottom-left shadow (offset: -1px horizontally, 1px vertically) */
+      /* 1px 1px 0 #000;   Bottom-right shadow (offset: 1px horizontally, 1px vertically) */
+  }
+ 

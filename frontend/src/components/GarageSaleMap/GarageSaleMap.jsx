@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import GoogleMapReact from 'google-map-react'
 import axios from 'axios';
+import './GarageSaleMap.css'
 
 
 
@@ -34,7 +35,7 @@ const GarageSaleMap = ({ fullAddress, markerText }) => {
    
 
   return (
-    <div style={{ height: '300px', width: '100%' }}>
+    <div className='map-format'>
       <GoogleMapReact bootstrapURLKeys={{key: 'AIzaSyBT6E7N9TKiM3KZcDNW5NPvrxJSIsmDbpU'}} 
       center={coordinates} 
 

@@ -38,9 +38,9 @@ const HomePage = () => {
 
 
   return (
-    <div className = "color" >
+    <div className = "color page-container" >
       <div className='top-bar'>
-        <h1>Active Garage Sales</h1>
+        <p className="outlined-text">Active Garage Sales</p>
         <div>
           <SearchBar searchInput={searchInput} setSearchInput={setSearchInput} />
         </div>

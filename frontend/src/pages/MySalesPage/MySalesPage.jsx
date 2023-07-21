@@ -51,8 +51,8 @@ const MySalesPage = () => {
  };
 
   return (
-    <div className='background-format'>
-      <h1>{user.username}'s Sale Summary</h1>
+    <div className=' color'>
+      <h1>{user.first_name}'s Sale Summary</h1>
       <div className='mysales-layout'>
         {mySales && mySales.length > 0 ? (
           mySales.map((garage_sale, index) => {
