@@ -13,7 +13,6 @@ import EditItemPage from "./pages/EditItemPage/EditItemPage";
 
 // Component Imports
 import Navbar from "./components/NavBar/NavBar";
-import Footer from "./components/Footer/Footer";
 import MySales from "./pages/MySalesPage/MySalesPage";
 
 // Util Imports

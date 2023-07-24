@@ -39,7 +39,7 @@
 }
 .page-container{
     background-image: url('./grass image.jpg');
-    background-size: cover; /* You can use 'cover', 'contain', '100% 100%', etc. */
+    background-size: cover; 
     width: auto;
     height: 1000px;
     background-repeat: no-repeat;
