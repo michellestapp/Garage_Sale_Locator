@@ -51,14 +51,14 @@ const MySalesPage = () => {
  };
 
   return (
-    <div className=' color'>
-      <h1>{user.first_name}'s Sale Summary</h1>
-      <div className='mysales-layout'>
+    <div className=' color page-container'>
+      <p className='color'>{user.first_name}'s Sale Summary</p>
+      <div className='garage-sales-list container'>
         {mySales && mySales.length > 0 ? (
           mySales.map((garage_sale, index) => {
             if (user.id === garage_sale.user.id) {
               return (
-                <div  key={index} className='border'>
+                <div  key={index} className='card-link'>
                   <div  className=' mysales-size' onClick={() => navigate(`/garage_sales/${garage_sale.id}`)}>
                     <p className='mysales-name-format'>{garage_sale.name}</p>
                     <p className='mysales-details-format'>{formatDate(garage_sale.date)}</p>

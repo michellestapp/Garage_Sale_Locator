@@ -33,8 +33,29 @@ label {
     display: block;
     padding: 10px;
   }
-  .color{
-    color:white;
-    padding-left: 30px;
-    padding-top: 30px;
+.color{
+    font-size: 48px;
+    font-weight: bold;
+    color:  rgb(136, 88, 190);
+    padding: 20px;
   }
+.page-container{
+    background-image: url('./grass image.jpg');
+    background-size: cover; 
+    width: auto;
+    height: 1000px;
+    background-repeat: no-repeat;
+    background-position: center center; 
+}
+.card-link {
+    width: 250px;
+    background-color: rgb(136, 88, 190);
+    margin-bottom: 1rem;
+    transition: background-color 0.3s ease;
+    color: white;
+
+}
+
+.card-link:hover{
+    background-color: purple;
+}
