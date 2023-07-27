@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import api from "../../utils/api";
+import './ItemList.css'
 
 const ItemList = ({ garageSaleDetails, garageSaleId, fetchGarageSale }) => {
   const navigate = useNavigate();
@@ -60,11 +61,10 @@ const ItemList = ({ garageSaleDetails, garageSaleId, fetchGarageSale }) => {
   }
 
   return (
-    <div className="pad-category">
-      <h2>Items</h2>
+    <div className="pad-category item-grid-container">
       {garageSaleDetails &&
         garageSaleDetails.items.map((item) => (
-          <div className="bg-primary text-white container-border border border-black container" key={item.id}>
+          <div className=" bg-primary text-white container-border border border-black " key={item.id}>
             {item.image ? (
               <img
                 className="image-props pad-category"
