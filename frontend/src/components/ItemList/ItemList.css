@@ -1,9 +1,4 @@
-label {
-    color: black;
-    font-weight: bold;
-    display: block;
-    padding: 10px;
-}
+
 .file-font{
     color:white;
 }
@@ -19,6 +14,9 @@ label {
 }
 .item-grid-container {
   display: grid;
-  grid-template-columns: repeat(4, 1fr); /* Four columns */
-  gap: 20px; /* Adjust the gap between items if needed */
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+  gap: 20px;
+}
+.container-color{
+  background-color:   rgb(136, 88, 190);
 }

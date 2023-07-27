@@ -61,10 +61,10 @@ const ItemList = ({ garageSaleDetails, garageSaleId, fetchGarageSale }) => {
   }
 
   return (
-    <div className="pad-category item-grid-container">
+    <div className="item-grid-container">
       {garageSaleDetails &&
         garageSaleDetails.items.map((item) => (
-          <div className=" bg-primary text-white container-border border border-black " key={item.id}>
+          <div className="container-color text-white container-border border border-black " key={item.id}>
             {item.image ? (
               <img
                 className="image-props pad-category"
