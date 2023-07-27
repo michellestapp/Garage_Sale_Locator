@@ -1,3 +1,16 @@
 .add-item-form{
-background-color: white;
+    background-color:rgb(136, 88, 190);
+    color: white;
+}
+.add-item-button{
+    margin:200px;
+    padding: 10px;
+    color:white;
+    border-color: purple;
+    background-color:   rgb(136, 88, 190);
+    font-size: larger;
+}
+.form-font{
+    color:white;
+    font-size: larger;
 }

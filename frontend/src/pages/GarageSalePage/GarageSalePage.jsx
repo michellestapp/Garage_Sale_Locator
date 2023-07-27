@@ -11,7 +11,6 @@ import api from '../../utils/api';
 function GarageSalePage() {
   const { garage_sale_id } = useParams();
   const [garageSaleDetails, setGarageSaleDetails] = useState(null);
-  const location = useLocation();
   const fullAddress = () => {
     return `${garageSaleDetails.street_address}, ${garageSaleDetails.city}, ${garageSaleDetails.state} ${garageSaleDetails.zip}`;
   };
@@ -35,12 +34,16 @@ function GarageSalePage() {
 
 
   return (
-    <div className='display color'>
-      <h1>Garage Sale Details</h1>
-      {garageSaleDetails && <GarageSaleMap fullAddress={fullAddress()} markerText={garageSaleDetails.name}/>}
+    <div className='page-container'>
+      <p className='outlined-text'>Garage Sale Details</p>
+      <div className='display'>
+        {garageSaleDetails && <GarageSaleDetails garageSaleDetails={garageSaleDetails} />}
+        {garageSaleDetails && <AddItemForm garageSale={garageSaleDetails} fetchGarageSale={fetchGarageSale}/>}
+        {garageSaleDetails && <GarageSaleMap fullAddress={fullAddress()} markerText={garageSaleDetails.name}/>}
+        
+      </div>
       <div className='gs-sale-additem'>
-      {garageSaleDetails && <GarageSaleDetails garageSaleDetails={garageSaleDetails} />}
-      {garageSaleDetails && <AddItemForm garageSale={garageSaleDetails} fetchGarageSale={fetchGarageSale}/>}
+        
       </div>
 
       {garageSaleDetails && <ItemList garageSaleDetails={garageSaleDetails} garageSaleId = {garage_sale_id} fetchGarageSale={fetchGarageSale}/>}

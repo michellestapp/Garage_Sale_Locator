@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import useAuth from '../../hooks/useAuth';
 import { useNavigate } from 'react-router-dom';
 import { formatDate, formatTime} from "../../utils/utils"
@@ -67,8 +66,8 @@ const MySalesPage = () => {
                     <p className='mysales-details-format'>{garage_sale.city}, {garage_sale.state} {garage_sale.zip} </p>
                   </div>
                   <div>
-                    <button className="btn btn-light btn-outline-dark btn-sm" type="submit" onClick={() => deleteSale(garage_sale.id)}>Delete Sale</button>
-                    <button className="btn btn-light btn-outline-dark btn-sm" type="submit" onClick={() => handleEditSale(garage_sale)}>Edit Sale</button>
+                    <button className="btn btn-light btn-outline-dark btn-sm padding" type="submit" onClick={() => deleteSale(garage_sale.id)}>Delete Sale</button>
+                    <button className="btn btn-light btn-outline-dark btn-sm padding" type="submit" onClick={() => handleEditSale(garage_sale)}>Edit Sale</button>
                   </div>
                 </div>
               );

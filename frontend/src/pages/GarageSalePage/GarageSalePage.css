@@ -10,12 +10,7 @@ body{
     color: ivory
 
 } 
-.sale-details-container{
-    align-items: center;
-    width: 600px;
-    height: auto;
-    padding: 30px
-}
+
 
 .sale-data-format{
     font-size: 20px;
@@ -31,6 +26,7 @@ body{
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    justify-content: center;
 }
 
 .gs-sale-additem{
@@ -81,5 +77,24 @@ body{
     padding-left:15px;
 }
 .button-margin{
-    margin:5px
+    margin:5px;
 }
+.outlined-text {
+    font-size: 48px;
+    font-weight: bold;
+    color:  rgb(136, 88, 190);
+    padding: 15px;
+    /* text-shadow:  */
+      /* -1px -1px 0 #000, Top-left shadow (offset: -1px horizontally, -1px vertically) */
+      /* 1px -1px 0 #000,  Top-right shadow (offset: 1px horizontally, -1px vertically) */
+      /* -1px 1px 0 #000,  Bottom-left shadow (offset: -1px horizontally, 1px vertically) */
+      /* 1px 1px 0 #000;   Bottom-right shadow (offset: 1px horizontally, 1px vertically) */
+  }
+  .page-container{
+    background-image:url('../../images/grass image.jpg');
+    background-size: cover; 
+    width: auto;
+    height: 1000px;
+    background-repeat: no-repeat;
+    background-position: center center;
+} 

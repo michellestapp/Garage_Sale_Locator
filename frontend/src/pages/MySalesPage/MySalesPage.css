@@ -40,7 +40,7 @@ label {
     padding: 20px;
   }
 .page-container{
-    background-image: url('./grass image.jpg');
+    background-image:url('../../images/grass image.jpg');
     background-size: cover; 
     width: auto;
     height: 1000px;
@@ -58,4 +58,7 @@ label {
 
 .card-link:hover{
     background-color: purple;
+}
+.padding{
+    margin: 15px;
 }

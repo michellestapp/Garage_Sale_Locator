@@ -1,3 +1,18 @@
-.color{
-    color: ivory
+.details-font{
+    color: ivory;
+    font-size:64px;
+}
+.sale-details-container{
+    align-items: center;
+    padding: 20px;
+    width: 350px;
+    height: 400px;
+    background-color:   rgb(136, 88, 190);
+    margin:20px;
+    border: 2px solid purple; /* 2px solid border with a color of #ccc (light gray) */
+
+}
+.sale-name-font{
+    color: white;
+    font-size: x-large;
 }
