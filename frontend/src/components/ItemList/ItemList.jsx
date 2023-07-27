@@ -64,7 +64,7 @@ const ItemList = ({ garageSaleDetails, garageSaleId, fetchGarageSale }) => {
       <h2>Items</h2>
       {garageSaleDetails &&
         garageSaleDetails.items.map((item) => (
-          <div className="border" key={item.id}>
+          <div className="bg-primary text-white container-border border border-black container" key={item.id}>
             {item.image ? (
               <img
                 className="image-props pad-category"
@@ -79,8 +79,8 @@ const ItemList = ({ garageSaleDetails, garageSaleId, fetchGarageSale }) => {
             <p className="item-format">Price: ${item.price}</p>
             <p className="item-format">Category: {item.category}</p>
             {user?.id === garageSaleDetails.user.id && (
-              <div>
-                <label>
+              <div className="file-font">
+                <label >
                   Image:{" "}
                   <input
                     type="file"

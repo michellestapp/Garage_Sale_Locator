@@ -4,3 +4,11 @@ label {
     display: block;
     padding: 10px;
   }
+  .file-font{
+    color:white;
+  }
+  .item-format{
+    margin-top: 0;
+    text-align: left;
+    padding-left:15px;
+}

@@ -1,7 +1,7 @@
 
 body{
     margin:0;
-    background-color: cornflowerblue;
+    background-color: rgb(139, 182, 76);
 }
 
 .sale-format {
@@ -71,11 +71,7 @@ body{
     height: 300px;
 
 }
-.item-format{
-    margin-top: 0;
-    text-align: left;
-    padding-left:15px;
-}
+
 .button-margin{
     margin:5px;
 }
@@ -94,7 +90,7 @@ body{
     background-image:url('../../images/grass image.jpg');
     background-size: cover; 
     width: auto;
-    height: 1000px;
-    background-repeat: no-repeat;
+    height: auto;
+    background-repeat: repeat;
     background-position: center center;
 } 

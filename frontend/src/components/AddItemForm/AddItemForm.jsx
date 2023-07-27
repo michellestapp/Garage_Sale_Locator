@@ -13,10 +13,7 @@ const AddItemForm = ({ garageSale, fetchGarageSale }) => {
     category: '',
     image: null,
   });
-  const [showAddItemForm, setShowAddItemForm] = useState(false);
-  const toggleAddItemForm = () => {
-    setShowAddItemForm(!showAddItemForm);
-  };
+  const [showModal, setShowModal]=useState(false);
 
   async function addItem() {
     try {
@@ -35,7 +32,6 @@ const AddItemForm = ({ garageSale, fetchGarageSale }) => {
         },
       });
       if (response.status === 201) {
-        console.log('Line 49 AddItemForm', garageSale.id)
         await fetchGarageSale();
       }  
     } catch (error) {
@@ -64,45 +60,44 @@ const AddItemForm = ({ garageSale, fetchGarageSale }) => {
   }
 
   return garageSale.user.id === user.id && (
-    <div>
-      <button className='add-item-button' onClick={toggleAddItemForm}>Add Item</button>
-
-    {showAddItemForm && (
-
-    <form   className = 'add-item-form' onSubmit={handleSubmit}>
-      <div>
- 
-      <label className='form-font'>
-        Item Name: <input  type="text" name="name_of_item" value={formData.name_of_item} onChange={handleInputChange} />
-      </label>
-      </div>
-      <div>
-        <label className='form-font'>
-          Description: <input className='add-item-desc-input' type="text" name="description" value={formData.description} onChange={handleInputChange} />
-        </label>
-      </div>
-      <label className='form-font'>
-        Price: <input className='add-item-price' type="number" name="price" value={formData.price} onChange={handleInputChange} />
-      </label>
-      <label className='form-font'>
-        Category:
-        <select  name="category" value={formData.category} onChange={handleInputChange}>
-          <option value="">Select a category</option>
-          <option value="Books">Books</option>
-          <option value="Electronics">Electronics</option>
-          <option value="Clothing">Clothing</option>
-
-        </select>
-      </label>
-      <div>
-        <button className = 'btn btn-light' type="submit">Save Item</button>
-      </div>
-      
-  
-    </form>
-    )}
+    <div className='add-item-button-container'>
+      <button className='add-item-button' onClick={() => setShowModal(true)}>Add Item</button>
+      {showModal && (
+        <div className="modal-overlay">
+          <div className="modal-content">
+            <form className='add-item-form' onSubmit={handleSubmit}>
+              <div>
+                <label className='form-font'>
+                  Item Name: <input type="text" name="name_of_item" value={formData.name_of_item} onChange={handleInputChange} />
+                </label>
+              </div>
+              <div>
+                <label className='form-font'>
+                  Description: <input className='add-item-desc-input' type="text" name="description" value={formData.description} onChange={handleInputChange} />
+                </label>
+              </div>
+              <label className='form-font'>
+                Price: <input className='add-item-price' type="number" name="price" value={formData.price} onChange={handleInputChange} />
+              </label>
+              <label className='form-font'>
+                Category:
+                <select name="category" value={formData.category} onChange={handleInputChange}>
+                  <option value="">Select a category</option>
+                  <option value="Books">Books</option>
+                  <option value="Electronics">Electronics</option>
+                  <option value="Clothing">Clothing</option>
+                </select>
+              </label>
+              <div >
+                
+                <button className='btn btn-light submit-item-button' type="submit">Save Item</button>
+                <button className='btn btn-light submit-item-button' onClick={() => setShowModal(false)}>Close</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
     </div>
-
   );
 };
 
