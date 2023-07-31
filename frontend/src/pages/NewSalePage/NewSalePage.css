@@ -1,11 +1,32 @@
-.background-format{
-    background-color: cornflowerblue;
-    border: 2px solid black;
-    padding: 10px;
-}
+
 label {
     color: black;
     font-weight: bold;
     display: block;
     padding: 10px;
   }
+  
+.new-sale-page-container{
+    background-image:url('../../images/grass image.jpg');
+    background-size: cover; 
+    width: auto;
+    height: auto;
+    background-repeat: repeat;
+    background-position: center center;
+} 
+.form-format{
+    background-color:  rgb(136, 88, 190);
+    width: 500px;
+    text-align: center;
+    padding-bottom:20px;
+    border: 10px solid white /* Change #000 to the desired border color */
+}
+.new-sale-font{
+    color:white;
+    margin-left:20px;
+}
+.new-sale-field{
+    margin: 20px;
+    width: 300px;
+    text-align: right;
+}

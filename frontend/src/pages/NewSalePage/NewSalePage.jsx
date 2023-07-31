@@ -50,40 +50,42 @@ const NewSalePage = ({}) => {
   }
 
   return (
-    <div className="background-format">
-      <form onSubmit={(event) => handleSubmit(event)}>
-        <label>Sale Name:{" "}
-          <input type="text" name="name" value={formData.name} onChange={handleInputChange}/>
+    <div className="page-container">
+      <div className="form-format">
+      <form  onSubmit={(event) => handleSubmit(event)}>
+        <label className="new-sale-font">Sale Name:{" "}
+          <input className="new-sale-field" type="text" name="name" value={formData.name} onChange={handleInputChange}/>
         </label>
         <div>
-          <label>Date of Sale:{""}
-            <input type="date" name="date" value={formData.date} onChange={handleInputChange}/>
+          <label className="new-sale-font">Date of Sale:{""}
+            <input className="new-sale-field" type="date" name="date" value={formData.date} onChange={handleInputChange}/>
           </label>
         </div>
-        <label>Start time:{""}
-          <input type="time" name="start_time" value={formData.start_time} onChange={handleInputChange}/>
+        <label className="new-sale-font">Start time:{""}
+          <input  className="new-sale-field" type="time" name="start_time" value={formData.start_time} onChange={handleInputChange}/>
         </label>
-        <label>End time:{""}
-          <input type="time" name="end_time" value={formData.end_time} onChange={handleInputChange}/>
+        <label className="new-sale-font">End time:{""}
+          <input className="new-sale-field" type="time" name="end_time" value={formData.end_time} onChange={handleInputChange}/>
         </label>
         <div>
-          <label>Street Address:{" "}
-            <input type="text" name="street_address" value={formData.street_address} onChange={handleInputChange} />
+          <label className="new-sale-font">Street Address:{" "}
+            <input className="new-sale-field" type="text" name="street_address" value={formData.street_address} onChange={handleInputChange} />
           </label>
         </div>
         <div>
-          <label>City:{" "}
-            <input type="text" name="city"  value={formData.city} onChange={handleInputChange}/>
+          <label className="new-sale-font">City:{" "}
+            <input className="new-sale-field" type="text" name="city"  value={formData.city} onChange={handleInputChange}/>
           </label>
-          <label>State:{" "}
-            <input type="text" name="state" value={formData.state} onChange={handleInputChange}/>
+          <label className="new-sale-font">State:{" "}
+            <input  className="new-sale-field" type="text" name="state" value={formData.state} onChange={handleInputChange}/>
           </label>
-          <label>Zip:{" "}
-            <input type="text" name="zip" value={formData.zip} onChange={handleInputChange} />
+          <label className="new-sale-font">Zip:{" "}
+            <input className="new-sale-field" type="text" name="zip" value={formData.zip} onChange={handleInputChange} />
           </label>
         </div>
         <button className="btn btn-light btn-outline-dark btn-sm" type="submit">Add Sale</button>
       </form>
+      </div>
     </div>
   );
 };
