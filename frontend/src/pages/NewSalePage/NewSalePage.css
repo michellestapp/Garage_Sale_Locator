@@ -1,11 +1,3 @@
-
-label {
-    color: black;
-    font-weight: bold;
-    display: block;
-    padding: 10px;
-  }
-  
 .new-sale-page-container{
     background-image:url('../../images/grass image.jpg');
     background-size: cover; 
@@ -19,7 +11,8 @@ label {
     width: 500px;
     text-align: center;
     padding-bottom:20px;
-    border: 10px solid white /* Change #000 to the desired border color */
+    border: 10px solid white;
+    align-items: center;
 }
 .new-sale-font{
     color:white;

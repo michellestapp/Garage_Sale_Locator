@@ -80,7 +80,7 @@ const ItemList = ({ garageSaleDetails, garageSaleId, fetchGarageSale }) => {
             <p className="item-format">Category: {item.category}</p>
             {user?.id === garageSaleDetails.user.id && (
               <div className="file-font">
-                <label >
+                <label className="pad-category">
                   Image:{" "}
                   <input
                     type="file"

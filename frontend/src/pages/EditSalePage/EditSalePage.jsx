@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useLocation, useParams, useNavigate } from 'react-router-dom';
 import useAuth from '../../hooks/useAuth';
 import api from '../../utils/api';
+import './EditSalePage.css'
 
 
 const EditSalePage = ({}) => {
@@ -56,49 +57,51 @@ async function editSale() {
  
 
   return (
-    <div className='background-format'>
+    <div className='edit-sale-page-container'>
+      <div className='edit-sale-form-format'>
       <form onSubmit={handleSubmit}>
         <label>
           Sale Name:
-          <input type="text" name="name" value={formData.name} onChange={handleInputChange} />
+          <input className='edit-sale-field' type="text" name="name" value={formData.name} onChange={handleInputChange} />
         </label>
         <div>
           <label>
             Date of Sale:
-            <input type="date" name="date" value={formData.date} onChange={handleInputChange} />
+            <input className='edit-sale-field' type="date" name="date" value={formData.date} onChange={handleInputChange} />
           </label>
         </div>
         <label>
           Start time:
-          <input type="time" name="start_time" value={formData.start_time} onChange={handleInputChange} />
+          <input  className='edit-sale-field' type="time" name="start_time" value={formData.start_time} onChange={handleInputChange} />
         </label>
         <label>
           End time:
-          <input type="time" name="end_time" value={formData.end_time} onChange={handleInputChange} />
+          <input className='edit-sale-field' type="time" name="end_time" value={formData.end_time} onChange={handleInputChange} />
         </label>
         <div>
           <label>
             Street Address:
-            <input type="text" name="street_address" value={formData.street_address} onChange={handleInputChange} />
+            <input className='edit-sale-field' type="text" name="street_address" value={formData.street_address} onChange={handleInputChange} />
           </label>
         </div>
         <div>
           <label>
             City:
-            <input type="text" name="city" value={formData.city} onChange={handleInputChange} />
+            <input className='edit-sale-field' type="text" name="city" value={formData.city} onChange={handleInputChange} />
           </label>
           <label>
             State:
-            <input type="text" name="state" value={formData.state} onChange={handleInputChange} />
+            <input className='edit-sale-field' type="text" name="state" value={formData.state} onChange={handleInputChange} />
           </label>
           <label>
             Zip:
-            <input type="text" name="zip" value={formData.zip} onChange={handleInputChange} />
+            <input className='edit-sale-field' type="text" name="zip" value={formData.zip} onChange={handleInputChange} />
           </label>
         </div>
         <br />
-        <button className="btn btn-light btn-outline-dark btn-sm" type="submit">Submit Changes</button>
+        <button className=" btn btn-light btn-outline-dark btn-sm" type="submit">Submit Changes</button>
       </form>
+      </div>
       <br /><br />
     </div>
   );
