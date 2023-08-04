@@ -56,4 +56,9 @@
       /* -1px 1px 0 #000,  Bottom-left shadow (offset: -1px horizontally, 1px vertically) */
       /* 1px 1px 0 #000;   Bottom-right shadow (offset: 1px horizontally, 1px vertically) */
   }
+  .garage-sale-map{
+    width: auto;
+    margin-bottom: 30px;
+    border: 2px solid purple; 
+  }
  

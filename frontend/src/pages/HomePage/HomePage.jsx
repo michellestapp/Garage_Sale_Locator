@@ -4,7 +4,8 @@ import api from "../../utils/api"
 import SearchBar from "../../components/SearchBar/SearchBar";
 import { useNavigate } from "react-router-dom";
 import './HomePage.css'
-import { formatDate, formatTime} from "../../utils/utils"
+import { formatDate, formatTime} from "../../utils/utils";
+import AllGarageSaleMap from "../../components/AllGarageSaleMap/AllGarageSaleMap";
 
 
 const HomePage = () => {
@@ -41,9 +42,13 @@ const HomePage = () => {
     <div className = "color page-container" >
       <div className='top-bar'>
         <p className="outlined-text">Active Garage Sales</p>
+
         <div>
           <SearchBar searchInput={searchInput} setSearchInput={setSearchInput} />
         </div>
+      </div>
+      <div className="garage-sale-map container">
+        <AllGarageSaleMap/>
       </div>
       <div className = "garage-sales-list container">
       {filteredGarageSales &&
