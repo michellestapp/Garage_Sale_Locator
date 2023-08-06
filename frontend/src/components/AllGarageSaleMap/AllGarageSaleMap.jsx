@@ -71,20 +71,19 @@ const AllGarageSaleMap = ({ filteredGarageSales }) => {
           {userLocation && (
             <LocationMarker lat={userLocation.lat} lng={userLocation.lng} text="You are here" />
           )}
-{filteredGarageSales.map((garageSale, index) => {
-  const { name } = garageSale;
-  const coord = coordinates[index];
-  const markerText = name ? name : "Garage Sale Name Not Available";
+          {coordinates.map((coord, index) => {
 
-  return (
-    <LocationMarker
-      key={index}
-      lat={coord.lat}
-      lng={coord.lng}
-      text={markerText}
-    />
-  );
-})}
+            console.log("Filtered Garage Sale:", filteredGarageSales[index].name);
+
+            return (
+              <LocationMarker
+                key={index}
+                lat={coord.lat}
+                lng={coord.lng}
+                text={filteredGarageSales[index].name}
+              />
+            );
+          })}
         </GoogleMapReact>
       )}
     </div>
