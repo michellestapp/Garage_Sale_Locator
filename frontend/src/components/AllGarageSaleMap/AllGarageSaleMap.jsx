@@ -3,13 +3,10 @@ import GoogleMapReact from "google-map-react";
 import './AllGarageSaleMap.css';
 import axios from "axios";
 
-const LocationMarker = ({ text }) => (
-  <div style={{ backgroundColor: 'red', color: 'white', padding: '5px', borderRadius: '50%', width: '40px', height: '40px' }}>
-    {text}
-  </div>
-);
+
 
 const AllGarageSaleMap = ({ filteredGarageSales }) => {
+  console.log({filteredGarageSales})
   const defaultCenter = {
     lat: 40.712776,
     lng: -74.005974,
@@ -18,6 +15,11 @@ const AllGarageSaleMap = ({ filteredGarageSales }) => {
   const [coordinates, setCoordinates] = useState([]);
 
   const defaultZoom = 10;
+  const LocationMarker = ({ text }) => (
+    <div style={{ backgroundColor: 'red', color: 'white', padding: '5px', borderRadius: '50%', width: '40px', height: '40px' }}>
+      {text}
+    </div>
+  );
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(
@@ -50,8 +52,8 @@ const AllGarageSaleMap = ({ filteredGarageSales }) => {
 
   useEffect(() => {
     filteredGarageSales.forEach((garageSale) => {
+      console.log({garageSale})
       const fullAddress = `${garageSale.street_address}, ${garageSale.city}, ${garageSale.state} ${garageSale.zip}`;
-      console.log(filteredGarageSales.name)
       fetchCoordinates(fullAddress);
     });
   }, [filteredGarageSales]);
@@ -69,14 +71,20 @@ const AllGarageSaleMap = ({ filteredGarageSales }) => {
           {userLocation && (
             <LocationMarker lat={userLocation.lat} lng={userLocation.lng} text="You are here" />
           )}
-          {coordinates.map((coord, index) => (
-            <LocationMarker
-              key={index}
-              lat={coord.lat}
-              lng={coord.lng}
-              text={filteredGarageSales.name}
-            />
-          ))}
+{filteredGarageSales.map((garageSale, index) => {
+  const { name } = garageSale;
+  const coord = coordinates[index];
+  const markerText = name ? name : "Garage Sale Name Not Available";
+
+  return (
+    <LocationMarker
+      key={index}
+      lat={coord.lat}
+      lng={coord.lng}
+      text={markerText}
+    />
+  );
+})}
         </GoogleMapReact>
       )}
     </div>
