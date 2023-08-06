@@ -48,7 +48,7 @@ const HomePage = () => {
         </div>
       </div>
       <div className="garage-sale-map container">
-        <AllGarageSaleMap/>
+        <AllGarageSaleMap filteredGarageSales={filteredGarageSales}/>
       </div>
       <div className = "garage-sales-list container">
       {filteredGarageSales &&
