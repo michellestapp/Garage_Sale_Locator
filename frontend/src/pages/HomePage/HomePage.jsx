@@ -33,7 +33,8 @@ const HomePage = () => {
       formatDate(garage_sale.date).includes(searchInput) ||
       formatTime(garage_sale.start_time).includes(searchInput) ||
       formatDate(garage_sale.end_time).includes(searchInput) ||
-      garage_sale.zip.toString().includes(searchInput)
+      garage_sale.zip.toString().includes(searchInput)||
+      garage_sale.items.some(item => item.category.toLowerCase().includes(searchInput.toLowerCase()))
     );
   });
 
