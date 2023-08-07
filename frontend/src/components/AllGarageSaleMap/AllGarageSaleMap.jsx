@@ -2,17 +2,19 @@ import React, { useState, useEffect } from "react";
 import GoogleMapReact from "google-map-react";
 import './AllGarageSaleMap.css';
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 
 
 const AllGarageSaleMap = ({ filteredGarageSales }) => {
-  console.log({filteredGarageSales})
   const defaultCenter = {
     lat: 40.712776,
     lng: -74.005974,
   };
   const [userLocation, setUserLocation] = useState(null);
   const [coordinates, setCoordinates] = useState([]);
+  const [isMounted, setIsMounted] = useState(true);
+  const navigate = useNavigate();
 
   const defaultZoom = 10;
   const LocationMarker = ({ text }) => (
@@ -22,6 +24,7 @@ const AllGarageSaleMap = ({ filteredGarageSales }) => {
   );
 
   useEffect(() => {
+    setIsMounted(true);
     navigator.geolocation.getCurrentPosition(
       (position) => {
         const { latitude, longitude } = position.coords;
@@ -31,7 +34,7 @@ const AllGarageSaleMap = ({ filteredGarageSales }) => {
         console.error("Error getting user's location:", error);
       }
     );
-  }, []);
+  }, [isMounted]);
 
   const fetchCoordinates = async (address) => {
     try {
@@ -52,7 +55,7 @@ const AllGarageSaleMap = ({ filteredGarageSales }) => {
 
   useEffect(() => {
     filteredGarageSales.forEach((garageSale) => {
-      console.log({garageSale})
+      // console.log({garageSale})
       const fullAddress = `${garageSale.street_address}, ${garageSale.city}, ${garageSale.state} ${garageSale.zip}`;
       fetchCoordinates(fullAddress);
     });
@@ -73,14 +76,14 @@ const AllGarageSaleMap = ({ filteredGarageSales }) => {
           )}
           {coordinates.map((coord, index) => {
 
-            console.log("Filtered Garage Sale:", filteredGarageSales[index].name);
+            // console.log("Filtered Garage Sale:", filteredGarageSales[index].name);
 
             return (
               <LocationMarker
                 key={index}
                 lat={coord.lat}
                 lng={coord.lng}
-                text={filteredGarageSales[index].name}
+                // text={filteredGarageSales[index].name}
               />
             );
           })}

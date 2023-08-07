@@ -4,7 +4,7 @@ import api from "../../utils/api"
 import SearchBar from "../../components/SearchBar/SearchBar";
 import { useNavigate } from "react-router-dom";
 import './HomePage.css'
-import { formatDate, formatTime} from "../../utils/utils";
+import { formatDate, formatTime } from "../../utils/utils";
 import AllGarageSaleMap from "../../components/AllGarageSaleMap/AllGarageSaleMap";
 
 
@@ -37,35 +37,40 @@ const HomePage = () => {
     );
   });
 
-
   return (
-    <div className = "color page-container" >
+    <div className="color page-container">
       <div className='top-bar'>
         <p className="outlined-text">Active Garage Sales</p>
-
         <div>
           <SearchBar searchInput={searchInput} setSearchInput={setSearchInput} />
         </div>
       </div>
       <div className="garage-sale-map container">
-        <AllGarageSaleMap filteredGarageSales={filteredGarageSales}/>
+        <AllGarageSaleMap filteredGarageSales={filteredGarageSales} />
       </div>
-      <div className = "garage-sales-list container">
-      {filteredGarageSales &&
-        filteredGarageSales.map((garage_sale) => (
-          <div className = "card-link" key= {garage_sale.id} onClick = {() => navigate(`/garage_sales/${garage_sale.id}`)}>
-            <div >
-
-              <div className = "sale-format">{garage_sale.name}</div>
-              <div className="sale-data-format">Date: <p>{formatDate(garage_sale.date)}</p></div>
-              <div className="sale-data-format">Time:  
-                <p>{formatTime(garage_sale.start_time)}-{formatTime(garage_sale.end_time)}</p>
+      <div className="garage-sales-list container">
+        {filteredGarageSales &&
+          filteredGarageSales.map((garage_sale) => {
+            const uniqueCategories = [...new Set(garage_sale.items.map(item => item.category))];
+            return (
+              <div className="card-link" key={garage_sale.id} onClick={() => navigate(`/garage_sales/${garage_sale.id}`)}>
+                <div>
+                  <div className="sale-format">{garage_sale.name}</div>
+                  <div className="sale-data-format">Date: <p>{formatDate(garage_sale.date)}</p></div>
+                  <div className="sale-data-format">Time:
+                    <p>{formatTime(garage_sale.start_time)}-{formatTime(garage_sale.end_time)}</p>
+                  </div>
+                  <div className="sale-data-format">Zip:<p>{garage_sale.zip}</p></div>
+                  {console.log('gARAGE sALE iTEMS', garage_sale.items)}
+                  <p className="item-format" key={garage_sale.id}>Categories </p>
+                  {uniqueCategories.map((category) => (
+                    <span key={category} className="sale-data-format">{category}</span>
+                  ))}
+                </div>
               </div>
-              <div className="sale-data-format">Zip:<p>{garage_sale.zip}</p></div>
-            </div>
-          </div>
-        ))}
-        </div>
+            );
+          })}
+      </div>
     </div>
   );
 };

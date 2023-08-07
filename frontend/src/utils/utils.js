@@ -19,5 +19,18 @@ const formatDate = (dateString) => {
       const formattedMinutes = minutes.toString().padStart(2, "0");
       return `${formattedHours}:${formattedMinutes} ${ampm}`;
     };
+
+  const getUniqueCategories = (garageSales) => {
+    const uniqueCategories = new Set();
   
-  export {formatDate, formatTime};
+    garageSales.forEach((garage_sale) => {
+      garage_sale.items.forEach((item) => {
+        uniqueCategories.add(item.category);
+      });
+    });
+  
+    return Array.from(uniqueCategories);
+  };
+  
+  export {formatDate, formatTime, getUniqueCategories};
+
