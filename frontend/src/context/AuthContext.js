@@ -2,6 +2,7 @@ import { createContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import jwtDecode from "jwt-decode";
+import api from "../utils/api";
 
 const AuthContext = createContext();
 
@@ -19,7 +20,6 @@ function setUserObject(user) {
 }
 
 export const AuthProvider = ({ children }) => {
-  const BASE_URL = "http://127.0.0.1:5000/api/auth";
   const userToken = JSON.parse(localStorage.getItem("token"));
   const decodedUser = userToken ? jwtDecode(userToken) : null;
   const [token, setToken] = useState(userToken);
@@ -36,7 +36,7 @@ export const AuthProvider = ({ children }) => {
         first_name: registerData.firstName,
         last_name: registerData.lastName,
       };
-      let response = await axios.post(`${BASE_URL}/register`, finalData);
+      let response = await api.post(`/auth/register`, finalData);
       if (response.status === 201) {
         console.log("Successful registration! Log in to access token");
         setIsServerError(false);
@@ -51,7 +51,7 @@ export const AuthProvider = ({ children }) => {
 
   const loginUser = async (loginData) => {
     try {
-      let response = await axios.post(`${BASE_URL}/login`, loginData);
+      let response = await api.post(`/auth/login`, loginData);
       if (response.status === 200) {
         localStorage.setItem("token", JSON.stringify(response.data.access));
         setToken(JSON.parse(localStorage.getItem("token")));

@@ -1,0 +1,26 @@
+
+.file-font{
+    color:white;
+}
+.item-format{
+    margin-top: 0;
+    text-align: left;
+    padding-left:15px;
+}
+.pad-category{
+  padding: 20px;
+  display: flex;
+  
+}
+.item-grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+  gap: 20px;
+}
+.container-color{
+  background-color:   rgb(136, 88, 190);
+}
+.image-place-holder{
+  width:500px;
+  height:275px;
+}

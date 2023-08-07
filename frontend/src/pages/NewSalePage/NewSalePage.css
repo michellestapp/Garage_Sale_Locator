@@ -1,0 +1,25 @@
+.new-sale-page-container{
+    background-image:url('../../images/grass image.jpg');
+    background-size: cover; 
+    width: auto;
+    height: auto;
+    background-repeat: repeat;
+    background-position: center center;
+} 
+.form-format{
+    background-color:  rgb(136, 88, 190);
+    width: 500px;
+    text-align: center;
+    padding-bottom:20px;
+    border: 10px solid white;
+    align-items: center;
+}
+.new-sale-font{
+    color:white;
+    margin-left:20px;
+}
+.new-sale-field{
+    margin: 20px;
+    width: 300px;
+    text-align: right;
+}

@@ -1,0 +1,85 @@
+
+body{
+    margin:0;
+    background-color: rgb(139, 182, 76);
+}
+
+.sale-format {
+    font-size: 24px;
+    font-weight: 500;
+    color: ivory
+
+} 
+
+
+.sale-data-format{
+    font-size: 20px;
+    text-align: left;
+    padding-left: 20px;
+    color: ivory
+}
+.color{
+    color: ivory
+}
+
+.display{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.gs-sale-additem{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    flex-direction: row;
+}
+.add-item-form{
+    background-color: rgb(136, 88, 190);
+    padding: 10px;
+    color: white
+    }
+
+.add-item-name-input{
+    padding: 5px;
+    width: 250px;
+    height: 25px
+}
+.add-item-desc-input{
+    padding: 5px;
+    width: 300px;
+    height: 40px;
+    margin: 10px
+}
+
+.add-item-price{
+    padding: 5px;
+    width: 100px;
+    height: 25px;
+    margin: 10px
+}
+
+
+.button-margin{
+    margin:5px;
+}
+.outlined-text {
+    font-size: 48px;
+    font-weight: bold;
+    color:  rgb(136, 88, 190);
+    padding: 15px;
+    /* text-shadow:  */
+      /* -1px -1px 0 #000, Top-left shadow (offset: -1px horizontally, -1px vertically) */
+      /* 1px -1px 0 #000,  Top-right shadow (offset: 1px horizontally, -1px vertically) */
+      /* -1px 1px 0 #000,  Bottom-left shadow (offset: -1px horizontally, 1px vertically) */
+      /* 1px 1px 0 #000;   Bottom-right shadow (offset: 1px horizontally, 1px vertically) */
+  }
+  .page-container{
+    background-image:url('../../images/grass image.jpg');
+    background-size: cover; 
+    width: auto;
+    height: auto;
+    background-repeat: repeat;
+    background-position: center center;
+} 

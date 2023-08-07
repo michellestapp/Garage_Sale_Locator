@@ -1,0 +1,49 @@
+.add-item-form{
+    background-color:rgb(136, 88, 190);
+    color: white;
+}
+.add-item-button{
+    margin:200px;
+    padding: 10px;
+    color:white;
+    border-color: purple;
+    background-color:   rgb(136, 88, 190);
+    font-size: larger;
+}
+.form-font{
+    color:white;
+    font-size: larger;
+}
+.add-item-button-container {
+    position: relative;
+  }
+  
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 50%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+  
+.modal-content {
+    padding: 20px;
+    border-radius: 8px;
+}
+.submit-item-button{
+    margin: 10px
+}
+  .container-border{
+    margin:10px;
+}
+
+.image-props{
+    object-fit:contain;
+    width:300px;
+    height: 300px;
+
+}

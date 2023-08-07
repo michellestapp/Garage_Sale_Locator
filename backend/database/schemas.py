@@ -64,6 +64,7 @@ cars_schema = CarSchema(many=True)
 # TODO: Add your schemas below
 class GarageSaleSchema(ma.Schema):
     id = fields.Integer(primary_key = True)
+    name = fields.String(required = True)
     date = fields.Date(required = True)
     start_time = fields.Time(required = True)
     end_time = fields.Time(required = True)
@@ -73,9 +74,9 @@ class GarageSaleSchema(ma.Schema):
     zip = fields.Integer(required = True)
     user_id = fields.Integer()
     user = ma.Nested(UserSchema, many = False)
-
+    items = ma.Nested("ItemSchema", many = True, exclude=('garage_sale',))
     class Meta:
-        fields = ("id", "date", "start_time", "end_time", "street_address", "city", "state", "zip", "user")
+        fields = ("id", "name","date", "start_time", "end_time", "street_address", "city", "state", "zip","user", "items")
 
     @post_load
     def create_garage_sale(self, data, **kwargs):
@@ -87,12 +88,12 @@ garage_sales_schema = GarageSaleSchema(many=True)
 class ItemSchema(ma.Schema):
     id = fields.Integer(primary_key = True)
     name_of_item = fields.String(required = True)
-    description = fields.String()
-    price = fields.Integer()
-    category = fields.String()
-    image = fields.String()
-    garage_sale_id = fields.Integer()
-    garage_sale = ma.Nested(GarageSaleSchema, many=True)
+    description = fields.String(required = False, allow_none=True)
+    price = fields.Integer(required = False, allow_none=True)
+    category = fields.String(required = False, allow_none=True)
+    image = fields.String(allow_none=True)
+    garage_sale_id = fields.Integer(required = True)
+    garage_sale = ma.Nested(GarageSaleSchema)
 
 
     class Meta:

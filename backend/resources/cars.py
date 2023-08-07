@@ -37,3 +37,7 @@ class UserCarResource(Resource):
         db.session.add(new_car)
         db.session.commit()
         return car_schema.dump(new_car), 201
+    
+class TestResource(Resource):
+    def get(self):
+        return "Test Successful"
