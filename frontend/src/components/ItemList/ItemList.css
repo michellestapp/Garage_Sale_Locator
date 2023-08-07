@@ -20,3 +20,7 @@
 .container-color{
   background-color:   rgb(136, 88, 190);
 }
+.image-place-holder{
+  width:500px;
+  height:275px;
+}

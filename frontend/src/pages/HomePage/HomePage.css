@@ -31,6 +31,11 @@
     font-weight: 500;
 
 } 
+.category-format{
+    font-size: large;
+    text-align: left;
+    padding-left: 25px;
+}
 
 .sale-data-format{
     font-size: 20px;

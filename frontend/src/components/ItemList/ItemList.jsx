@@ -72,7 +72,7 @@ const ItemList = ({ garageSaleDetails, garageSaleId, fetchGarageSale }) => {
                 alt={item.name_of_item}
               />
             ) : (
-              <span>No image available</span>
+              <p className="image-place-holder">No image available</p>
             )}
             <p className="item-format">Item Name: {item.name_of_item}</p>
             <p className="item-format">Item Description: {item.description}</p>

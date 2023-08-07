@@ -4,8 +4,6 @@ import './AllGarageSaleMap.css';
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-
-
 const AllGarageSaleMap = ({ filteredGarageSales }) => {
   const defaultCenter = {
     lat: 40.712776,
@@ -17,11 +15,17 @@ const AllGarageSaleMap = ({ filteredGarageSales }) => {
   const navigate = useNavigate();
 
   const defaultZoom = 10;
-  const LocationMarker = ({ text }) => (
+  const LocationMarker1 = ({ text }) => (
     <div style={{ backgroundColor: 'red', color: 'white', padding: '5px', borderRadius: '50%', width: '40px', height: '40px' }}>
       {text}
     </div>
   );
+
+  const LocationMarker2 = ({ text }) => (
+    <div style={{ backgroundColor: 'purple', color: 'white', padding: '5px', borderRadius: '50%', width: '40px', height: '40px' }}>
+      {text}
+    </div>
+  ); 
 
   useEffect(() => {
     setIsMounted(true);
@@ -44,21 +48,28 @@ const AllGarageSaleMap = ({ filteredGarageSales }) => {
       );
 
       const { lat, lng } = response.data.results[0].geometry.location;
-      setCoordinates((prevCoordinates) => [
-        ...prevCoordinates,
-        { lat, lng, address },
-      ]);
+      return { lat, lng, address };
     } catch (error) {
       console.error('Error fetching coordinates:', error);
+      return null;
     }
   };
 
   useEffect(() => {
-    filteredGarageSales.forEach((garageSale) => {
-      // console.log({garageSale})
-      const fullAddress = `${garageSale.street_address}, ${garageSale.city}, ${garageSale.state} ${garageSale.zip}`;
-      fetchCoordinates(fullAddress);
-    });
+    const fetchAllCoordinates = async () => {
+      const coordinatesArray = await Promise.all(
+        filteredGarageSales.map(async (garageSale) => {
+          const fullAddress = `${garageSale.street_address}, ${garageSale.city}, ${garageSale.state} ${garageSale.zip}`;
+          return await fetchCoordinates(fullAddress);
+        })
+      );
+
+      // Filter out null values (in case of fetch errors)
+      const validCoordinates = coordinatesArray.filter((coord) => coord !== null);
+      setCoordinates(validCoordinates);
+    };
+
+    fetchAllCoordinates();
   }, [filteredGarageSales]);
 
   const center = userLocation;
@@ -72,21 +83,13 @@ const AllGarageSaleMap = ({ filteredGarageSales }) => {
           defaultZoom={defaultZoom}
         >
           {userLocation && (
-            <LocationMarker lat={userLocation.lat} lng={userLocation.lng} text="You are here" />
+            <LocationMarker1 lat={userLocation.lat} lng={userLocation.lng} text="You are here" />
           )}
-          {coordinates.map((coord, index) => {
-
-            // console.log("Filtered Garage Sale:", filteredGarageSales[index].name);
-
-            return (
-              <LocationMarker
-                key={index}
-                lat={coord.lat}
-                lng={coord.lng}
-                // text={filteredGarageSales[index].name}
-              />
-            );
-          })}
+          {coordinates.map((coord, index) => (
+            <LocationMarker2 key={index} lat={coord.lat} lng={coord.lng} 
+            // text={filteredGarageSales[index].name} 
+            />
+          ))}
         </GoogleMapReact>
       )}
     </div>
