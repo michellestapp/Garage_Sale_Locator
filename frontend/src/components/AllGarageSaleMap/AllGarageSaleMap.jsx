@@ -21,8 +21,8 @@ const AllGarageSaleMap = ({ filteredGarageSales }) => {
     </div>
   );
 
-  const LocationMarker2 = ({ text }) => (
-    <div style={{ backgroundColor: 'purple', color: 'white', padding: '5px', borderRadius: '50%', width: '40px', height: '40px' }}>
+  const LocationMarker2 = ({ text, onClick }) => (
+    <div onClick={onClick} style={{ backgroundColor: 'purple', color: 'white', padding: '5px', borderRadius: '50%', width: '40px', height: '40px' }}>
       {text}
     </div>
   ); 
@@ -86,9 +86,14 @@ const AllGarageSaleMap = ({ filteredGarageSales }) => {
             <LocationMarker1 lat={userLocation.lat} lng={userLocation.lng} text="You are here" />
           )}
           {coordinates.map((coord, index) => (
-            <LocationMarker2 key={index} lat={coord.lat} lng={coord.lng} 
-            // text={filteredGarageSales[index].name} 
+            // <div  onClick={() => navigate(`/garage_sales/${filteredGarageSales[index].id}`)}>
+              // {console.log(coord.lat,'  ',coord.lng)}
+
+            <LocationMarker2 key={index} lat={coord.lat} lng={coord.lng} onClick={() => navigate(`/garage_sales/${filteredGarageSales[index].id}`)}
+            text={filteredGarageSales[index]?.name || "Unknown"} 
             />
+            // </div>
+
           ))}
         </GoogleMapReact>
       )}
