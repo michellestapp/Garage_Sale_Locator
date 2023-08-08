@@ -50,7 +50,7 @@ const NewSalePage = ({}) => {
   }
 
   return (
-    <div className="page-container">
+    <div className="new-sale-page-container">
       <div className="form-format">
       <form  onSubmit={(event) => handleSubmit(event)}>
         <label className="new-sale-font">Sale Name:{" "}
