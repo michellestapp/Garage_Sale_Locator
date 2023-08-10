@@ -63,16 +63,15 @@ const HomePage = () => {
                     <p>{formatTime(garage_sale.start_time)}-{formatTime(garage_sale.end_time)}</p>
                   </div>
                   <div className="sale-data-format">Zip:<p>{garage_sale.zip}</p></div>
-                  <p className="category-format" key={garage_sale.id}>Categories: </p>
+                  <p className="sale-data-format" key={garage_sale.id}>Categories: </p>
                   {uniqueCategories.map((category) => (
                     <div key={category}>
-                    <p className="category-format">{category}</p>
-                    {garage_sale.items.map((item) => {
+                    <p className="category-format  single-spacing">{category}</p>
+                    {/* {garage_sale.items.map((item) => {
                       if (item.category === category) {
-                        console.log(item.name);
-                        return <p className="item-cat-format" key={item.id}>{item.name_of_item}</p>;
+                        return <p className="item-cat-format  single-spacing" key={item.id}>{item.name_of_item}</p>;
                       }
-                    })}
+                    })} */}
                   </div>
                   ))}
                 </div>
