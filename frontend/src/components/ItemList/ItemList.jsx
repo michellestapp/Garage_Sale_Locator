@@ -64,7 +64,7 @@ const ItemList = ({ garageSaleDetails, garageSaleId, fetchGarageSale }) => {
     <div className="item-grid-container">
       {garageSaleDetails &&
         garageSaleDetails.items.map((item) => (
-          <div className="container-color text-white container-border border border-black " key={item.id}>
+          <div className="item-container container-color text-white container-border border border-black " key={item.id}>
             {item.image ? (
               <img
                 className="image-props pad-category"
@@ -91,26 +91,17 @@ const ItemList = ({ garageSaleDetails, garageSaleId, fetchGarageSale }) => {
               </div>
             )}
             {user?.id === garageSaleDetails.user.id && (
-              <button
-                className="btn btn-light btn-outline-dark btn-sm button-margin"
-                onClick={() => postImage(item)}
-              >
+              <button className="btn btn-light btn-outline-dark btn-sm button-margin" onClick={() => postImage(item)}>
                 Upload Image
               </button>
             )}
             {user?.id === garageSaleDetails.user.id && (
-              <button
-                className="btn btn-light btn-outline-dark btn-sm button-margin"
-                onClick={() => handleEditItem(item)}
-              >
+              <button className="btn btn-light btn-outline-dark btn-sm button-margin" onClick={() => handleEditItem(item)}>
                 Edit Item
               </button>
             )}
             {user?.id === garageSaleDetails.user.id && (
-              <button
-                className="btn btn-light btn-outline-dark btn-sm"
-                onClick={() => deleteItem(item)}
-              >
+              <button className="btn btn-light btn-outline-dark btn-sm" onClick={() => deleteItem(item)}>
                 Delete Item
               </button>
             )}

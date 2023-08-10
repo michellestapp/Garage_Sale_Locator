@@ -86,13 +86,11 @@ const AllGarageSaleMap = ({ filteredGarageSales }) => {
             <LocationMarker1 lat={userLocation.lat} lng={userLocation.lng} text="You are here" />
           )}
           {coordinates.map((coord, index) => (
-            // <div  onClick={() => navigate(`/garage_sales/${filteredGarageSales[index].id}`)}>
-              // {console.log(coord.lat,'  ',coord.lng)}
+
 
             <LocationMarker2 key={index} lat={coord.lat} lng={coord.lng} onClick={() => navigate(`/garage_sales/${filteredGarageSales[index].id}`)}
             text={filteredGarageSales[index]?.name || "Unknown"} 
             />
-            // </div>
 
           ))}
         </GoogleMapReact>

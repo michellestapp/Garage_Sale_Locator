@@ -1,3 +1,9 @@
 .error {
   color: red;
 }
+.login-page-container{
+  background-image:url('../../images/grass image.jpg');
+  background-size: cover; 
+  width: auto;
+  height: auto;
+}

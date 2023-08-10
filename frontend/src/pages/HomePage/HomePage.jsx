@@ -62,7 +62,6 @@ const HomePage = () => {
                     <p>{formatTime(garage_sale.start_time)}-{formatTime(garage_sale.end_time)}</p>
                   </div>
                   <div className="sale-data-format">Zip:<p>{garage_sale.zip}</p></div>
-                  {console.log('gARAGE sALE iTEMS', garage_sale.items)}
                   <p className="item-format" key={garage_sale.id}>Categories: </p>
                   {uniqueCategories.map((category) => (
                     <p key={category} className="category-format">{category}</p>
