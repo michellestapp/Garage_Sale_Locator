@@ -34,7 +34,8 @@ const HomePage = () => {
       formatTime(garage_sale.start_time).includes(searchInput) ||
       formatDate(garage_sale.end_time).includes(searchInput) ||
       garage_sale.zip.toString().includes(searchInput)||
-      garage_sale.items.some(item => item.category.toLowerCase().includes(searchInput.toLowerCase()))
+      garage_sale.items.some(item => item.category.toLowerCase().includes(searchInput.toLowerCase()))||
+      garage_sale.items.some(item => item.name_of_item.toLowerCase().includes(searchInput.toLowerCase()))
     );
   });
 
@@ -62,9 +63,17 @@ const HomePage = () => {
                     <p>{formatTime(garage_sale.start_time)}-{formatTime(garage_sale.end_time)}</p>
                   </div>
                   <div className="sale-data-format">Zip:<p>{garage_sale.zip}</p></div>
-                  <p className="item-format" key={garage_sale.id}>Categories: </p>
+                  <p className="category-format" key={garage_sale.id}>Categories: </p>
                   {uniqueCategories.map((category) => (
-                    <p key={category} className="category-format">{category}</p>
+                    <div key={category}>
+                    <p className="category-format">{category}</p>
+                    {garage_sale.items.map((item) => {
+                      if (item.category === category) {
+                        console.log(item.name);
+                        return <p className="item-cat-format" key={item.id}>{item.name_of_item}</p>;
+                      }
+                    })}
+                  </div>
                   ))}
                 </div>
               </div>
