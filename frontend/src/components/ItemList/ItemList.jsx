@@ -3,11 +3,13 @@ import { useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import api from "../../utils/api";
 import './ItemList.css'
+import "bootstrap/dist/css/bootstrap.min.css";
 
 const ItemList = ({ garageSaleDetails, garageSaleId, fetchGarageSale }) => {
   const navigate = useNavigate();
   const [user, token] = useAuth();
   const [image, setImage] = useState("");
+  
 
   const handleEditItem = (item) => {
     navigate(`/items/${item.id}`, {

@@ -1,4 +1,4 @@
-FROM node:lts-alpine3.17 as build
+FROM node:alpine3.17 as build
 WORKDIR /app
 COPY package*.json .
 RUN npm install --legacy-peer-deps --save google-maps-react
