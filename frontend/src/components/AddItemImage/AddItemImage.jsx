@@ -37,17 +37,23 @@ const AddItemImage = ({itemId,  fetchGarageSale}) => {
       };
 
 
-    return (
+      return (
         <div>
-        <label>
-          Image:
-          <input type="file" name="image" onChange={handleFileInputChange} />
-        </label>
-        <button className="btn btn-light btn-outline-dark btn-sm" onClick={postImage}>
-          Upload Image
-        </button>
-      </div>
-    );
+          <label>
+            Image:
+            <input type="file" name="image" onChange={handleFileInputChange} />
+          </label>
+          <div>
+          <button
+            type="button" 
+            className="btn btn-light btn-outline-dark btn-sm"
+            onClick={postImage}
+          >
+            Upload Image
+          </button>
+          </div>
+        </div>
+      );
 }
  
 export default AddItemImage;

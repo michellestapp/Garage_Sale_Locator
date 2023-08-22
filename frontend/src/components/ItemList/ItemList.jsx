@@ -9,7 +9,7 @@ import AddItemImage from "../AddItemImage/AddItemImage";
 const ItemList = ({ garageSaleDetails, garageSaleId, fetchGarageSale }) => {
   const navigate = useNavigate();
   const [user, token] = useAuth();
-  // const [image, setImage] = useState("");
+  const [image, setImage] = useState("");
   
 
   const handleEditItem = (item) => {
@@ -18,28 +18,28 @@ const ItemList = ({ garageSaleDetails, garageSaleId, fetchGarageSale }) => {
     });
   };
 
-  // const postImage = async (item) => {
-  //   try {
-  //     const form = new FormData();
-  //     form.append("image", image || "");
+  const postImage = async (item) => {
+    try {
+      const form = new FormData();
+      form.append("image", image || "");
 
-  //     const response = await api.post(
-  //       `/items/${item.id}/image`,
-  //       form,
-  //       {
-  //         headers: {
-  //           Authorization: "Bearer " + token,
-  //           "Content-Type": "multipart/form-data",
-  //         },
-  //       }
-  //     );
-  //     if (response.status === 200) {
-  //       await fetchGarageSale();
-  //     }
-  //   } catch (error) {
-  //     console.log(error.response.data);
-  //   }
-  // };
+      const response = await api.post(
+        `/items/${item.id}/image`,
+        form,
+        {
+          headers: {
+            Authorization: "Bearer " + token,
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      if (response.status === 200) {
+        await fetchGarageSale();
+      }
+    } catch (error) {
+      console.log(error.response.data);
+    }
+  };
 
   const deleteItem = async (item) => {
     try {
@@ -59,9 +59,9 @@ const ItemList = ({ garageSaleDetails, garageSaleId, fetchGarageSale }) => {
     }
   };
 
-  // function handleFileInputChange(event) {
-  //   setImage(event.target.files[0]);
-  // }
+  function handleFileInputChange(event) {
+    setImage(event.target.files[0]);
+  }
 
   return (
     <div className="item-grid-container">
@@ -82,25 +82,25 @@ const ItemList = ({ garageSaleDetails, garageSaleId, fetchGarageSale }) => {
             <p className="item-format">Price: ${item.price}</p>
             <p className="item-format">Category: {item.category}</p>
             {user?.id === garageSaleDetails.user.id && (
-                <div className="file-font">
-                <AddItemImage itemId={item.id} token={token} fetchGarageSale={fetchGarageSale} />
-              </div>
+              //   <div className="file-font">
+              //   <AddItemImage itemId={item.id} token={token} fetchGarageSale={fetchGarageSale} />
+              // </div>
 
-            //   <div className="file-font">
-            //     <label className="pad-category">
-            //       Image:{" "}
-            //       <input
-            //         type="file"
-            //         name="image"
-            //         onChange={handleFileInputChange}
-            //       />
-            //     </label>
-            //   </div>
-            // )}
-            // {user?.id === garageSaleDetails.user.id && (
-            //   <button className="btn btn-light btn-outline-dark btn-sm button-margin" onClick={() => postImage(item)}>
-            //     Upload Image
-            //   </button>
+              <div className="file-font">
+                <label className="pad-category">
+                  Image:{" "}
+                  <input
+                    type="file"
+                    name="image"
+                    onChange={handleFileInputChange}
+                  />
+                </label>
+              </div>
+            )}
+            {user?.id === garageSaleDetails.user.id && (
+              <button className="btn btn-light btn-outline-dark btn-sm button-margin" onClick={() => postImage(item)}>
+                Upload Image
+              </button>
             )}
             {user?.id === garageSaleDetails.user.id && (
               <button className="btn btn-light btn-outline-dark btn-sm button-margin" onClick={() => handleEditItem(item)}>
