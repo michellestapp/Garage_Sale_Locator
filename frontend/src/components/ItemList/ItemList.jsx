@@ -90,7 +90,7 @@ const ItemList = ({ garageSaleDetails, garageSaleId, fetchGarageSale }) => {
                 <label className="pad-category">
                   Image: {" "}
                   <input
-                    className="btn btn-light btn-outline-dark btn-sm button-margin"
+                    className="btn btn-light btn-outline-dark btn-sm button-margin btn-custom"
                     type="file"
                     name="image"
                     onChange={handleFileInputChange}
@@ -99,17 +99,17 @@ const ItemList = ({ garageSaleDetails, garageSaleId, fetchGarageSale }) => {
               </div>
             )}
             {user?.id === garageSaleDetails.user.id && (
-              <button className="btn btn-light btn-outline-dark btn-sm button-margin" onClick={() => postImage(item)}>
+              <button className="btn btn-light btn-outline-dark btn-sm button-margin btn-custom" onClick={() => postImage(item)}>
                 Upload Image
               </button>
             )}
             {user?.id === garageSaleDetails.user.id && (
-              <button className="btn btn-light btn-outline-dark btn-sm button-margin" onClick={() => handleEditItem(item)}>
+              <button className="btn btn-light btn-outline-dark btn-sm button-margin btn-custom" onClick={() => handleEditItem(item)}>
                 Edit Item
               </button>
             )}
             {user?.id === garageSaleDetails.user.id && (
-              <button className="btn btn-light btn-outline-dark btn-sm" onClick={() => deleteItem(item)}>
+              <button className="btn btn-light btn-outline-dark btn-sm btn-custom" onClick={() => deleteItem(item)}>
                 Delete Item
               </button>
             )}

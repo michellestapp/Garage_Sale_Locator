@@ -35,3 +35,8 @@
   display: flex;
 
 }
+.btn-custom:hover {
+  background-color:  rgb(102, 31, 184); 
+  color: #fff; 
+  border-color: rgb(102, 31, 184);
+}

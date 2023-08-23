@@ -6,7 +6,7 @@
     margin:200px;
     padding: 10px;
     color:white;
-    border-color: purple;
+    border-color: rgb(102, 31, 184);
     background-color:   rgb(136, 88, 190);
     font-size: larger;
 }
@@ -47,3 +47,8 @@
     height: 300px;
 
 }
+.btn-custom:hover {
+    background-color:  rgb(102, 31, 184); 
+    color: #fff; 
+    border-color: rgb(102, 31, 184);
+  }

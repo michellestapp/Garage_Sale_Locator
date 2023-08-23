@@ -61,7 +61,7 @@ const AddItemForm = ({ garageSale, fetchGarageSale }) => {
   return (
     garageSale.user.id === user.id && (
       <div className="add-item-button-container">
-        <button className="add-item-button" onClick={() => setShowModal(true)}>
+        <button className="add-item-button btn-custom" onClick={() => setShowModal(true)}>
           Add Item
         </button>
         {showModal && (
