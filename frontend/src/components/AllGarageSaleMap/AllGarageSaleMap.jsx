@@ -64,7 +64,6 @@ const AllGarageSaleMap = ({ filteredGarageSales }) => {
         })
       );
 
-      // Filter out null values (in case of fetch errors)
       const validCoordinates = coordinatesArray.filter((coord) => coord !== null);
       setCoordinates(validCoordinates);
     };

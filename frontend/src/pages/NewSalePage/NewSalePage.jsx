@@ -50,7 +50,7 @@ const NewSalePage = ({}) => {
   }
 
   return (
-    <div className="new-sale-page-container">
+    <div className="new-sale-page-container d-flex justify-content-center align-items-center">
       <div className="form-format">
       <form  onSubmit={(event) => handleSubmit(event)}>
         <label className="new-sale-font">Sale Name:{" "}
