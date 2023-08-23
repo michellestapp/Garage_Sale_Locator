@@ -4,6 +4,10 @@
     background-size: cover; 
     width: auto;
     height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
 }
 .edit-sale-form-format{
     background-color:  rgb(136, 88, 190);
@@ -15,6 +19,7 @@
     align-items: center;
     color: white;
     font-size: larger;
+    
 }
 
 .edit-sale-field{
@@ -26,3 +31,9 @@
     color: purple;
     font-size: larger;
 }
+.center-form-edit-sale{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+  }

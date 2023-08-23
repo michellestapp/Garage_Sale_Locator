@@ -22,7 +22,7 @@
 }
 
 .card-link:hover{
-    background-color: purple;
+    background-color: rgb(102, 31, 184);
 }
   
   
@@ -72,6 +72,6 @@
   .garage-sale-map{
     width: auto;
     margin-bottom: 30px;
-    border: 2px solid purple; 
+    border: 2px solid rgb(102, 31, 184); 
   }
  

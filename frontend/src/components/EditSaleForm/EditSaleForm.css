@@ -1,0 +1,9 @@
+.center-form-edit-sale{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+  }
+.test{
+    padding: 20px
+}

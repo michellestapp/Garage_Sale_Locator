@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import api from '../../utils/api';
+import './EditSaleForm.css';
 
 
 const EditSaleForm = ({ garageSaleId, token, fetchMySales }) => {
@@ -45,14 +46,14 @@ const EditSaleForm = ({ garageSaleId, token, fetchMySales }) => {
   }, [token]);
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
+    <div className='center-form-edit-sale test'>
+      <form  onSubmit={handleSubmit}>
         <label>
           Sale Name:
           <input type="text" name="name" value={formData.name} onChange={handleInputChange} />
         </label>
         <div>
-          <label>
+          <label className='test'>
             Date of Sale:
             <input type="date" name="date" value={formData.date} onChange={handleInputChange} />
           </label>
