@@ -88,8 +88,9 @@ const ItemList = ({ garageSaleDetails, garageSaleId, fetchGarageSale }) => {
 
               <div className="file-font">
                 <label className="pad-category">
-                  Image:{" "}
+                  Image: {" "}
                   <input
+                    className="btn btn-light btn-outline-dark btn-sm button-margin"
                     type="file"
                     name="image"
                     onChange={handleFileInputChange}
