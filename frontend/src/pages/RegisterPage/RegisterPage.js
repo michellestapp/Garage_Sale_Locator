@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import AuthContext from "../../context/AuthContext";
 import useCustomForm from "../../hooks/useCustomForm";
+import './RegisterPage.css'
 
 const RegisterPage = () => {
   const { registerUser } = useContext(AuthContext);
@@ -17,9 +18,10 @@ const RegisterPage = () => {
   );
 
   return (
+    <div className="login-page-container">
     <div className="container">
       <form className="form" onSubmit={handleSubmit}>
-        <label>
+        <label className="register-font">
           Username:{" "}
           <input
             type="text"
@@ -28,7 +30,7 @@ const RegisterPage = () => {
             onChange={handleInputChange}
           />
         </label>
-        <label>
+        <label className="register-font">
           First Name:{" "}
           <input
             type="text"
@@ -37,7 +39,7 @@ const RegisterPage = () => {
             onChange={handleInputChange}
           />
         </label>
-        <label>
+        <label className="register-font">
           Last Name:{" "}
           <input
             type="text"
@@ -46,7 +48,7 @@ const RegisterPage = () => {
             onChange={handleInputChange}
           />
         </label>
-        <label>
+        <label className="register-font">
           Email:{" "}
           <input
             type="text"
@@ -55,7 +57,7 @@ const RegisterPage = () => {
             onChange={handleInputChange}
           />
         </label>
-        <label>
+        <label className="register-font">
           Password:{" "}
           <input
             type="password"
@@ -64,8 +66,9 @@ const RegisterPage = () => {
             onChange={handleInputChange}
           />
         </label>
-        <button>Register!</button>
+        <button className="btn-purple">Register!</button>
       </form>
+    </div>
     </div>
   );
 };
