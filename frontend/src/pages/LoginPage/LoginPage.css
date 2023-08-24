@@ -7,3 +7,12 @@
   width: auto;
   height: auto;
 }
+.btn-purple {
+  background-color: rgb(102, 31, 184); ;
+  color: white; 
+  border-color: rgb(102, 31, 184); ; 
+}
+.register-font{
+  color:rgb(102, 31, 184); ;
+}
+

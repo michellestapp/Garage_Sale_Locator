@@ -23,7 +23,7 @@ const LoginPage = () => {
     <div className="login-page-container">
     <div className="container">
       <form className="form" onSubmit={handleSubmit}>
-        <label>
+        <label className="register-font">
           Username:{" "}
           <input
             type="text"
@@ -32,7 +32,7 @@ const LoginPage = () => {
             onChange={handleInputChange}
           />
         </label>
-        <label>
+        <labe className="register-font">
           Password:{" "}
           <input
             type="password"
@@ -40,12 +40,12 @@ const LoginPage = () => {
             value={formData.password}
             onChange={handleInputChange}
           />
-        </label>
+        </labe>
         {isServerError ? (
           <p className="error">Login failed, incorrect credentials!</p>
         ) : null}
-        <Link to="/register">Click to register!</Link>
-        <button className="btn btn-success">Login!</button>
+        <Link className="register-font" to="/register">Click to register!</Link>
+        <button className="btn-purple">Login!</button>
       </form>
     </div>
     </div>
