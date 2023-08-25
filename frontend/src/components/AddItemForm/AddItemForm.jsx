@@ -92,9 +92,16 @@ const AddItemForm = ({ garageSale, fetchGarageSale }) => {
                     onChange={handleInputChange}
                   >
                     <option value="">Select a category</option>
+                    <option value="Beauty">Beauty & Health</option>
                     <option value="Books">Books</option>
+                    <option value="Clothing">Clothing & Shoes</option>
                     <option value="Electronics">Electronics</option>
-                    <option value="Clothing">Clothing</option>
+                    <option value="Home">Home, Garden, & Tools</option>
+                    <option value="Jewelry">Jewelry & Watches</option>
+                    <option value="Movies">Movies, Music, & Games</option>
+                    <option value="Pets">Pet Supplies</option>
+                    <option value="JSports">Sports & Outdoors</option>
+                    <option value="Toys">Toys, Kids & Babies</option>
                   </select>
                 </label>
                 <div>
