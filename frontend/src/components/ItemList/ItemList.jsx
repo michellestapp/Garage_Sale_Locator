@@ -67,7 +67,7 @@ const ItemList = ({ garageSaleDetails, garageSaleId, fetchGarageSale }) => {
     <div className="item-grid-container">
       {garageSaleDetails &&
         garageSaleDetails.items.map((item) => (
-          <div className="item-container container-color text-white container-border border border-black " key={item.id}>
+          <div className="item-container container-color container-border border border-black " key={item.id}>
             {item.image ? (
               <img
                 className="image-props pad-category"
@@ -77,10 +77,16 @@ const ItemList = ({ garageSaleDetails, garageSaleId, fetchGarageSale }) => {
             ) : (
               <p className="image-place-holder">No image available</p>
             )}
-            <p className="item-format">Item Name: {item.name_of_item}</p>
-            <p className="item-format">Item Description: {item.description}</p>
-            <p className="item-format">Price: ${item.price}</p>
-            <p className="item-format">Category: {item.category}</p>
+           
+            <span className="item-label-font">Item Name:</span> {/* Apply a different font to the label */}
+            <span className="item-name-font">{item.name_of_item}</span>
+            <p></p>
+            <span className="item-label-font">Price:</span>     
+            <span className="item-name-font">${item.price}</span>
+            <p></p>
+            <span className="item-label-font">Category:</span> 
+            <span className="item-name-font">{item.category}</span>
+
             {user?.id === garageSaleDetails.user.id && (
               //   <div className="file-font">
               //   <AddItemImage itemId={item.id} token={token} fetchGarageSale={fetchGarageSale} />

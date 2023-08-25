@@ -21,7 +21,7 @@ const LoginPage = () => {
 
   return (
     <div className="login-page-container">
-    <div className="container">
+    <div >
       <form className="form" onSubmit={handleSubmit}>
         <label className="register-font">
           Username:{" "}

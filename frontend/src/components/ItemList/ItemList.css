@@ -40,3 +40,13 @@
   color: #fff; 
   border-color: rgb(102, 31, 184);
 }
+.item-name-font{
+  font-size: large;
+  color:white;
+  /* padding: 10px; */
+}
+.item-label-font{
+  font-size: x-large;
+  color: white;
+  padding: 15px;
+}
