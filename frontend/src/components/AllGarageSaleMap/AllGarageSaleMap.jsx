@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
-import GoogleMapReact from "google-map-react";
+import React, { useState, useEffect } from 'react';
+import GoogleMapReact from 'google-map-react';
 import './AllGarageSaleMap.css';
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-const AllGarageSaleMap = ({ filteredGarageSales }) => {
+const AllGarageSaleMap = ({ filteredGarageSales, selectedGarageSales }) => {
   const defaultCenter = {
     lat: 40.712776,
     lng: -74.005974,
@@ -84,14 +84,20 @@ const AllGarageSaleMap = ({ filteredGarageSales }) => {
           {userLocation && (
             <LocationMarker1 lat={userLocation.lat} lng={userLocation.lng} text="You are here" />
           )}
-          {coordinates.map((coord, index) => (
-
-
-            <LocationMarker2 key={index} lat={coord.lat} lng={coord.lng} onClick={() => navigate(`/garage_sales/${filteredGarageSales[index].id}`)}
-            text={filteredGarageSales[index]?.name || "Unknown"} 
-            />
-
-          ))}
+        {coordinates.map((coord, index) => {
+          if (selectedGarageSales.includes(filteredGarageSales[index].id)) {
+            return (
+              <LocationMarker2
+                key={index}
+                lat={coord.lat}
+                lng={coord.lng}
+                onClick={() => navigate(`/garage_sales/${filteredGarageSales[index].id}`)}
+                text={filteredGarageSales[index]?.name || 'Unknown'}
+              />
+            );
+          }
+          return null; // Skip markers for unselected garage sales
+        })}
         </GoogleMapReact>
       )}
     </div>

@@ -6,20 +6,10 @@ import api from "../../utils/api";
 
 const GarageSaleDetails = ({ garageSaleDetails }) => {
   const [garageSaleData, setGarageSaleData] = useState(null);
-  const [selectedGarageSales, setSelectedGarageSales] = useState([]);
 
   useEffect(() => {
     fetchGarageSale();
   }, []);
-
-  const toggleSelectedGarageSale = (garageSaleId) => {
-    if (selectedGarageSales.includes(garageSaleId)) {
-      setSelectedGarageSales(selectedGarageSales.filter((id) => id !== garageSaleId));
-    } else {
-      setSelectedGarageSales([...selectedGarageSales, garageSaleId]);
-    }
-  };
-
 
   const fetchGarageSale = async () => {
     try {
@@ -35,7 +25,6 @@ const GarageSaleDetails = ({ garageSaleDetails }) => {
   return (
     <div className="sale-details-container">
       <div className="container">
-        
         <p className="sale-format sale-name-font">{garageSaleDetails.name}</p>
         <div className="details-font">
           <p>Date of Sale: {formatDate(garageSaleDetails.date)}</p>
