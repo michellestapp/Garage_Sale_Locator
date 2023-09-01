@@ -6,12 +6,18 @@ import { useNavigate } from "react-router-dom";
 import './HomePage.css'
 import { formatDate, formatTime } from "../../utils/utils";
 import AllGarageSaleMap from "../../components/AllGarageSaleMap/AllGarageSaleMap";
+import GarageSaleCheckbox from "../../components/GarageSaleCheckbox//GarageSaleCheckbox";
+
 
 
 const HomePage = () => {
   const [garageSales, setGarageSales] = useState([]);
   const [searchInput, setSearchInput] = useState("");
+  const [selectedGarageSales, setSelectedGarageSales] = useState([]);
   const navigate = useNavigate();
+
+
+
 
   useEffect(() => {
     const fetchGarageSales = async () => {
@@ -24,8 +30,18 @@ const HomePage = () => {
       }
     };
 
+
+
     fetchGarageSales();
   }, []);
+
+     const toggleSelectedGarageSale = (garageSaleId) => {
+      if (selectedGarageSales.includes(garageSaleId)) {
+        setSelectedGarageSales(selectedGarageSales.filter((id) => id !== garageSaleId));
+      } else {
+        setSelectedGarageSales([...selectedGarageSales, garageSaleId]);
+      }
+    };
 
   const filteredGarageSales = garageSales.filter((garage_sale) => {
     return (
@@ -55,8 +71,16 @@ const HomePage = () => {
           filteredGarageSales.map((garage_sale) => {
             const uniqueCategories = [...new Set(garage_sale.items.map(item => item.category))];
             return (
-              <div className="card-link" key={garage_sale.id} onClick={() => navigate(`/garage_sales/${garage_sale.id}`)}>
+              // <div className="card-link" key={garage_sale.id} onClick={() => navigate(`/garage_sales/${garage_sale.id}`)}>
+                
+                <div className="card-link" key={garage_sale.id} >
                 <div>
+                <input
+                    type="checkbox"
+                    value={garage_sale.id}
+                    checked={selectedGarageSales.includes(garage_sale.id)}
+                    onChange={() => toggleSelectedGarageSale(garage_sale.id)}
+                  />
                   <div className="sale-format">{garage_sale.name}</div>
                   <div className="sale-data-format">Date: <p>{formatDate(garage_sale.date)}</p></div>
                   <div className="sale-data-format">Time:
@@ -67,6 +91,8 @@ const HomePage = () => {
                   {uniqueCategories.map((category) => (
                     <div key={category}>
                     <p className="category-format  single-spacing">{category}</p>
+                    
+            
                     {/* {garage_sale.items.map((item) => {
                       if (item.category === category) {
                         return <p className="item-cat-format  single-spacing" key={item.id}>{item.name_of_item}</p>;
@@ -74,6 +100,10 @@ const HomePage = () => {
                     })} */}
                   </div>
                   ))}
+                  <button className="btn btn-dark" onClick={() => navigate(`/garage_sales/${garage_sale.id}`)}>
+                  Details
+                </button>
+                {console.log (garage_sale.id)}
                 </div>
               </div>
             );

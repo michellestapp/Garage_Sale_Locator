@@ -48,6 +48,9 @@ const MySalesPage = () => {
   const handleEditSale = (garageSale) => {
    navigate(`/edit_sale/${garageSale.id}`, { state: { garage_sale: garageSale} });
  };
+  const [isSelected, setIsSelected] = useState(false); 
+
+  
 
   return (
     <div className=' color page-container'>
@@ -58,8 +61,15 @@ const MySalesPage = () => {
             if (user.id === garage_sale.user.id) {
               return (
                 <div  key={index} className='card-link'>
+                  
+                  
                   <div  className=' mysales-size' onClick={() => navigate(`/garage_sales/${garage_sale.id}`)}>
+                    
+                    
+                    
+                    
                     <p className='mysales-name-format'>{garage_sale.name}</p>
+                    
                     <p className='mysales-details-format'>{formatDate(garage_sale.date)}</p>
                     <p className='mysales-details-format'>{formatTime(garage_sale.start_time)}-{formatTime(garage_sale.end_time)}</p>
                     <p className='mysales-details-format'>{garage_sale.street_address}</p>

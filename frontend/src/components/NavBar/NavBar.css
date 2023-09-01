@@ -32,3 +32,9 @@ li {
   cursor: pointer;
   font-size: 2rem;
 }
+.link-style {
+  text-decoration: none;
+  color: white;
+  text-shadow: -2px -2px 0 purple, 2px -2px 0 purple, -2px 2px 0 purple, 2px 2px 0 purple;
+  
+}
