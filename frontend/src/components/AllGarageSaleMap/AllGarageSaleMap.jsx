@@ -84,20 +84,15 @@ const AllGarageSaleMap = ({ filteredGarageSales, selectedGarageSales }) => {
           {userLocation && (
             <LocationMarker1 lat={userLocation.lat} lng={userLocation.lng} text="You are here" />
           )}
-        {coordinates.map((coord, index) => {
-          if (selectedGarageSales.includes(filteredGarageSales[index].id)) {
-            return (
-              <LocationMarker2
-                key={index}
-                lat={coord.lat}
-                lng={coord.lng}
-                onClick={() => navigate(`/garage_sales/${filteredGarageSales[index].id}`)}
-                text={filteredGarageSales[index]?.name || 'Unknown'}
-              />
-            );
-          }
-          return null; // Skip markers for unselected garage sales
-        })}
+          {coordinates.map((coord, index) => (
+            <LocationMarker2
+              key={index}
+              lat={coord.lat}
+              lng={coord.lng}
+              onClick={() => navigate(`/garage_sales/${filteredGarageSales[index].id}`)}
+              text={filteredGarageSales[index]?.name || "Unknown"}
+            />
+          ))}
         </GoogleMapReact>
       )}
     </div>
