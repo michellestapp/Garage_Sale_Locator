@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import GoogleMapReact from 'google-map-react';
+import React, { useState, useEffect } from "react";
+import GoogleMapReact from "google-map-react";
 import './AllGarageSaleMap.css';
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -64,6 +64,7 @@ const AllGarageSaleMap = ({ filteredGarageSales, selectedGarageSales }) => {
         })
       );
 
+      // Filter out null values (in case of fetch errors)
       const validCoordinates = coordinatesArray.filter((coord) => coord !== null);
       setCoordinates(validCoordinates);
     };
@@ -84,15 +85,21 @@ const AllGarageSaleMap = ({ filteredGarageSales, selectedGarageSales }) => {
           {userLocation && (
             <LocationMarker1 lat={userLocation.lat} lng={userLocation.lng} text="You are here" />
           )}
-          {coordinates.map((coord, index) => (
-            <LocationMarker2
-              key={index}
-              lat={coord.lat}
-              lng={coord.lng}
-              onClick={() => navigate(`/garage_sales/${filteredGarageSales[index].id}`)}
-              text={filteredGarageSales[index]?.name || "Unknown"}
-            />
-          ))}
+          {coordinates.map((coord, index) => {
+            const garageSale = filteredGarageSales[index];
+            if (selectedGarageSales.includes(garageSale.id)) {
+              return (
+                <LocationMarker2
+                  key={index}
+                  lat={coord.lat}
+                  lng={coord.lng}
+                  onClick={() => navigate(`/garage_sales/${garageSale.id}`)}
+                  text={garageSale?.name || "Unknown"}
+                />
+              );
+            }
+            return null; // Don't render if not selected
+          })}
         </GoogleMapReact>
       )}
     </div>

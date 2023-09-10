@@ -103,7 +103,7 @@ const HomePage = () => {
                   <button className="btn btn-dark" onClick={() => navigate(`/garage_sales/${garage_sale.id}`)}>
                   Details
                 </button>
-                {console.log (garage_sale.id)}
+                {/* {console.log (garage_sale.id)} */}
                 </div>
               </div>
             );
