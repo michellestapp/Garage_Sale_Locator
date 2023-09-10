@@ -7,7 +7,7 @@ import './HomePage.css'
 import { formatDate, formatTime } from "../../utils/utils";
 import AllGarageSaleMap from "../../components/AllGarageSaleMap/AllGarageSaleMap";
 import GarageSaleCheckbox from "../../components/GarageSaleCheckbox//GarageSaleCheckbox";
-
+import { Link } from "react-router-dom";
 
 
 const HomePage = () => {
@@ -66,6 +66,11 @@ const HomePage = () => {
       <div className="garage-sale-map container">
         <AllGarageSaleMap filteredGarageSales={filteredGarageSales}   selectedGarageSales={selectedGarageSales}/>
       </div>
+      <div>
+      {/* Display selected sales */}
+      {/* Link to the selected sales map */}
+      <Link to="/selected-sales-map">View Selected Sales Map</Link>
+    </div>
       <div className="garage-sales-list container">
         {filteredGarageSales &&
           filteredGarageSales.map((garage_sale) => {

@@ -10,10 +10,11 @@ import GarageSalePage from "./pages/GarageSalePage/GarageSalePage";
 import NewSalePage from "./pages/NewSalePage/NewSalePage";
 import EditSalePage from "./pages/EditSalePage/EditSalePage";
 import EditItemPage from "./pages/EditItemPage/EditItemPage";
+import MySales from "./pages/MySalesPage/MySalesPage";
 
 // Component Imports
 import Navbar from "./components/NavBar/NavBar";
-import MySales from "./pages/MySalesPage/MySalesPage";
+import SelectedSalesMap from "./components/SelectedSalesMap/SelectedSalesMap";
 
 // Util Imports
 import PrivateRoute from "./utils/PrivateRoute";
@@ -52,6 +53,7 @@ function App() {
         <Route path="/garage_sales/:garage_sale_id" element={<GarageSalePage />}/>
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/selected-sales-map" element={<SelectedSalesMap />} />
       </Routes>
   
     </div>
