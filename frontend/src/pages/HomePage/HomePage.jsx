@@ -13,7 +13,7 @@ import { Link } from "react-router-dom";
 const HomePage = () => {
   const [garageSales, setGarageSales] = useState([]);
   const [searchInput, setSearchInput] = useState("");
-  const [selectedGarageSales, setSelectedGarageSales] = useState([]);
+  const [selectedGarageSales, setSelectedGarageSales] = useState(garageSales.map(garageSale => garageSale.id));
   const navigate = useNavigate();
 
 
@@ -25,6 +25,8 @@ const HomePage = () => {
         let response = await api.get("/garage_sales/all");
         const GarageSaleData = response.data;
         setGarageSales(GarageSaleData);
+        const allGarageSaleIds = GarageSaleData.map(garageSale => garageSale.id);
+        setSelectedGarageSales(allGarageSaleIds);
       } catch (error) {
         console.error("Error fetching garage sales:", error);
       }
@@ -67,52 +69,48 @@ const HomePage = () => {
         <AllGarageSaleMap filteredGarageSales={filteredGarageSales}   selectedGarageSales={selectedGarageSales}/>
       </div>
       <div>
-      {/* Display selected sales */}
-      {/* Link to the selected sales map */}
       <Link to="/selected-sales-map">View Selected Sales Map</Link>
     </div>
       <div className="garage-sales-list container">
-        {filteredGarageSales &&
-          filteredGarageSales.map((garage_sale) => {
-            const uniqueCategories = [...new Set(garage_sale.items.map(item => item.category))];
-            return (
-              // <div className="card-link" key={garage_sale.id} onClick={() => navigate(`/garage_sales/${garage_sale.id}`)}>
-                
-                <div className="card-link" key={garage_sale.id} >
-                <div>
-                <input
-                    type="checkbox"
-                    value={garage_sale.id}
-                    checked={selectedGarageSales.includes(garage_sale.id)}
-                    onChange={() => toggleSelectedGarageSale(garage_sale.id)}
-                  />
-                  <div className="sale-format">{garage_sale.name}</div>
-                  <div className="sale-data-format">Date: <p>{formatDate(garage_sale.date)}</p></div>
-                  <div className="sale-data-format">Time:
-                    <p>{formatTime(garage_sale.start_time)}-{formatTime(garage_sale.end_time)}</p>
-                  </div>
-                  <div className="sale-data-format">Zip:<p>{garage_sale.zip}</p></div>
-                  <p className="sale-data-format single-spacing" key={garage_sale.id}>Sale Categories: </p>
-                  {uniqueCategories.map((category) => (
-                    <div key={category}>
-                    <p className="category-format  single-spacing">{category}</p>
-                    
-            
-                    {/* {garage_sale.items.map((item) => {
-                      if (item.category === category) {
-                        return <p className="item-cat-format  single-spacing" key={item.id}>{item.name_of_item}</p>;
-                      }
-                    })} */}
-                  </div>
-                  ))}
-                  <button className="btn btn-dark" onClick={() => navigate(`/garage_sales/${garage_sale.id}`)}>
-                  Details
-                </button>
-                {/* {console.log (garage_sale.id)} */}
-                </div>
+      {filteredGarageSales &&
+      filteredGarageSales.map((garage_sale) => {
+        const uniqueCategories = [...new Set(garage_sale.items.map(item => item.category))];
+        console.log(selectedGarageSales);
+        return (
+          <div className="card-link" key={garage_sale.id}>
+            <div>
+              <input
+                type="checkbox"
+                value={garage_sale.id}
+                checked={selectedGarageSales.includes(garage_sale.id)}
+                onChange={() => toggleSelectedGarageSale(garage_sale.id)}
+              />
+              <div className="sale-format">{garage_sale.name}</div>
+              <div className="sale-data-format">Date: <p>{formatDate(garage_sale.date)}</p></div>
+              <div className="sale-data-format">Time:
+                <p>{formatTime(garage_sale.start_time)}-{formatTime(garage_sale.end_time)}</p>
               </div>
-            );
-          })}
+              <div className="sale-data-format">Zip:<p>{garage_sale.zip}</p></div>
+              <p className="sale-data-format single-spacing" key={garage_sale.id}>Sale Categories: </p>
+              {uniqueCategories.map((category) => (
+                <div key={category}>
+                  <p className="category-format  single-spacing">{category}</p>
+                  {/* Check if garage_sale.items is defined before mapping over it */}
+                  {/* {garage_sale.items && garage_sale.items.map((item) => {
+                    if (item.category === category) {
+                      return <p className="item-cat-format  single-spacing" key={item.id}>{item.name_of_item}</p>;
+                    }
+                  })} */}
+                </div>
+              ))}
+              <button className="btn btn-dark" onClick={() => navigate(`/garage_sales/${garage_sale.id}`)}>
+                Details
+              </button>
+            </div>
+          </div>
+        );
+      })}
+
       </div>
     </div>
   );

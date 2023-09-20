@@ -87,7 +87,8 @@ const AllGarageSaleMap = ({ filteredGarageSales, selectedGarageSales }) => {
           )}
           {coordinates.map((coord, index) => {
             const garageSale = filteredGarageSales[index];
-            if (selectedGarageSales.includes(garageSale.id)) {
+            // if (selectedGarageSales.includes(garageSale.id)) 
+            {
               return (
                 <LocationMarker2
                   key={index}
